@@ -3,15 +3,17 @@ from django.core.files.storage import FileSystemStorage
 from  django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
+import datetime
 
 from TeacherApp.models import Studentdb,Subjectdb
 
 
 # Create your views here.
 def Indexpage(request):
+    date=datetime.datetime.now()
     student_count=Studentdb.objects.count()
     subject_count=Subjectdb.objects.count()
-    return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count})
+    return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count,'date':date})
 
 def Addstudentpage(request):
     return render(request,'addstudent.html')

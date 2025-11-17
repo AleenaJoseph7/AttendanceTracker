@@ -137,9 +137,9 @@
   </ul>
 </div>
 <!-- [Mobile Media Block end] -->
+
 <div class="ms-auto">
   <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
-
 
     <li class="dropdown pc-h-item header-user-profile">
       <a class="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
@@ -186,17 +186,29 @@
       <div class="pc-content">
         <!-- [ breadcrumb ] start -->
         <div class="page-header">
-          <div class="page-block">
-            <div class="page-header-title">
-              <h5 class="mb-0 font-medium">Default</h5>
-            </div>
-            <ul class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
-              <li class="breadcrumb-item" aria-current="page">Default</li>
-            </ul>
-          </div>
-        </div>
+  <div class="page-block flex items-center justify-between w-full">
+
+    <div>
+      <div class="page-header-title">
+        <h5 class="mb-3 font-medium">Default</h5>
+      </div>
+
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
+        <li class="breadcrumb-item" aria-current="page">Default</li>
+      </ul>
+    </div>
+
+    <!-- ✅ Right-Aligned Date -->
+    <div class="flex items-center gap-2">
+      <i data-feather="calendar" class="w-4 h-4"></i>
+      <span class="text-sm font-medium">{{ date }}</span>
+    </div>
+
+  </div>
+</div>
+
         <!-- [ breadcrumb ] end -->
 
         <!-- [ Main Content ] start -->
