@@ -1,4 +1,3 @@
-
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
@@ -8,40 +7,45 @@
     <div class="card shadow-lg p-4">
         <h3 class="text-center mb-4">Add Subject</h3>
 
-        <form method="POST">
+        <form method="POST" action="{% url 'Updatesubject' sub_id=subject.id %}">
             {% csrf_token %}
 
             <div class="mb-3">
                 <label class="form-label">Subject Name</label>
-                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control">
+                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control" value="{{subject.Subject_name}}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Subject Code</label>
-                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control">
+                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control" value="{{subject.Subject_code}}">
+            </div>
+
+             <div class="mb-3">
+                <label class="form-label">Teacher</label>
+                <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control" value="{{subject.Subject_teacher}}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Semester</label>
                 <select name="subject_sem" class="form-control">
-                    <option value="">-- Select Semester --</option>
-                    <option value="S1">S1</option>
-                    <option value="S2">S2</option>
-                    <option value="S3">S3</option>
-                    <option value="S4">S4</option>
-                    <option value="S5">S5</option>
-                    <option value="S6">S6</option>
+                    <option >{{subject.Subject_sem}}</option>
+                    <option >S1</option>
+                    <option >S2</option>
+                    <option >S3</option>
+                    <option >S4</option>
+                    <option >S5</option>
+                    <option >S6</option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Department</label>
                 <select name="subject_dep" class="form-control">
-                    <option value="">-- Select Department --</option>
-                    <option value="CSE">CSE</option>
-                    <option value="EC">EC</option>
-                    <option value="EEE">EEE</option>
-                    <option value="CE">CE</option>
+                    <option >{{subject.Subject_dep}}</option>
+                    <option >CSE</option>
+                    <option >EC</option>
+                    <option >EEE</option>
+                    <option >CE</option>
                 </select>
             </div>
 

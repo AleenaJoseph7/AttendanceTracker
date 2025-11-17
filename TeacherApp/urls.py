@@ -11,5 +11,10 @@ urlpatterns=[
     path('updatestudent/<int:s_id>',views.updatestudent,name="updatestudent"),
     path('deletestudent/<int:s_id>',views.deletestudent,name="deletestudent"),
 
-
+    path('AddsubjectPage/',views.AddsubjectPage,name="AddsubjectPage"),
+    path('savesubject/',views.savesubject,name="savesubject"),
+    path('DisplaysubjectPage/',views.DisplaysubjectPage,name="DisplaysubjectPage"),
+    path('EditsubjectPage/<int:sub_id>/',views.EditsubjectPage,name="EditsubjectPage"),
+    path('Updatesubject/<int:sub_id>/',views.Updatesubject,name="Updatesubject"),
+    path('Deletesubject/<int:sub_id>/',views.Deletesubject,name="Deletesubject"),
 ]

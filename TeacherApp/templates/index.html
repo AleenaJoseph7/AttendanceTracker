@@ -95,13 +95,13 @@
           <i data-feather="monitor"></i>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../pages/login-v1.html" class="pc-link" target="_blank">
+          <a href="{% url 'AddsubjectPage' %}" class="pc-link" target="_blank">
             <span class="pc-micon"> <i data-feather="lock"></i></span>
             <span class="pc-mtext">Add Subject</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../pages/register-v1.html" class="pc-link" target="_blank">
+          <a href="{% url 'DisplaysubjectPage' %}" class="pc-link" target="_blank">
             <span class="pc-micon"> <i data-feather="user-plus"></i></span>
             <span class="pc-mtext">View Subjects</span>
           </a>
@@ -276,15 +276,14 @@
           <div class="col-span-12 xl:col-span-4 md:col-span-6">
             <div class="card">
               <div class="card-header !pb-0 !border-b-0">
-                <h5>Monthly Sales</h5>
+                <h5>Subject</h5>
               </div>
               <div class="card-body">
                 <div class="flex items-center justify-between gap-3 flex-wrap">
                   <h3 class="font-light flex items-center mb-0">
                     <i class="feather icon-arrow-down text-danger-500 text-[30px] mr-1.5"></i>
-                    $ 2.942.32
+                    {{subject_count}}
                   </h3>
-                  <p class="mb-0">36%</p>
                 </div>
                 <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mt-6 dark:bg-themedark-bodybg">
                   <div class="bg-theme-bg-2 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar"

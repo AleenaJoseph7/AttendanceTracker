@@ -4,13 +4,14 @@ from  django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 
-from TeacherApp.models import Studentdb
+from TeacherApp.models import Studentdb,Subjectdb
 
 
 # Create your views here.
 def Indexpage(request):
     student_count=Studentdb.objects.count()
-    return render(request,"index.html",{'student_count':student_count})
+    subject_count=Studentdb.objects.count()
+    return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count})
 
 def Addstudentpage(request):
     return render(request,'addstudent.html')
@@ -75,3 +76,57 @@ def deletestudent(request,s_id):
     data=Studentdb.objects.filter(id=s_id)
     data.delete()
     return redirect(DisplaystudentPage)
+
+
+def AddsubjectPage(request):
+    return render(request,"addsubject.html")
+
+def savesubject(request):
+    if request.method=='POST':
+        subject_name=request.POST.get('subject_name')
+        subject_code=request.POST.get('subject_code')
+        subject_teacher=request.POST.get('subject_teacher')
+        subject_sem=request.POST.get('subject_sem')
+        subject_dep=request.POST.get('subject_dep')
+
+        ob=Subjectdb(Subject_name=subject_name,
+                     Subject_code= subject_code,
+                     Subject_teacher=subject_teacher,
+                     Subject_sem=subject_sem,
+                     Subject_dep=subject_dep)
+
+        ob.save()
+        return redirect(AddsubjectPage)
+
+def DisplaysubjectPage(request):
+    data=Studentdb.objects.all()
+    return render(request,"displaysubject.html",{'data':data})
+
+def EditsubjectPage(request,sub_id):
+    subject=Studentdb.objects.get(id=sub_id)
+    return render(request,"editsubject.html",{'subject':subject})
+
+def Updatesubject(request,sub_id):
+    if request.method=='POST':
+        subject_name=request.POST.get('subject_name')
+        subject_code=request.POST.get('subject_code')
+        subject_teacher=request.POST.get('subject_teacher')
+        subject_sem=request.POST.get('subject_sem')
+        subject_dep=request.POST.get('subject_dep')
+
+        Subjectdb.objects.filter(id=sub_id).update(Subject_name=subject_name,
+                     Subject_code= subject_code,
+                     Subject_teacher=subject_teacher,
+                     Subject_sem=subject_sem,
+                     Subject_dep=subject_dep)
+
+        return redirect(DisplaysubjectPage)
+
+def Deletesubject(request,sub_id):
+    data=Studentdb.objects.filter(id=sub_id)
+    data.delete()
+    return redirect(DisplaysubjectPage)
+
+
+
+
