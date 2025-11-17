@@ -10,7 +10,7 @@ from TeacherApp.models import Studentdb,Subjectdb
 # Create your views here.
 def Indexpage(request):
     student_count=Studentdb.objects.count()
-    subject_count=Studentdb.objects.count()
+    subject_count=Subjectdb.objects.count()
     return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count})
 
 def Addstudentpage(request):
@@ -99,11 +99,11 @@ def savesubject(request):
         return redirect(AddsubjectPage)
 
 def DisplaysubjectPage(request):
-    data=Studentdb.objects.all()
+    data=Subjectdb.objects.all()
     return render(request,"displaysubject.html",{'data':data})
 
 def EditsubjectPage(request,sub_id):
-    subject=Studentdb.objects.get(id=sub_id)
+    subject=Subjectdb.objects.get(id=sub_id)
     return render(request,"editsubject.html",{'subject':subject})
 
 def Updatesubject(request,sub_id):
@@ -123,7 +123,7 @@ def Updatesubject(request,sub_id):
         return redirect(DisplaysubjectPage)
 
 def Deletesubject(request,sub_id):
-    data=Studentdb.objects.filter(id=sub_id)
+    data=Subjectdb.objects.filter(id=sub_id)
     data.delete()
     return redirect(DisplaysubjectPage)
 
