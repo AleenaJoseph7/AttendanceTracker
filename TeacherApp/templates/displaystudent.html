@@ -1,55 +1,59 @@
-
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
 
- <div class="container mt-5">
-        <div class="table-responsive" style="text-align:justify;">
-            <table>
-                <thead>
-                <tr>
-                    <th>Student Profile</th>
-                    <th>Student Name</th>
-                    <th>Student RollNumber</th>
-                    <th>Student Registration_ID</th>
-                    <th>Student Batch</th>
-                    <th>Student Semester</th>
-                    <th>Student Duartion</th>
-                    <th>Options</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
+<div class="container mt-5">
 
-                <tbody>
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-bordered table-hover align-middle text-center">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Profile</th>
+                    <th>Name</th>
+                    <th>Roll Number</th>
+                    <th>Reg ID</th>
+                    <th>Batch</th>
+                    <th>Semester</th>
+                    <th>Duration</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
                 {% for i in data %}
                 <tr>
                     <td>
-                        <img src="{{i.Student_prof.url}}" height="200px" width="200px" class="rounded-circle">
+                        <img src="{{ i.Student_prof.url }}" 
+                             class="rounded-circle"
+                             style="height: 80px; width: 80px; object-fit: cover;">
                     </td>
-                    <td>{{i.Student_name}}</td>
-                    <td>{{i.Student_rollno}}</td>
-                    <td>{{i.Student_regid}}</td>
-                    <td>{{i.Student_batch}}</td>
-                    <td>{{i.Student_sem}}</td>
-                    <td>{{i.Student_duartion}}</td>
+
+                    <td>{{ i.Student_name }}</td>
+                    <td>{{ i.Student_rollno }}</td>
+                    <td>{{ i.Student_regid }}</td>
+                    <td>{{ i.Student_batch }}</td>
+                    <td>{{ i.Student_sem }}</td>
+                    <td>{{ i.Student_duartion }}</td>
+
                     <td>
                         <a href="{% url 'EditstudentPage' s_id=i.id %}">
-                            <button type="submit" class="btn btn-success" >Edit</button>
+                            <button class="btn btn-success btn-sm px-3">Edit</button>
                         </a>
                     </td>
+
                     <td>
                         <a href="{% url 'deletestudent' s_id=i.id %}">
-                            <button type="submit" class="btn btn-danger" >Delete</button>
+                            <button class="btn btn-danger btn-sm px-3">Delete</button>
                         </a>
                     </td>
                 </tr>
                 {% endfor %}
-                </tbody>
+            </tbody>
 
-            </table>
-
-        </div>
+        </table>
     </div>
 
+</div>
 
 {% endblock %}

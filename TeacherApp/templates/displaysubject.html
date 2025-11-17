@@ -1,49 +1,50 @@
-
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
 
- <div class="container mt-5">
-        <div class="table-responsive" style="text-align:justify;">
-            <table>
-                <thead>
+<div class="container mt-5">
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-bordered table-hover text-center align-middle">
+
+            <thead class="table-dark">
                 <tr>
                     <th>Subject Name</th>
                     <th>Subject Code</th>
                     <th>Subject Teacher</th>
-                    <th>Subject Semester</th>
-                    <th>Subject Department</th>
-                    <th>Options</th>
-                    <th>Options</th>
+                    <th>Semester</th>
+                    <th>Department</th>
+                    <th colspan="2">Actions</th>
                 </tr>
-                </thead>
+            </thead>
 
-                <tbody>
+            <tbody>
                 {% for i in data %}
                 <tr>
-                    <td>{{i.Subject_name}}</td>
-                    <td>{{i.Subject_code}}</td>
-                    <td>{{i.Subject_teacher}}</td>
-                    <td>{{i.Subject_sem}}</td>
-                    <td>{{i.Subject_dep}}</td>
+                    <td>{{ i.Subject_name }}</td>
+                    <td>{{ i.Subject_code }}</td>
+                    <td>{{ i.Subject_teacher }}</td>
+                    <td>{{ i.Subject_sem }}</td>
+                    <td>{{ i.Subject_dep }}</td>
+
                     <td>
                         <a href="{% url 'EditsubjectPage' sub_id=i.id %}">
-                            <button type="submit" class="btn btn-success" >Edit</button>
+                            <button class="btn btn-success btn-sm px-3">Edit</button>
                         </a>
                     </td>
+
                     <td>
                         <a href="{% url 'Deletesubject' sub_id=i.id %}">
-                            <button type="submit" class="btn btn-danger" >Delete</button>
+                            <button class="btn btn-danger btn-sm px-3">Delete</button>
                         </a>
                     </td>
                 </tr>
                 {% endfor %}
-                </tbody>
+            </tbody>
 
-            </table>
-
-        </div>
+        </table>
     </div>
 
+</div>
 
 {% endblock %}
