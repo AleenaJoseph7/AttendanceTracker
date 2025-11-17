@@ -1,0 +1,55 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="container mt-5">
+        <div class="table-responsive" style="text-align:justify;">
+            <table>
+                <thead>
+                <tr>
+                    <th>Student Profile</th>
+                    <th>Student Name</th>
+                    <th>Student RollNumber</th>
+                    <th>Student Registration_ID</th>
+                    <th>Student Batch</th>
+                    <th>Student Semester</th>
+                    <th>Student Duartion</th>
+                    <th>Options</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>
+                        <img src="{{i.Student_prof.url}}" height="200px" width="200px" class="rounded-circle">
+                    </td>
+                    <td>{{i.Student_name}}</td>
+                    <td>{{i.Student_rollno}}</td>
+                    <td>{{i.Student_regid}}</td>
+                    <td>{{i.Student_batch}}</td>
+                    <td>{{i.Student_sem}}</td>
+                    <td>{{i.Student_duartion}}</td>
+                    <td>
+                        <a href="{% url 'EditstudentPage' s_id=i.id %}">
+                            <button type="submit" class="btn btn-success" >Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'deletestudent' s_id=i.id %}">
+                            <button type="submit" class="btn btn-danger" >Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+
+{% endblock %}

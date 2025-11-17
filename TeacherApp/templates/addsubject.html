@@ -1,0 +1,62 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-md-6">
+
+    <div class="card shadow-lg p-4">
+        <h3 class="text-center mb-4">Add Subject</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Subject Name</label>
+                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Subject Code</label>
+                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Semester</label>
+                <select name="subject_sem" class="form-control">
+                    <option value="">-- Select Semester --</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="S3">S3</option>
+                    <option value="S4">S4</option>
+                    <option value="S5">S5</option>
+                    <option value="S6">S6</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Department</label>
+                <select name="subject_dep" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    <option value="CSE">CSE</option>
+                    <option value="EC">EC</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CE">CE</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-3" style="width:95%; border-radius:10px;">
+                Save Subject
+            </button>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
