@@ -50,116 +50,112 @@
 </div>
 <!-- [ Pre-loader ] End -->
  <!-- [ Sidebar Menu ] start -->
-<nav class="pc-sidebar">
-  <div class="navbar-wrapper">
-    <div class="m-header flex items-center py-4 px-6 h-header-height">
-      <a href="{% url 'Indexpage' %}" class="b-brand flex items-center gap-3">
-      <h1 style="font-size:35px; font-weight:bold; font-family:Arial;">STRACK</h1></a>
-    </div>
-    <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
-      <ul class="pc-navbar">
-        <li class="pc-item">
-        <li class="pc-item">
-          <a href="{% url 'Indexpage' %}" class="pc-link">
-            <span class="pc-micon">
-              <i data-feather="home"></i>
-            </span>
-            <span class="pc-mtext">Dashboard</span>
-          </a>
-        </li>
-        <li class="pc-item pc-caption">
-          <label>Student </label>
-          <i data-feather="feather"></i>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'Addstudentpage' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="edit"></i></span>
-            <span class="pc-mtext">Add Student Details</span>
-          </a>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'DisplaystudentPage' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="type"></i></span>
-            <span class="pc-mtext">View Student Details</span>
-          </a>
-        </li>
+ <nav class="pc-sidebar">
+        <div class="navbar-wrapper">
+            <div class="m-header flex items-center py-4 px-6 h-header-height">
+                <a href="{% url 'Indexpage' %}" class="b-brand flex items-center gap-3">
+                    <h1 style="font-size:35px; font-weight:bold; font-family:Arial;">STRACK</h1>
+                </a>
+            </div>
+            <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
+                <ul class="pc-navbar">
+                    <li class="pc-item">
+                        <a href="{% url 'Indexpage' %}" class="pc-link">
+                            <span class="pc-micon">
+                                <i data-feather="home"></i>
+                            </span>
+                            <span class="pc-mtext">Dashboard</span>
+                        </a>
+                    </li>
 
+                    <li class="pc-item pc-caption">
+                        <label>Student</label>
+                        <i data-feather="users"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'Addstudentpage' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="user-plus"></i></span>
+                            <span class="pc-mtext">Add Student Details</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'DisplaystudentPage' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="list"></i></span>
+                            <span class="pc-mtext">View Student Details</span>
+                        </a>
+                    </li>
 
-        <li class="pc-item pc-caption">
-          <label>Subject </label>
-          <i data-feather="monitor"></i>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'AddsubjectPage' %}" class="pc-link" >
-            <span class="pc-micon"> <i data-feather="lock"></i></span>
-            <span class="pc-mtext">Add Subject</span>
-          </a>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'DisplaysubjectPage' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="user-plus"></i></span>
-            <span class="pc-mtext">View Subjects</span>
-          </a>
-        </li>
+                    <li class="pc-item pc-caption">
+                        <label>Subject</label>
+                        <i data-feather="book"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'AddsubjectPage' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="plus-circle"></i></span>
+                            <span class="pc-mtext">Add Subject</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'DisplaysubjectPage' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="book-open"></i></span>
+                            <span class="pc-mtext">View Subjects</span>
+                        </a>
+                    </li>
 
+                    <li class="pc-item pc-caption">
+                        <label>Internal Mark</label>
+                        <i data-feather="award"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'Addinternalpage' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="edit-3"></i></span>
+                            <span class="pc-mtext">Add Internal Mark</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{% url 'Displayinternal' %}" class="pc-link">
+                            <span class="pc-micon"><i data-feather="bar-chart-2"></i></span>
+                            <span class="pc-mtext">View Internal Mark</span>
+                        </a>
+                    </li>
 
+                    <li class="pc-item pc-caption">
+                        <label>QR Code</label>
+                        <i data-feather="maximize"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="#" class="pc-link">
+                            <span class="pc-micon"><i data-feather="maximize"></i></span>
+                            <span class="pc-mtext">QR Code</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="#" class="pc-link">
+                            <span class="pc-micon"><i data-feather="calendar"></i></span>
+                            <span class="pc-mtext">View Attendance Details</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="#" class="pc-link">
+                            <span class="pc-micon"><i data-feather="pie-chart"></i></span>
+                            <span class="pc-mtext">View Total Attendance</span>
+                        </a>
+                    </li>
 
-            <li class="pc-item pc-caption">
-          <label>Internal Mark</label>
-          <i data-feather="monitor"></i>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'Addinternalpage' %}" class="pc-link" >
-            <span class="pc-micon"> <i data-feather="lock"></i></span>
-            <span class="pc-mtext">Add Internal Mark</span>
-          </a>
-        </li>
-        <li class="pc-item ">
-          <a href="{% url 'Displayinternal' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="user-plus"></i></span>
-            <span class="pc-mtext">View Internal Mark</span>
-          </a>
-        </li>
-
-            <li class="pc-item pc-caption">
-          <label>QR Code</label>
-          <i data-feather="monitor"></i>
-        </li>
-        <li class="pc-item ">
-          <a href="#" class="pc-link" >
-            <span class="pc-micon"> <i data-feather="lock"></i></span>
-            <span class="pc-mtext">QR Code</span>
-          </a>
-        </li>
-        <li class="pc-item ">
-          <a href="#" class="pc-link">
-            <span class="pc-micon"> <i data-feather="user-plus"></i></span>
-            <span class="pc-mtext">View Attendance Details</span>
-          </a>
-        </li>
-          <li class="pc-item ">
-          <a href="#" class="pc-link">
-            <span class="pc-micon"> <i data-feather="user-plus"></i></span>
-            <span class="pc-mtext">View Total Attendance</span>
-          </a>
-        </li>
-
-
-
-          <li class="pc-item pc-caption">
-          <label>Messenger</label>
-          <i data-feather="monitor"></i>
-        </li>
-        <li class="pc-item ">
-          <a href="#" class="pc-link" >
-            <span class="pc-micon"> <i data-feather="lock"></i></span>
-            <span class="pc-mtext">Message</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+                    <li class="pc-item pc-caption">
+                        <label>Messenger</label>
+                        <i data-feather="message-circle"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="#" class="pc-link">
+                            <span class="pc-micon"><i data-feather="send"></i></span>
+                            <span class="pc-mtext">Message</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 <!-- [ Sidebar Menu ] end -->
  <!-- [ Header Topbar ] start -->
 <header class="pc-header">
