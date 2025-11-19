@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg p-4" style="border:1px solid lightgrey; border-radius:10px;">
+                <h3 class="text-center mb-4" style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Add Internal Marks</h3>
+
+                <form method="POST" action="{% url 'Saveinternal' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Student</label>
+                        <select name="student" class="form-control" required>
+                            <option>-- Select Student --</option>
+                            {% for i in student %}
+                                <option value="{{ i.id }}">{{i.Student_name}}({{i.Student_rollno}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Subject</label>
+                        <select name="subject" class="form-control" required>
+                            <option >-- Select Subject --</option>
+                            {% for i in subject %}
+                                <option value="{{ i.id }}">{{i.Subject_name}}({{i.Subject_code}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Internal Mark Obtained</label>
+                        <input type="text" name="internalmark" min="0" placeholder="Enter marks obtained" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Total Mark</label>
+                        <input type="text" name="totalmark" min="1" placeholder="Enter total marks" class="form-control" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-3" style="width:95%; border-radius:10px;">Upload</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

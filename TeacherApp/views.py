@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 import datetime
 
-from TeacherApp.models import Studentdb,Subjectdb
+from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
 
 
 # Create your views here.
@@ -133,6 +133,60 @@ def Deletesubject(request,sub_id):
     data=Subjectdb.objects.filter(id=sub_id)
     data.delete()
     return redirect(DisplaysubjectPage)
+
+def Addinternalpage(request):
+    student=Studentdb.objects.all()
+    subject=Subjectdb.objects.all()
+    return render(request,"addinternal.html",{'student':student,'subject':subject})
+
+def Saveinternal(request):
+    if request.method=='POST':
+        student_id=request.POST.get('student')
+        subject_id=request.POST.get('subject')
+        internalmark=request.POST.get('internalmark')
+        totalmark=request.POST.get('totalmark')
+
+        student=Studentdb.objects.get(id=student_id)
+        subject=Subjectdb.objects.get(id=subject_id)
+
+        ob=Internalmarkdb(Student=student,
+                          Subject=subject,
+                          Internalmark=internalmark,
+                          Totalmark=totalmark)
+        ob.save()
+        return redirect(Addinternalpage)
+def Displayinternal(request):
+    data=Internalmarkdb.objects.all()
+    return render(request,"displayinternal.html",{'data':data})
+
+def Editinternalpage(request,i_id):
+    student = Studentdb.objects.all()
+    subject = Subjectdb.objects.all()
+    internal=Internalmarkdb.objects.get(id=i_id)
+    return render(request,"editinternal.html",{'student':student,'subject':subject,'internal':internal})
+
+
+def Updateinternal(request,i_id):
+    if request.method=='POST':
+        student_id=request.POST.get('student')
+        subject_id=request.POST.get('subject')
+        internalmark=request.POST.get('internalmark')
+        totalmark=request.POST.get('totalmark')
+
+        student = Studentdb.objects.get(id=student_id)
+        subject = Subjectdb.objects.get(id=subject_id)
+
+        Internalmarkdb.objects.filter(id=i_id).update(Student=student,
+                          Subject=subject,
+                          Internalmark=internalmark,
+                          Totalmark=totalmark)
+        return redirect(Displayinternal)
+
+def Deleteinternal(request,i_id):
+    data=Internalmarkdb.objects.filter(id=i_id)
+    data.delete()
+    return redirect(Displayinternal)
+
 
 
 

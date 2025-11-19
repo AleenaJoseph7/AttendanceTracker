@@ -33,4 +33,16 @@ class Attendancedb(models.Model):
                                                                     ("Absent","Absent")])
     # ("Present", "Present") 1st data to be stored to db, 2nd visible to user
     def __str__(self):
-        return self.Student
+        return f"{self.Student.Student_name} - {self.Subject.Subject_code} - {self.Date}"
+
+class Internalmarkdb(models.Model):
+    Student=models.ForeignKey(Studentdb,on_delete=models.CASCADE)
+    Subject=models.ForeignKey(Subjectdb,on_delete=models.CASCADE)
+    Internalmark = models.IntegerField(null=False, blank=False)
+    Totalmark = models.IntegerField(null=False, blank=False,default=50)
+
+    # class Meta:
+    #     unique_together = ('Student', 'Subject', 'Date')  # Prevent duplicate attendance
+
+    def __str__(self):
+        return f"{self.Student.Student_name} - {self.Subject.Subject_name}"

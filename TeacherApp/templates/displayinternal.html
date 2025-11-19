@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Subject Code</th>
+                    <th>Internal Mark</th>
+                    <th>Total Mark</th>
+                    <th colspan="2" style="text-align:center;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.Student.Student_name }}</td>
+                    <td>{{ i.Subject.Subject_code }}</td>
+                    <td>{{ i.Internalmark }}</td>
+                    <td>{{ i.Totalmark }}</td>
+                    <td>
+                        <a href="{% url 'Editinternalpage' i_id=i.id %}">
+                            <button class="btn btn-success btn-sm px-3">Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'Deleteinternal' i_id=i.id %}">
+                            <button class="btn btn-danger btn-sm px-3">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No Internal Marks Available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

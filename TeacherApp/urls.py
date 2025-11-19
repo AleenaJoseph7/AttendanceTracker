@@ -17,4 +17,14 @@ urlpatterns=[
     path('EditsubjectPage/<int:sub_id>/',views.EditsubjectPage,name="EditsubjectPage"),
     path('Updatesubject/<int:sub_id>/',views.Updatesubject,name="Updatesubject"),
     path('Deletesubject/<int:sub_id>/',views.Deletesubject,name="Deletesubject"),
+
+    path('Addinternalpage/',views.Addinternalpage,name="Addinternalpage"),
+    path('Saveinternal/',views.Saveinternal,name="Saveinternal"),
+    path('Displayinternal/',views.Displayinternal,name="Displayinternal"),
+    path('Editinternalpage/<int:i_id>/',views.Editinternalpage,name="Editinternalpage"),
+    path('Updateinternal/<int:i_id>/',views.Updateinternal,name="Updateinternal"),
+    path('Deleteinternal/<int:i_id>/',views.Deleteinternal,name="Deleteinternal"),
+
+
+
 ]
