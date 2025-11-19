@@ -16,6 +16,7 @@
                     <th>Batch</th>
                     <th>Semester</th>
                     <th>Duration</th>
+                    <th>Mobile Number</th>
                     <th colspan="2" style="text-align:center;">Actions</th>
                 </tr>
             </thead>
@@ -35,7 +36,7 @@
                     <td>{{ i.Student_batch }}</td>
                     <td>{{ i.Student_sem }}</td>
                     <td>{{ i.Student_duration }}</td>
-
+                    <td>{{i.Student_phone}}</td>
                     <td>
                         <a href="{% url 'EditstudentPage' s_id=i.id %}">
                             <button class="btn btn-success btn-sm px-3">Edit</button>
