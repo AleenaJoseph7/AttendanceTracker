@@ -16,7 +16,8 @@ def Indexpage(request):
     return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count,'date':date})
 
 def Addstudentpage(request):
-    return render(request,'addstudent.html')
+    date = datetime.datetime.now()
+    return render(request,'addstudent.html',{'date':date})
 
 def savestudent(request):
     if request.method=='POST':
@@ -43,13 +44,15 @@ def savestudent(request):
         return redirect(Addstudentpage)
 
 def DisplaystudentPage(request):
+    date = datetime.datetime.now()
     data=Studentdb.objects.all()
-    return render(request,"displaystudent.html",{'data':data})
+    return render(request,"displaystudent.html",{'data':data,'date':date})
 
 
 def EditstudentPage(request,s_id):
+    date = datetime.datetime.now()
     student=Studentdb.objects.get(id=s_id)
-    return render(request,"editstudent.html",{'student':student})
+    return render(request,"editstudent.html",{'student':student,'date':date})
 
 def updatestudent(request,s_id):
     if request.method=='POST':
@@ -86,7 +89,8 @@ def deletestudent(request,s_id):
 
 
 def AddsubjectPage(request):
-    return render(request,"addsubject.html")
+    date = datetime.datetime.now()
+    return render(request,"addsubject.html",{'date':date})
 
 def savesubject(request):
     if request.method=='POST':
@@ -106,12 +110,14 @@ def savesubject(request):
         return redirect(AddsubjectPage)
 
 def DisplaysubjectPage(request):
+    date = datetime.datetime.now()
     data=Subjectdb.objects.all()
-    return render(request,"displaysubject.html",{'data':data})
+    return render(request,"displaysubject.html",{'data':data,'date':date})
 
 def EditsubjectPage(request,sub_id):
+    date = datetime.datetime.now()
     subject=Subjectdb.objects.get(id=sub_id)
-    return render(request,"editsubject.html",{'subject':subject})
+    return render(request,"editsubject.html",{'subject':subject,'date':date})
 
 def Updatesubject(request,sub_id):
     if request.method=='POST':
@@ -135,9 +141,10 @@ def Deletesubject(request,sub_id):
     return redirect(DisplaysubjectPage)
 
 def Addinternalpage(request):
+    date = datetime.datetime.now()
     student=Studentdb.objects.all()
     subject=Subjectdb.objects.all()
-    return render(request,"addinternal.html",{'student':student,'subject':subject})
+    return render(request,"addinternal.html",{'student':student,'subject':subject,'date':date})
 
 def Saveinternal(request):
     if request.method=='POST':
@@ -156,14 +163,16 @@ def Saveinternal(request):
         ob.save()
         return redirect(Addinternalpage)
 def Displayinternal(request):
+    date = datetime.datetime.now()
     data=Internalmarkdb.objects.all()
-    return render(request,"displayinternal.html",{'data':data})
+    return render(request,"displayinternal.html",{'data':data,'date':date})
 
 def Editinternalpage(request,i_id):
+    date = datetime.datetime.now()
     student = Studentdb.objects.all()
     subject = Subjectdb.objects.all()
     internal=Internalmarkdb.objects.get(id=i_id)
-    return render(request,"editinternal.html",{'student':student,'subject':subject,'internal':internal})
+    return render(request,"editinternal.html",{'student':student,'subject':subject,'internal':internal,'date':date})
 
 
 def Updateinternal(request,i_id):

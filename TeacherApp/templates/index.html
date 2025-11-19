@@ -262,164 +262,199 @@
         <!-- [ breadcrumb ] end -->
 
         <!-- [ Main Content ] start -->
-          <div class="container mt-5">
-              {% block content %}
-        <div class="grid grid-cols-12 gap-x-6">
-          <div class="col-span-12 xl:col-span-4 md:col-span-6">
-            <div class="card">
-              <div class="card-header !pb-0 !border-b-0">
-                <h5>Student</h5>
-              </div>
-              <div class="card-body">
-                <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <h3 class="font-light flex items-center mb-0">
-                    <i class="feather icon-arrow-up text-success-500 text-[30px] mr-1.5"></i>
-                    {{student_count}}
-                  </h3>
-                </div>
-                <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mt-6 dark:bg-themedark-bodybg">
-                  <div class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar"
-                    style="width: 75%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-span-12 xl:col-span-4 md:col-span-6">
-            <div class="card">
-              <div class="card-header !pb-0 !border-b-0">
-                <h5>Subject</h5>
-              </div>
-              <div class="card-body">
-                <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <h3 class="font-light flex items-center mb-0">
-                    <i class="feather icon-arrow-down text-danger-500 text-[30px] mr-1.5"></i>
-                    {{subject_count}}
-                  </h3>
-                </div>
-                <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mt-6 dark:bg-themedark-bodybg">
-                  <div class="bg-theme-bg-2 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar"
-                    style="width: 35%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-span-12 xl:col-span-4">
-            <div class="card">
-              <div class="card-header !pb-0 !border-b-0">
-                <h5>Yearly Sales</h5>
-              </div>
-              <div class="card-body">
-                <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <h3 class="font-light flex items-center mb-0">
-                    <i class="feather icon-arrow-up text-success-500 text-[30px] mr-1.5"></i>
-                    $8.638.32
-                  </h3>
-                  <p class="mb-0">80%</p>
-                </div>
-                <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mt-6 dark:bg-themedark-bodybg">
-                  <div class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar"
-                    style="width: 80%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-span-12 xl:col-span-4">
-            <div class="card card-social">
-              <div class="card-body border-b border-theme-border dark:border-themedark-border">
-                <div class="flex items-center justify-center">
-                  <div class="shrink-0">
-                    <i class="fab fa-facebook-f text-primary-500 text-[36px]"></i>
-                  </div>
-                  <div class="grow ltr:text-right rtl:text-left">
-                    <h3 class="mb-2">12,281</h3>
-                    <h5 class="text-success-500 mb-0">+7.2% <span class="text-muted">Total Like</span></h5>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="grid grid-cols-12 gap-x-6">
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Target:</span>35,098</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 60%"></div>
+        <div class="container mt-5">
+    {% block content %}
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-12 gap-x-6 mb-6">
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <div class="card stat-card student-stat">
+                <div class="card-body">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h6 class="text-muted mb-2">Total Students</h6>
+                            <h3 class="font-bold text-2xl">{{ student_count }}</h3>
+                            <p class="text-sm text-muted mt-1">Registered in system</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-primary-100 text-primary-500">
+                            <i data-feather="users" class="w-6 h-6"></i>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Duration:</span>350</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-theme-bg-2 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 45%"></div>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="col-span-12 xl:col-span-4 md:col-span-6">
-            <div class="card card-social">
-              <div class="card-body border-b border-theme-border dark:border-themedark-border">
-                <div class="flex items-center justify-center">
-                  <div class="shrink-0">
-                    <i class="fab fa-twitter text-primary-500 text-[36px]"></i>
-                  </div>
-                  <div class="grow ltr:text-right rtl:text-left">
-                    <h3 class="mb-2">11,200</h3>
-                    <h5 class="text-purple-500 mb-0">+6.2% <span class="text-muted">Total Likes</span></h5>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="grid grid-cols-12 gap-x-6">
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Target:</span>34,185</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-success-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 40%"></div>
-                    </div>
-                  </div>
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Duration:</span>800</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-primary-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 70%"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-span-12 xl:col-span-4 md:col-span-6">
-            <div class="card card-social">
-              <div class="card-body border-b border-theme-border dark:border-themedark-border">
-                <div class="flex items-center justify-center">
-                  <div class="shrink-0">
-                    <i class="fab fa-google-plus-g text-danger-500 text-[36px]"></i>
-                  </div>
-                  <div class="grow ltr:text-right rtl:text-left">
-                    <h3 class="mb-2">10,500</h3>
-                    <h5 class="text-purple-500 mb-0">+5.9% <span class="text-muted">Total Likes</span></h5>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="grid grid-cols-12 gap-x-6">
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Target:</span>25,998</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <div class="col-span-6">
-                    <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Duration:</span>900</h6>
-                    <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
-                      <div class="bg-theme-bg-2 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 50%"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endblock %}
         </div>
-        <!-- [ Main Content ] end -->
-      </div>
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <div class="card stat-card subject-stat">
+                <div class="card-body">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h6 class="text-muted mb-2">Total Subjects</h6>
+                            <h3 class="font-bold text-2xl">{{ subject_count }}</h3>
+                            <p class="text-sm text-muted mt-1">Available courses</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-success-100 text-success-500">
+                            <i data-feather="book" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <div class="card stat-card attendance-stat">
+                <div class="card-body">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h6 class="text-muted mb-2">Today's Attendance</h6>
+                            <h3 class="font-bold text-2xl">87%</h3>
+                            <p class="text-sm text-muted mt-1">Overall present rate</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-warning-100 text-warning-500">
+                            <i data-feather="calendar" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <div class="card stat-card internal-stat">
+                <div class="card-body">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h6 class="text-muted mb-2">Internal Marks</h6>
+                            <h3 class="font-bold text-2xl">92%</h3>
+                            <p class="text-sm text-muted mt-1">Average performance</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-danger-100 text-danger-500">
+                            <i data-feather="award" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Access Cards -->
+    <div class="grid grid-cols-12 gap-x-6 mb-6">
+        <div class="col-span-12">
+            <h4 class="mb-4 font-semibold">Quick Access</h4>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="{% url 'Addstudentpage' %}">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-primary-100 text-primary-500 inline-block mb-3">
+                            <i data-feather="user-plus" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">Add Student</h5>
+                        <p class="text-muted text-sm">Register new student details</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="{% url 'DisplaystudentPage' %}">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-info-100 text-info-500 inline-block mb-3">
+                            <i data-feather="list" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">View Students</h5>
+                        <p class="text-muted text-sm">Browse all student records</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="{% url 'AddsubjectPage' %}">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-success-100 text-success-500 inline-block mb-3">
+                            <i data-feather="plus-circle" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">Add Subject</h5>
+                        <p class="text-muted text-sm">Create new course subject</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="{% url 'DisplaysubjectPage' %}">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-warning-100 text-warning-500 inline-block mb-3">
+                            <i data-feather="book-open" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">View Subjects</h5>
+                        <p class="text-muted text-sm">Browse all available subjects</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Additional Quick Access Cards -->
+    <div class="grid grid-cols-12 gap-x-6 mb-6">
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="#">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-purple-100 text-purple-500 inline-block mb-3">
+                            <i data-feather="maximize" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">QR Code</h5>
+                        <p class="text-muted text-sm">Generate attendance QR codes</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="#">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-pink-100 text-pink-500 inline-block mb-3">
+                            <i data-feather="calendar" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">View Attendance</h5>
+                        <p class="text-muted text-sm">Check attendance details</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="#">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-indigo-100 text-indigo-500 inline-block mb-3">
+                            <i data-feather="pie-chart" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">Attendance %</h5>
+                        <p class="text-muted text-sm">View attendance statistics</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-span-12 xl:col-span-3 md:col-span-6">
+            <a href="#">
+                <div class="card quick-access-card">
+                    <div class="card-body text-center">
+                        <div class="p-4 rounded-full bg-teal-100 text-teal-500 inline-block mb-3">
+                            <i data-feather="send" class="w-8 h-8"></i>
+                        </div>
+                        <h5 class="font-semibold mb-2">Messenger</h5>
+                        <p class="text-muted text-sm">Send messages to students</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+            {% endblock %}
+        </div>
     </div>
     </div>
     <!-- [ Main Content ] end -->
