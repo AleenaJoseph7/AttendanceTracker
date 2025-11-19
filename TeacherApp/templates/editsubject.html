@@ -5,7 +5,7 @@
 <div class="col-md-6">
 
     <div class="card shadow-lg p-4">
-        <h3 class="text-center mb-4">Edit Subject</h3>
+        <h3 class="text-center mb-4" style="color:darkblue;">Edit Subject</h3>
 
         <form method="POST" action="{% url 'Updatesubject' sub_id=subject.id %}">
             {% csrf_token %}
