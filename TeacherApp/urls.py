@@ -25,6 +25,8 @@ urlpatterns=[
     path('Updateinternal/<int:i_id>/',views.Updateinternal,name="Updateinternal"),
     path('Deleteinternal/<int:i_id>/',views.Deleteinternal,name="Deleteinternal"),
 
-
+    path('AdminLoginPage/',views.AdminLoginPage,name="AdminLoginPage"),
+    path('AdminLogin/',views.AdminLogin,name="AdminLogin"),
+    path('AdminLogout/',views.AdminLogout,name="AdminLogout"),
 
 ]

@@ -198,5 +198,32 @@ def Deleteinternal(request,i_id):
 
 
 
+def AdminLoginPage(request):
+    return render(request,"adminlogin.html")
+
+def AdminLogin(request):
+    if request.method=='POST':
+        admin_username=request.POST.get('admin_username')
+        admin_password=request.POST.get('admin_password')
+
+        if User.objects.filter(username__contains=admin_username).exists():
+            data=authenticate(username=admin_username,password=admin_password)
+
+            if data is not None:
+                login(request,data)
+                request.session['Username']=admin_username
+                request.session['Password']=admin_password
+                return redirect(Indexpage)
+
+            else:
+                return redirect(AdminLoginPage)
+        else:
+            return redirect(AdminLoginPage)
+
+def AdminLogout(request):
+    del request.session['Username']
+    del request.session['Password']
+    return redirect(AdminLoginPage)
+
 
 
