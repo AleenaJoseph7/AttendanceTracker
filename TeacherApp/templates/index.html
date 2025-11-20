@@ -120,17 +120,17 @@
                     </li>
 
                     <li class="pc-item pc-caption">
-                        <label>QR Code</label>
+                        <label>Attendance</label>
                         <i data-feather="maximize"></i>
                     </li>
                     <li class="pc-item">
-                        <a href="#" class="pc-link">
+                        <a href="{% url 'AttendancePage' %}" class="pc-link">
                             <span class="pc-micon"><i data-feather="maximize"></i></span>
-                            <span class="pc-mtext">QR Code</span>
+                            <span class="pc-mtext">Add Attendance</span>
                         </a>
                     </li>
                     <li class="pc-item">
-                        <a href="#" class="pc-link">
+                        <a href="{% url 'Displayattendancepage' %}" class="pc-link">
                             <span class="pc-micon"><i data-feather="calendar"></i></span>
                             <span class="pc-mtext">View Attendance Details</span>
                         </a>
@@ -401,21 +401,21 @@
     <!-- Additional Quick Access Cards -->
     <div class="grid grid-cols-12 gap-x-6 mb-6">
         <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="#">
+            <a href="{% url 'AttendancePage' %}">
                 <div class="card quick-access-card">
                     <div class="card-body text-center">
                         <div class="p-4 rounded-full bg-purple-100 text-purple-500 inline-block mb-3">
                             <i data-feather="maximize" class="w-8 h-8"></i>
                         </div>
-                        <h5 class="font-semibold mb-2">QR Code</h5>
-                        <p class="text-muted text-sm">Generate attendance QR codes</p>
+                        <h5 class="font-semibold mb-2">Attendance</h5>
+                        <p class="text-muted text-sm">Add Day to Day attendance </p>
                     </div>
                 </div>
             </a>
         </div>
 
         <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="#">
+            <a href="{% url 'Displayattendancepage' %}">
                 <div class="card quick-access-card">
                     <div class="card-body text-center">
                         <div class="p-4 rounded-full bg-pink-100 text-pink-500 inline-block mb-3">

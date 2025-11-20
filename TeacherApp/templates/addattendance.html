@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg p-4" style="border:1px solid lightgrey; border-radius:10px;">
+                <h3 class="text-center mb-4"
+                    style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">
+                    Add Attendance
+                </h3>
+
+                <form method="POST" action="{% url 'saveattendance' %}">
+                    {% csrf_token %}
+
+                    <!-- Student Select -->
+                    <div class="mb-3">
+                        <label class="form-label">Select Student</label>
+                        <select name="attendance_student" class="form-control" required>
+                            <option >-- Select Student --</option>
+                            {% for i in student %}
+                                <option value="{{i.id}}" >{{i.Student_name}}({{i.Student_rollno}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Subject Select -->
+                    <div class="mb-3">
+                        <label class="form-label">Select Subject</label>
+                        <select name="attendance_subject" class="form-control" required>
+                            <option >-- Select Subject --</option>
+                            {% for i in subject %}
+                                <option value="{{i.id}}" >{{i.Subject_name}}({{i.Subject_code}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="attendance_date" value="{{ today }}" class="form-control" required>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-3">
+                        <label class="form-label">Attendance Status</label>
+                        <select name="attendance_status" class="form-control" required>
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit"
+                                class="btn btn-primary mt-3"
+                                style="width:95%; border-radius:10px;">
+                            Save Attendance
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

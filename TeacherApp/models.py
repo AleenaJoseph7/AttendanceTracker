@@ -1,5 +1,7 @@
 from django.db import models
 
+from datetime import date
+
 # Create your models here.
 class Studentdb(models.Model):
     Student_name=models.CharField(max_length=30,null=True,blank=True)
@@ -28,7 +30,7 @@ class Subjectdb(models.Model):
 class Attendancedb(models.Model):
     Student=models.ForeignKey(Studentdb,on_delete=models.CASCADE)
     Subject=models.ForeignKey(Subjectdb,on_delete=models.CASCADE)
-    Date=models.DateField(auto_now_add=True)
+    Date=models.DateField(default=date.today)
     Status=models.CharField(max_length=10,default="Absent",choices=[("Present","Present"),
                                                                     ("Absent","Absent")])
     # ("Present", "Present") 1st data to be stored to db, 2nd visible to user

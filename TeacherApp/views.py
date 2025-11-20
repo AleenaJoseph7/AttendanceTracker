@@ -4,6 +4,7 @@ from  django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 import datetime
+from datetime import date
 
 from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
 
@@ -195,6 +196,67 @@ def Deleteinternal(request,i_id):
     data=Internalmarkdb.objects.filter(id=i_id)
     data.delete()
     return redirect(Displayinternal)
+
+def AttendancePage(request):
+    subject=Subjectdb.objects.all()
+    student=Studentdb.objects.all()
+    date=datetime.datetime.now()
+    return render(request,"addattendance.html",{'date':date,'subject':subject,'student':student})
+
+def saveattendance(request):
+    if request.method=='POST':
+        attendance_student=request.POST.get('attendance_student')
+        attendance_subject=request.POST.get('attendance_subject')
+        attendance_date=request.POST.get('attendance_date')
+        attendance_status=request.POST.get('attendance_status')
+
+        attendance_studentobj=Studentdb.objects.get(id=attendance_student)
+        attendance_subjectobj=Subjectdb.objects.get(id=attendance_subject)
+
+        ob=Attendancedb(Student=attendance_studentobj,
+                        Subject=attendance_subjectobj,
+                        Date=attendance_date,
+                        Status=attendance_status)
+
+        ob.save()
+        return redirect(AttendancePage)
+
+def Displayattendancepage(request):
+    date = datetime.datetime.now()
+    data=Attendancedb.objects.all()
+    return render(request,"displayattendance.html",{'date':date,'data':data})
+
+def Editattendancepage(request,a_id):
+    subject = Subjectdb.objects.all()
+    student = Studentdb.objects.all()
+    date = datetime.datetime.now()
+    attendance=Attendancedb.objects.get(id=a_id)
+    return render(request,"editattendance.html", {'date': date,'attendance':attendance,'subject':subject,'student':student})
+
+def updateattendance(request,a_id):
+    if request.method == 'POST':
+        attendance_student = request.POST.get('attendance_student')
+        attendance_subject = request.POST.get('attendance_subject')
+        attendance_date = request.POST.get('attendance_date')
+        attendance_status = request.POST.get('attendance_status')
+
+        attendance_studentobj = Studentdb.objects.get(id=attendance_student)
+        attendance_subjectobj = Subjectdb.objects.get(id=attendance_subject)
+
+        Attendancedb.objects.filter(id=a_id).update(Student=attendance_studentobj,
+                          Subject=attendance_subjectobj,
+                          Date=attendance_date,
+                          Status=attendance_status)
+        return redirect(Displayattendancepage)
+
+def deleteattendance(request,a_id):
+    data=Attendancedb.objects.filter(id=a_id)
+    data.delete()
+    return redirect(Displayattendancepage)
+
+
+
+
 
 
 

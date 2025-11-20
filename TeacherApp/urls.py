@@ -25,6 +25,13 @@ urlpatterns=[
     path('Updateinternal/<int:i_id>/',views.Updateinternal,name="Updateinternal"),
     path('Deleteinternal/<int:i_id>/',views.Deleteinternal,name="Deleteinternal"),
 
+    path('AttendancePage/',views.AttendancePage,name="AttendancePage"),
+    path('saveattendance/',views.saveattendance,name="saveattendance"),
+    path('Displayattendancepage/',views.Displayattendancepage,name="Displayattendancepage"),
+    path('Editattendancepage/<int:a_id>/',views.Editattendancepage,name="Editattendancepage"),
+    path('updateattendance/<int:a_id>/',views.updateattendance,name="updateattendance"),
+    path('deleteattendance/<int:a_id>/',views.deleteattendance,name="deleteattendance"),
+
     path('AdminLoginPage/',views.AdminLoginPage,name="AdminLoginPage"),
     path('AdminLogin/',views.AdminLogin,name="AdminLogin"),
     path('AdminLogout/',views.AdminLogout,name="AdminLogout"),
