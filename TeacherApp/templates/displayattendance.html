@@ -3,8 +3,20 @@
 {% block content %}
 
 <div class="container mt-5">
+<form method="get" class="mb-5 mt-5" style="padding:10px;">
+    <select name="subject" class="form-select" onchange="this.form.submit()">
+        <option value="">All Subjects</option>
 
+        {% for s in subjects %}
+            <option value="{{ s.id }}"
+                {% if request.GET.subject == s.id|stringformat:"s" %}selected{% endif %}>
+                {{ s.Subject_name }} ({{ s.Subject_code }})
+            </option>
+        {% endfor %}
+    </select>
+</form>
     <div class="table-responsive shadow-sm p-3 bg-white rounded">
+
         <table class="table table-bordered table-hover align-middle">
 
             <thead class="table-dark">

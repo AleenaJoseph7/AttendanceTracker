@@ -165,8 +165,25 @@ def Saveinternal(request):
         return redirect(Addinternalpage)
 def Displayinternal(request):
     date = datetime.datetime.now()
-    data=Internalmarkdb.objects.all()
-    return render(request,"displayinternal.html",{'data':data,'date':date})
+    student_id = request.GET.get("student")
+
+    if student_id:
+        data = Internalmarkdb.objects.filter(Student_id=student_id)
+    else:
+        data = Internalmarkdb.objects.all()
+
+    students = Studentdb.objects.all()
+
+    return render(
+        request,
+        "displayinternal.html",
+        {
+            'data': data,
+            'date': date,
+            'students': students,
+            'student_id': student_id,
+        }
+    )
 
 def Editinternalpage(request,i_id):
     date = datetime.datetime.now()
@@ -222,9 +239,15 @@ def saveattendance(request):
         return redirect(AttendancePage)
 
 def Displayattendancepage(request):
+    subject_id = request.GET.get("subject")  # subject selected from dropdown
+
+    if subject_id:
+        data = Attendancedb.objects.filter(Subject_id=subject_id)
+    else:
+        data = Attendancedb.objects.all()
     date = datetime.datetime.now()
-    data=Attendancedb.objects.all()
-    return render(request,"displayattendance.html",{'date':date,'data':data})
+    subjects = Subjectdb.objects.all()
+    return render(request,"displayattendance.html",{'date':date,'data':data,'subject_id':subject_id,'subjects':subjects})
 
 def Editattendancepage(request,a_id):
     subject = Subjectdb.objects.all()
