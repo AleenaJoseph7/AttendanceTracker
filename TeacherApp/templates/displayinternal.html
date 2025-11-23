@@ -37,7 +37,13 @@
                 <tr>
                     <td>{{ i.Student.Student_name }}</td>
                     <td>{{ i.Subject.Subject_code }}</td>
-                    <td>{{ i.Internalmark }}</td>
+                    <td>
+                         {% if i.Internalmark < 25 %}
+                            <span style="color:red; font-weight:bold;">{{ i.Internalmark }}</span>
+                         {% else %}
+                            <span style="color:green; font-weight:bold;">{{ i.Internalmark }}</span>
+                         {% endif %}
+                    </td>
                     <td>{{ i.Totalmark }}</td>
                     <td>
                         <a href="{% url 'Editinternalpage' i_id=i.id %}">
