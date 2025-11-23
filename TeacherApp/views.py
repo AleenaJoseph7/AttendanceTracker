@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 import datetime
 from datetime import date
+from django.db.models import Count, Q
 
 from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
 
@@ -14,7 +15,17 @@ def Indexpage(request):
     date=datetime.datetime.now()
     student_count=Studentdb.objects.count()
     subject_count=Subjectdb.objects.count()
-    return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count,'date':date})
+    today=datetime.date.today()
+    attendance_today = Attendancedb.objects.filter(Date=today)
+
+    total_class = attendance_today.count()
+    present_count = attendance_today.filter(Status="Present").count()
+
+    if total_class > 0:
+        today_percentage = round((present_count / total_class) * 100, 2)
+    else:
+        today_percentage = 0
+    return render(request,"index.html",{'student_count':student_count,'subject_count':subject_count,'date':date,'today_percentage': today_percentage,})
 
 def Addstudentpage(request):
     date = datetime.datetime.now()
@@ -280,6 +291,27 @@ def deleteattendance(request,a_id):
     data=Attendancedb.objects.filter(id=a_id)
     data.delete()
     return redirect(Displayattendancepage)
+
+def AttendancePercentagePage(request):
+    subjects = Subjectdb.objects.all()
+    selected_subject = request.GET.get("subject")
+    date=datetime.datetime.now()
+    data = []
+
+    if selected_subject:
+        data = Attendancedb.objects.filter(Subject_id=selected_subject).values(
+            'Student__Student_name',
+        ).annotate(
+            total=Count('id'),
+            present=Count('id', filter=Q(Status="Present")),
+            absent=Count('id', filter=Q(Status="Absent"))
+        )
+
+        for d in data:
+            d['percentage'] = round((d['present'] / d['total']) * 100, 2) if d['total'] else 0
+
+    return render(request, "attendancepercentage.html",
+                  {"subjects": subjects, "data": data, "selected_subject": selected_subject,'date':date})
 
 
 

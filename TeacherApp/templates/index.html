@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li class="pc-item">
-                        <a href="#" class="pc-link">
+                        <a href="{% url 'AttendancePercentagePage' %}" class="pc-link">
                             <span class="pc-micon"><i data-feather="pie-chart"></i></span>
                             <span class="pc-mtext">View Total Attendance</span>
                         </a>
@@ -307,7 +307,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h6 class="text-muted mb-2">Today's Attendance</h6>
-                            <h3 class="font-bold text-2xl">87%</h3>
+                            <h3 class="font-bold text-2xl">{{today_percentage}}%</h3>
                             <p class="text-sm text-muted mt-1">Overall present rate</p>
                         </div>
                         <div class="p-3 rounded-full bg-warning-100 text-warning-500">
@@ -429,7 +429,7 @@
         </div>
 
         <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="#">
+            <a href="{% url 'AttendancePercentagePage' %}">
                 <div class="card quick-access-card">
                     <div class="card-body text-center">
                         <div class="p-4 rounded-full bg-indigo-100 text-indigo-500 inline-block mb-3">

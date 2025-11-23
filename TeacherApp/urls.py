@@ -31,6 +31,7 @@ urlpatterns=[
     path('Editattendancepage/<int:a_id>/',views.Editattendancepage,name="Editattendancepage"),
     path('updateattendance/<int:a_id>/',views.updateattendance,name="updateattendance"),
     path('deleteattendance/<int:a_id>/',views.deleteattendance,name="deleteattendance"),
+    path('AttendancePercentagePage/',views.AttendancePercentagePage,name="AttendancePercentagePage"),
 
     path('AdminLoginPage/',views.AdminLoginPage,name="AdminLoginPage"),
     path('AdminLogin/',views.AdminLogin,name="AdminLogin"),
