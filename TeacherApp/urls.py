@@ -33,6 +33,11 @@ urlpatterns=[
     path('deleteattendance/<int:a_id>/',views.deleteattendance,name="deleteattendance"),
     path('AttendancePercentagePage/',views.AttendancePercentagePage,name="AttendancePercentagePage"),
 
+    path("pdf/internal/<int:subject_id>/", views.internal_pdf, name="internal_pdf"),
+    path("pdf/student/<int:student_id>/", views.student_attendance_pdf, name="student_attendance_pdf"),
+    path("pdf/subject/<int:subject_id>/", views.subject_attendance_pdf, name="subject_attendance_pdf"),
+
+
     path('AdminLoginPage/',views.AdminLoginPage,name="AdminLoginPage"),
     path('AdminLogin/',views.AdminLogin,name="AdminLogin"),
     path('AdminLogout/',views.AdminLogout,name="AdminLogout"),

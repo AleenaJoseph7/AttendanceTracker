@@ -7,6 +7,9 @@ import datetime
 from datetime import date
 from django.db.models import Count, Q
 
+from django.http import FileResponse
+from .utils.pdf_generator import generate_pdf_table
+
 from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
 
 
@@ -179,9 +182,12 @@ def Saveinternal(request):
         ob.save()
         return redirect(Addinternalpage)
 def Displayinternal(request):
+    import datetime
     date = datetime.datetime.now()
     student_id = request.GET.get("student")
+    selected_subject = request.GET.get("subject")  # Get from request if filtering by subject
 
+    # Filter by student if provided
     if student_id:
         data = Internalmarkdb.objects.filter(Student_id=student_id)
     else:
@@ -189,14 +195,19 @@ def Displayinternal(request):
 
     students = Studentdb.objects.all()
 
+    # If no subject selected, pick the first one in data (optional)
+    if not selected_subject and data.exists():
+        selected_subject = data.first().Subject.id
+
     return render(
         request,
         "displayinternal.html",
         {
-            'data': data,
-            'date': date,
-            'students': students,
-            'student_id': student_id,
+            "data": data,
+            "date": date,
+            "students": students,
+            "student_id": student_id,
+            "selected_subject": selected_subject,  # ✅ Must pass this
         }
     )
 
@@ -312,6 +323,59 @@ def AttendancePercentagePage(request):
 
     return render(request, "attendancepercentage.html",
                   {"subjects": subjects, "data": data, "selected_subject": selected_subject,'date':date})
+
+
+def internal_pdf(request, subject_id):
+    subject = Subjectdb.objects.get(id=subject_id)
+    records = Internalmarkdb.objects.filter(Subject=subject)
+
+    data_rows = [["Student Name", "Internal Mark", "Total Mark"]]
+    for r in records:
+        data_rows.append([r.Student.Student_name, r.Internalmark, r.Totalmark])
+
+    pdf_buffer = generate_pdf_table(
+        f"Internal Marks Report - {subject.Subject_code}", data_rows
+    )
+
+    return FileResponse(pdf_buffer, as_attachment=True, filename="internal_marks.pdf")
+
+
+
+def student_attendance_pdf(request, student_id):
+    data = Attendancedb.objects.filter(Student_id=student_id).order_by("Date")
+
+    student_name = data[0].Student.Student_name if data else "Student"
+
+    # Table headers
+    data_rows = [["Date", "Status"]]
+
+    for i in data:
+        data_rows.append([str(i.Date), i.Status])
+
+    pdf_buffer = generate_pdf_table(
+        f"Attendance Report - {student_name}", data_rows
+    )
+
+    return FileResponse(pdf_buffer, as_attachment=True, filename="student_attendance.pdf")
+
+
+
+def subject_attendance_pdf(request, subject_id):
+    data = Attendancedb.objects.filter(Subject_id=subject_id).order_by("Date")
+
+    subject_name = data[0].Subject.Subject_name if data else "Subject"
+
+    # Table headers
+    data_rows = [["Date", "Student Name", "Status"]]
+
+    for i in data:
+        data_rows.append([str(i.Date), i.Student.Student_name, i.Status])
+
+    pdf_buffer = generate_pdf_table(
+        f"Attendance Report - {subject_name}", data_rows
+    )
+
+    return FileResponse(pdf_buffer, as_attachment=True, filename="subject_attendance.pdf")
 
 
 

@@ -3,25 +3,39 @@
 {% block content %}
 
 <div class="container mt-5">
-    <form method="get" class="mb-5 mt-5" style="padding:10px;">
-    <div class="row">
-        <div class="col-md-4">
-            <select name="student" class="form-select" onchange="this.form.submit()">
-                <option value="">All Students</option>
-                {% for s in students %}
-                    <option value="{{ s.id }}"
-                        {% if student_id == s.id|stringformat:"s" %}selected{% endif %}>
-                        {{ s.Student_name }} ({{ s.Student_rollno }})
-                    </option>
-                {% endfor %}
-            </select>
+
+    <!-- Filter + PDF button row using flex -->
+    <form method="get" class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <!-- Student Filter on left -->
+            <div style="flex: 1; max-width: 400px;">
+                <select name="student" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Students</option>
+                    {% for s in students %}
+                        <option value="{{ s.id }}"
+                            {% if student_id == s.id|stringformat:"s" %}selected{% endif %}>
+                            {{ s.Student_name }} ({{ s.Student_rollno }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- PDF Button on right -->
+            <div>
+                {% if selected_subject %}
+                    <a href="{% url 'internal_pdf' selected_subject %}" class="btn btn-danger">
+                        <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                    </a>
+                {% endif %}
+            </div>
+
         </div>
-    </div>
-</form>
+    </form>
 
+    <!-- Table -->
     <div class="table-responsive shadow-sm p-3 bg-white rounded">
-        <table class="table table-bordered table-hover align-middle" >
-
+        <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark">
                 <tr>
                     <th>Student Name</th>
@@ -31,39 +45,36 @@
                     <th colspan="2" style="text-align:center;">Actions</th>
                 </tr>
             </thead>
-
             <tbody>
                 {% for i in data %}
-                <tr>
-                    <td>{{ i.Student.Student_name }}</td>
-                    <td>{{ i.Subject.Subject_code }}</td>
-                    <td>
-
-                         {% if i.Internalmark < 35 %}
-                            <span style="color:red; font-weight:bold;">{{ i.Internalmark }}</span>
-                         {% else %}
-                            <span style="color:green; font-weight:bold;">{{ i.Internalmark }}</span>
-                         {% endif %}
-                    </td>
-                    <td>{{ i.Totalmark }}</td>
-                    <td>
-                        <a href="{% url 'Editinternalpage' i_id=i.id %}">
-                            <button class="btn btn-success btn-sm px-3">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'Deleteinternal' i_id=i.id %}">
-                            <button class="btn btn-danger btn-sm px-3">Delete</button>
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ i.Student.Student_name }}</td>
+                        <td>{{ i.Subject.Subject_code }}</td>
+                        <td>
+                            {% if i.Internalmark < 35 %}
+                                <span style="color:red; font-weight:bold;">{{ i.Internalmark }}</span>
+                            {% else %}
+                                <span style="color:green; font-weight:bold;">{{ i.Internalmark }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ i.Totalmark }}</td>
+                        <td>
+                            <a href="{% url 'Editinternalpage' i_id=i.id %}">
+                                <button class="btn btn-success btn-sm px-3">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'Deleteinternal' i_id=i.id %}">
+                                <button class="btn btn-danger btn-sm px-3">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
                 {% empty %}
-                <tr>
-                    <td colspan="6" class="text-center">No Internal Marks Available</td>
-                </tr>
+                    <tr>
+                        <td colspan="6" class="text-center">No Internal Marks Available</td>
+                    </tr>
                 {% endfor %}
             </tbody>
-
         </table>
     </div>
 
