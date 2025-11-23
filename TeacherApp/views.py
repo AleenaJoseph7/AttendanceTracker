@@ -29,6 +29,7 @@ def savestudent(request):
         student_sem=request.POST.get('student_sem')
         student_duration=request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
+        student_password = request.POST.get('student_password')
         student_prof=request.FILES.get('student_prof')
 
 
@@ -39,6 +40,7 @@ def savestudent(request):
                      Student_sem=student_sem,
                      Student_duration=student_duration,
                      Student_phone=student_phone,
+                     Student_password=student_password,
                      Student_prof=student_prof)
 
         ob.save()
@@ -64,6 +66,7 @@ def updatestudent(request,s_id):
         student_sem=request.POST.get('student_sem')
         student_duration=request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
+        student_password = request.POST.get('student_password')
         try:
             student_prof=request.FILES['student_prof']
             fs=FileSystemStorage()
@@ -79,6 +82,7 @@ def updatestudent(request,s_id):
                      Student_sem=student_sem,
                      Student_duration=student_duration,
                      Student_phone=student_phone,
+                     Student_password=student_password,
                      Student_prof=files)
 
         return redirect(DisplaystudentPage)

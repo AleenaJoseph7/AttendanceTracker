@@ -12,6 +12,7 @@ class Studentdb(models.Model):
     Student_duration=models.CharField(max_length=30,null=True,blank=True)
     Student_phone = models.IntegerField(null=True, blank=True)
     Student_prof=models.ImageField(upload_to="Student Profile Image",null=True,blank=True)
+    Student_password=models.CharField(max_length=10,null=True,blank=True)
 
     def __str__(self):
         return self.Student_name
