@@ -9,6 +9,8 @@ from django.db.models import Count, Q
 
 from django.http import FileResponse
 from .utils.pdf_generator import generate_pdf_table
+from reportlab.lib import colors
+
 
 from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
 
@@ -184,20 +186,24 @@ def Saveinternal(request):
 def Displayinternal(request):
     import datetime
     date = datetime.datetime.now()
-    student_id = request.GET.get("student")
-    selected_subject = request.GET.get("subject")  # Get from request if filtering by subject
 
-    # Filter by student if provided
+    # Get filter values from request
+    selected_subject = request.GET.get("subject")  # Subject filter
+    student_id = request.GET.get("student")        # Optional student filter
+
+    # Base queryset
+    data = Internalmarkdb.objects.all()
+
+    # Filter by subject if selected
+    if selected_subject:
+        data = data.filter(Subject_id=selected_subject)
+
+    # Optional: filter by student if student dropdown is added later
     if student_id:
-        data = Internalmarkdb.objects.filter(Student_id=student_id)
-    else:
-        data = Internalmarkdb.objects.all()
+        data = data.filter(Student_id=student_id)
 
-    students = Studentdb.objects.all()
-
-    # If no subject selected, pick the first one in data (optional)
-    if not selected_subject and data.exists():
-        selected_subject = data.first().Subject.id
+    # Get all subjects for the dropdown
+    subjects = Subjectdb.objects.all()
 
     return render(
         request,
@@ -205,11 +211,12 @@ def Displayinternal(request):
         {
             "data": data,
             "date": date,
-            "students": students,
-            "student_id": student_id,
-            "selected_subject": selected_subject,  # ✅ Must pass this
+            "subjects": subjects,          # For dropdown
+            "selected_subject": selected_subject,  # For PDF button & dropdown
+            "student_id": student_id       # Optional if student filter added
         }
     )
+
 
 def Editinternalpage(request,i_id):
     date = datetime.datetime.now()
@@ -333,9 +340,8 @@ def internal_pdf(request, subject_id):
     for r in records:
         data_rows.append([r.Student.Student_name, r.Internalmark, r.Totalmark])
 
-    pdf_buffer = generate_pdf_table(
-        f"Internal Marks Report - {subject.Subject_code}", data_rows
-    )
+    pdf_title = f"{subject.Subject_name}({subject.Subject_code}) Internal Report" # e.g., "CST01 Internal Marks"
+    pdf_buffer = generate_pdf_table(pdf_title, data_rows)
 
     return FileResponse(pdf_buffer, as_attachment=True, filename="internal_marks.pdf")
 
@@ -343,39 +349,49 @@ def internal_pdf(request, subject_id):
 
 def student_attendance_pdf(request, student_id):
     data = Attendancedb.objects.filter(Student_id=student_id).order_by("Date")
-
     student_name = data[0].Student.Student_name if data else "Student"
 
-    # Table headers
-    data_rows = [["Date", "Status"]]
+    data_rows = [["Student Name", "Date", "Status"]]
+    for record in data:
+        data_rows.append([record.Student.Student_name, str(record.Date), record.Status])
 
-    for i in data:
-        data_rows.append([str(i.Date), i.Status])
+    # Pass column 2 (Status) for coloring
+    column_color_map = {
+        2: lambda v: colors.green if v == "Present" else colors.red
+    }
 
-    pdf_buffer = generate_pdf_table(
-        f"Attendance Report - {student_name}", data_rows
-    )
-
+    pdf_buffer = generate_pdf_table(f"Attendance Report - {student_name}", data_rows, column_color_map)
     return FileResponse(pdf_buffer, as_attachment=True, filename="student_attendance.pdf")
 
 
 
-def subject_attendance_pdf(request, subject_id):
-    data = Attendancedb.objects.filter(Subject_id=subject_id).order_by("Date")
 
-    subject_name = data[0].Subject.Subject_name if data else "Subject"
 
-    # Table headers
-    data_rows = [["Date", "Student Name", "Status"]]
-
-    for i in data:
-        data_rows.append([str(i.Date), i.Student.Student_name, i.Status])
-
-    pdf_buffer = generate_pdf_table(
-        f"Attendance Report - {subject_name}", data_rows
+def subject_attendance_percentage_pdf(request, subject_id):
+    subject = Subjectdb.objects.get(id=subject_id)
+    data = Attendancedb.objects.filter(Subject_id=subject_id).values(
+        'Student__Student_name'
+    ).annotate(
+        total=Count('id'),
+        present=Count('id', filter=Q(Status="Present")),
+        absent=Count('id', filter=Q(Status="Absent"))
     )
 
-    return FileResponse(pdf_buffer, as_attachment=True, filename="subject_attendance.pdf")
+    # Compute percentage
+    for d in data:
+        d['percentage'] = round((d['present']/d['total'])*100, 2) if d['total'] else 0
+
+    data_rows = [["Student Name","Total","Present","Absent","Percentage"]]
+    for d in data:
+        data_rows.append([d['Student__Student_name'], d['total'], d['present'], d['absent'], d['percentage']])
+
+    # Column 4 is Percentage
+    column_color_map = {4: lambda v: colors.green if float(v)>=75 else colors.red}
+
+    pdf_buffer = generate_pdf_table(f"{subject.Subject_name}({subject.Subject_code})", data_rows, column_color_map)
+    return FileResponse(pdf_buffer, as_attachment=True, filename="attendance_percentage.pdf")
+
+
 
 
 
