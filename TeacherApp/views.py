@@ -11,8 +11,12 @@ from django.http import FileResponse
 from .utils.pdf_generator import generate_pdf_table
 from reportlab.lib import colors
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb
+
+from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb,ChatMessage
 
 
 # Create your views here.
@@ -392,11 +396,34 @@ def subject_attendance_percentage_pdf(request, subject_id):
     return FileResponse(pdf_buffer, as_attachment=True, filename="attendance_percentage.pdf")
 
 
+def Chatbotpage(request, student_id):
+    students = Studentdb.objects.all()
+    return render(request, "Chatbot.html", {
+        "student_id": student_id,
+        "students": students
+    })
+
+
+def MessengerStudentList(request):
+    students = Studentdb.objects.all()
+    return render(request, "MessengerStudentList.html", {"students": students})
 
 
 
+def get_messages(request, student_id):
+    messages = ChatMessage.objects.filter(student_id=student_id)
+    data = [{"sender": m.sender, "message": m.message} for m in messages]
+    return JsonResponse({"messages": data})
 
-
+@csrf_exempt
+def send_message(request, student_id):
+    data = json.loads(request.body)
+    ChatMessage.objects.create(
+        sender="teacher",
+        student_id=student_id,
+        message=data["message"]
+    )
+    return JsonResponse({"status": "success"})
 
 
 def AdminLoginPage(request):

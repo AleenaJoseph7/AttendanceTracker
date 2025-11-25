@@ -37,9 +37,12 @@ urlpatterns=[
     path("pdf/student/<int:student_id>/", views.student_attendance_pdf, name="student_attendance_pdf"),
     path("pdf/subject/<int:subject_id>/", views.subject_attendance_percentage_pdf, name="subject_attendance_pdf"),
 
+    path('Chatbotpage/<int:student_id>/', views.Chatbotpage, name="Chatbotpage"),
+    path('MessengerStudentList/', views.MessengerStudentList, name="MessengerStudentList"),
+    path('chat/<int:student_id>/', views.get_messages),
+    path('chat/send/<int:student_id>/', views.send_message),
 
     path('AdminLoginPage/',views.AdminLoginPage,name="AdminLoginPage"),
     path('AdminLogin/',views.AdminLogin,name="AdminLogin"),
     path('AdminLogout/',views.AdminLogout,name="AdminLogout"),
-
 ]

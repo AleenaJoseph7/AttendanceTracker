@@ -49,3 +49,16 @@ class Internalmarkdb(models.Model):
 
     def __str__(self):
         return f"{self.Student.Student_name} - {self.Subject.Subject_name}"
+
+
+class ChatMessage(models.Model):
+    sender = models.CharField(max_length=20)    # "teacher" or "student"
+    student = models.ForeignKey(Studentdb, on_delete=models.CASCADE)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return f"{self.sender}: {self.message}"
