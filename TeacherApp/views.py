@@ -418,11 +418,13 @@ def get_messages(request, student_id):
 @csrf_exempt
 def send_message(request, student_id):
     data = json.loads(request.body)
+
     ChatMessage.objects.create(
         sender="teacher",
-        student_id=student_id,
+        student_id=student_id,   # ✔ correct FK assignment
         message=data["message"]
     )
+
     return JsonResponse({"status": "success"})
 
 

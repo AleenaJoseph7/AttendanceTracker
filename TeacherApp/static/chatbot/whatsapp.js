@@ -1,14 +1,12 @@
 let activeStudent = null;
 
-// Auto scroll
 function scrollDown() {
     const chatBody = document.getElementById("chat-body");
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// Open selected chat
 function openChat(id, name) {
-    activeStudent = id;  // <-- FIXED (no let here!!)
+    activeStudent = id;  // FIXED
 
     document.getElementById("chatName").innerText = name;
     document.getElementById("messageBox").disabled = false;
@@ -17,7 +15,6 @@ function openChat(id, name) {
     loadMessages();
 }
 
-// Load messages
 async function loadMessages() {
     if (!activeStudent) return;
 
@@ -37,12 +34,12 @@ async function loadMessages() {
     scrollDown();
 }
 
-// Auto refresh
 setInterval(loadMessages, 1500);
 
-// Send message
 document.getElementById("sendBtn").onclick = async () => {
+    const messageBox = document.getElementById("messageBox");
     let msg = messageBox.value.trim();
+
     if (msg === "" || !activeStudent) return;
 
     await fetch(`/chat/send/${activeStudent}/`, {
