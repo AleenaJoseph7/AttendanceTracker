@@ -4,11 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatBody   = document.getElementById("chat-body");
     const messageBox = document.getElementById("messageBox");
     const sendBtn    = document.getElementById("sendBtn");
-    const clearBtn   = document.getElementById("clearChatBtn");   // Clear chat button
+    const clearBtn   = document.getElementById("clearChatBtn");
 
-    // Your app is mounted at /TeacherAdmin/
     const BASE_URL = "/TeacherAdmin";
-    const sid = studentID;   // comes from <script> in Chatbot.html
+    const sid = studentID;
 
     function scrollDown() {
         if (!chatBody) return;
@@ -27,13 +26,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
             data.messages.forEach(m => {
                 const div = document.createElement("div");
-                // "me" vs "other" should match your whatsapp.css
                 div.className = "message " + (m.sender === "teacher" ? "me" : "other");
-                div.innerText = m.message;
+
+                // Generate ticks based on read_status
+                let ticks = "";
+                if (m.sender === "teacher") {
+                    if (m.read_status === "sent") {
+                        ticks = "✓";
+                    } else if (m.read_status === "delivered") {
+                        ticks = "✓✓";
+                    } else if (m.read_status === "read") {
+                        ticks = '✓✓'; // blue tick styled in CSS
+                        div.classList.add("read");
+                    }
+                }
+
+                div.innerHTML = `
+                    <span>${m.message}</span>
+                    <small class="ticks">${ticks}</small>
+                `;
+
                 chatBody.appendChild(div);
             });
 
             scrollDown();
+
         } catch (err) {
             console.error("Error loading messages:", err);
         }
@@ -41,9 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ------------ SEND MESSAGE ------------
     async function sendMessage() {
-        if (!sid) return;
         const msg = messageBox.value.trim();
-        if (msg === "") return;
+        if (!msg || !sid) return;
 
         try {
             await fetch(`${BASE_URL}/chat/send/${sid}/`, {
@@ -54,8 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             messageBox.value = "";
             loadMessages();
+
         } catch (err) {
-            console.error("Error sending message:", err);
+            console.error("Error sending:", err);
         }
     }
 
@@ -63,28 +80,25 @@ document.addEventListener("DOMContentLoaded", function () {
     async function clearChat() {
         if (!sid) return;
 
-        const ok = confirm("Are you sure you want to clear this chat?");
+        const ok = confirm("Clear chat?");
         if (!ok) return;
 
         try {
-            await fetch(`${BASE_URL}/chat/clear/${sid}/`, {
-                method: "POST"
-            });
+            await fetch(`${BASE_URL}/chat/clear/${sid}/`, { method: "POST" });
 
             chatBody.innerHTML = "";
-            alert("Chat cleared successfully.");
+            alert("Chat cleared!");
+
         } catch (err) {
             console.error("Error clearing chat:", err);
         }
     }
 
-    // ------------ EVENT LISTENERS ------------
-    if (sendBtn) {
-        sendBtn.addEventListener("click", sendMessage);
-    }
+    // Listeners
+    if (sendBtn) sendBtn.addEventListener("click", sendMessage);
 
     if (messageBox) {
-        messageBox.addEventListener("keydown", function (e) {
+        messageBox.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 sendMessage();
@@ -92,11 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    if (clearBtn) {
-        clearBtn.addEventListener("click", clearChat);
-    }
+    if (clearBtn) clearBtn.addEventListener("click", clearChat);
 
-    // Auto refresh every 1.5 seconds
+    // Auto refresh every 1.5 sec
     setInterval(loadMessages, 1500);
     loadMessages();
 });

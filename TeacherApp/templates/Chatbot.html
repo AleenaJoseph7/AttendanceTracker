@@ -4,15 +4,18 @@
 
 <link rel="stylesheet" href="{% static 'chatbot/whatsapp.css' %}">
 
+<!-- Pass student_id to JS -->
 <script>
-    // From Django: which student this page is for
     const studentID = "{{ current_student.id }}";
+    const BASE_URL = "/TeacherAdmin";
 </script>
+
+
 <script src="{% static 'chatbot/whatsapp.js' %}"></script>
 
 <div class="messenger-wrapper">
 
-    <!-- LEFT PANEL : STUDENT LIST -->
+    <!-- LEFT LIST OF STUDENTS -->
     <div class="chat-list">
         <div class="chat-list-header">
             <h4 class="mb-0">Chats</h4>
@@ -21,32 +24,36 @@
         {% for s in students %}
             <a href="{% url 'Chatbotpage' s.id %}"
                class="chat-list-item {% if s.id == current_student.id %}active{% endif %}">
+
                 {% if s.Student_prof %}
                     <img src="{{ s.Student_prof.url }}" class="avatar">
                 {% else %}
                     <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
                 {% endif %}
+
                 <div class="list-info">
                     <div class="name">{{ s.Student_name }}</div>
                     <div class="preview">
                         {% if s.id == current_student.id %}
-                            Active chat
+                            Active Chat
                         {% else %}
                             Click to open chat
                         {% endif %}
                     </div>
                 </div>
+
             </a>
         {% empty %}
-            <div class="p-3 text-muted">No students available</div>
+            <div class="p-3 text-muted">No students found</div>
         {% endfor %}
     </div>
 
     <!-- RIGHT CHAT WINDOW -->
     <div class="chat-window">
 
-        <!-- HEADER : SHOW WHO YOU'RE CHATTING WITH -->
+        <!-- HEADER WITH STUDENT DETAILS -->
         <div class="chat-header">
+
             {% if current_student.Student_prof %}
                 <img src="{{ current_student.Student_prof.url }}" class="avatar">
             {% else %}
@@ -54,31 +61,27 @@
             {% endif %}
 
             <div style="flex:1;">
-                <h4 class="mb-0">
-                    {{ current_student.Student_name }}
-                </h4>
+                <h4 class="mb-0">{{ current_student.Student_name }}</h4>
                 <small class="status">
-                    Roll: {{ current_student.Student_rollno }} |
-                    Reg: {{ current_student.Student_regid }}
+                    Roll No: {{ current_student.Student_rollno }} |
+                    Reg ID: {{ current_student.Student_regid }}
                 </small>
             </div>
 
-            <!-- Clear Chat button -->
             <button id="clearChatBtn" class="btn btn-sm btn-outline-danger">
                 Clear Chat
             </button>
         </div>
 
         <!-- CHAT BODY -->
-        <div id="chat-body" class="chat-body">
-            <!-- Messages inserted by JS -->
-        </div>
+        <div id="chat-body" class="chat-body"></div>
 
-        <!-- INPUT -->
+        <!-- CHAT INPUT -->
         <div class="chat-input">
             <input type="text" id="messageBox" placeholder="Type a message...">
             <button id="sendBtn">Send</button>
         </div>
+
     </div>
 
 </div>

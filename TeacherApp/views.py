@@ -418,8 +418,14 @@ def MessengerShortcut(request):
 
 def get_messages(request, student_id):
     messages = ChatMessage.objects.filter(student_id=student_id)
-    data = [{"sender": m.sender, "message": m.message} for m in messages]
+    data = [{
+        "sender": m.sender,
+        "message": m.message,
+        "read_status": m.read_status     # ✔ now included
+    } for m in messages]
+
     return JsonResponse({"messages": data})
+
 
 @csrf_exempt
 def send_message(request, student_id):

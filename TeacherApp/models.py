@@ -52,13 +52,21 @@ class Internalmarkdb(models.Model):
 
 
 class ChatMessage(models.Model):
-    sender = models.CharField(max_length=20)    # "teacher" or "student"
+    sender = models.CharField(max_length=20)
     student = models.ForeignKey(Studentdb, on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # NEW FIELD
+    read_status = models.CharField(
+        max_length=10,
+        default="sent",   # sent → delivered → read
+        choices=[
+            ("sent", "Sent"),
+            ("delivered", "Delivered"),
+            ("read", "Read"),
+        ]
+    )
+
     class Meta:
         ordering = ['timestamp']
-
-    def __str__(self):
-        return f"{self.sender}: {self.message}"
