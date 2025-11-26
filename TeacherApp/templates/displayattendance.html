@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container mt-5">
- <form method="get" class="mb-3">
+    <form method="get" class="mb-3">
         <div class="justify-content-between align-items-center" style="display:flex; gap:30px;">
 
             <!-- Subject Filter on left -->
@@ -11,10 +11,10 @@
                 <select name="subject" class="form-select" onchange="this.form.submit()">
                     <option value="">All Subjects</option>
                     {% for s in subjects %}
-                        <option value="{{ s.id }}"
+                    <option value="{{ s.id }}"
                             {% if request.GET.subject == s.id|stringformat:"s" %}selected{% endif %}>
-                            {{ s.Subject_name }} ({{ s.Subject_code }})
-                        </option>
+                    {{ s.Subject_name }} ({{ s.Subject_code }})
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -22,9 +22,9 @@
             <!-- PDF Button on right -->
             <div>
                 {% if request.GET.subject %}
-                    <a href="{% url 'subject_attendance_pdf' request.GET.subject %}" class="btn btn-primary">
-                        <i class="bi bi-file-earmark-pdf"></i> Download PDF
-                    </a>
+                <a href="{% url 'subject_attendance_pdf' request.GET.subject %}" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                </a>
                 {% endif %}
             </div>
 
@@ -35,46 +35,48 @@
         <table class="table table-bordered table-hover align-middle">
 
             <thead class="table-dark">
-                <tr>
-                    <th>Student Name</th>
-                    <th>Subject Code</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th colspan="2" style="text-align:center;">Actions</th>
-                </tr>
+            <tr>
+                <th>Student Name</th>
+                <th>Subject Code</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th colspan="2" style="text-align:center;">Actions</th>
+            </tr>
             </thead>
 
             <tbody>
-                {% for i in data %}
-                <tr>
-                    <td>{{ i.Student.Student_name }}</td>
-                    <td>{{ i.Subject.Subject_code }}</td>
-                    <td>{{ i.Date }}</td>
-                    <td>
-                        {% if i.Status == "Present" %}
-                            <span style="color:Green;  font-weight:bold;">Present</span>
-                        {% else %}
-                            <span style="color:Red;  font-weight:bold;">Absent</span>
-                        {% endif %}
-                    </td>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.Student.Student_name }}</td>
+                <td>{{ i.Subject.Subject_code }}</td>
+                <td>{{ i.Date }}</td>
+                <td>
+                    {% if i.Status == "Present" %}
+                    <span style="color:Green;  font-weight:bold;">Present</span>
+                    {% else %}
+                    <span style="color:Red;  font-weight:bold;">Absent</span>
+                    {% endif %}
+                </td>
 
-                    <td>
-                        <a href="{% url 'Editattendancepage' a_id=i.id %}">
-                            <button class="btn btn-success btn-sm px-3">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'deleteattendance' a_id=i.id %}">
-                            <button class="btn btn-danger btn-sm px-3">Delete</button>
-                        </a>
-                    </td>
-                </tr>
+                <td>
+                    <a href="{% url 'Editattendancepage' a_id=i.id %}">
+                        <button class="btn btn-success btn-sm px-3">Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'deleteattendance' a_id=i.id %}"
+                       onclick="return confirm('Are you sure you want to delete this attendance record?');">
+                        <button class="btn btn-danger btn-sm px-3">Delete</button>
+                    </a>
 
-                {% empty %}
-                <tr>
-                    <td colspan="6" class="text-center text-muted">No Attendance Records Found</td>
-                </tr>
-                {% endfor %}
+                </td>
+            </tr>
+
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center text-muted">No Attendance Records Found</td>
+            </tr>
+            {% endfor %}
             </tbody>
 
         </table>

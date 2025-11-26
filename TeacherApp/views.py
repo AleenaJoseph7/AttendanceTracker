@@ -427,6 +427,13 @@ def send_message(request, student_id):
 
     return JsonResponse({"status": "success"})
 
+@csrf_exempt
+def clear_chat(request, student_id):
+    # delete all chat messages for this student
+    ChatMessage.objects.filter(student_id=student_id).delete()
+    return JsonResponse({"status": "cleared"})
+
+
 
 def AdminLoginPage(request):
     return render(request,"adminlogin.html")

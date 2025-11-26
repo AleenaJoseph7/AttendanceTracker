@@ -1,18 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const chatBody = document.getElementById("chat-body");
-    const messageBox = document.getElementById("messageBox");
-    const sendBtn = document.getElementById("sendBtn");
+// static/chatbot/whatsapp.js
 
-    // because your app is mounted as path('TeacherAdmin/', include(...))
+document.addEventListener("DOMContentLoaded", function () {
+    const chatBody   = document.getElementById("chat-body");
+    const messageBox = document.getElementById("messageBox");
+    const sendBtn    = document.getElementById("sendBtn");
+    const clearBtn   = document.getElementById("clearChatBtn");   // Clear chat button
+
+    // Your app is mounted at /TeacherAdmin/
     const BASE_URL = "/TeacherAdmin";
-    const sid = studentID;  // from the <script> tag in template
+    const sid = studentID;   // comes from <script> in Chatbot.html
 
     function scrollDown() {
+        if (!chatBody) return;
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
+    // ------------ LOAD MESSAGES ------------
     async function loadMessages() {
-        if (!sid) return;
+        if (!sid || !chatBody) return;
 
         try {
             const res = await fetch(`${BASE_URL}/chat/${sid}/`);
@@ -21,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
             chatBody.innerHTML = "";
 
             data.messages.forEach(m => {
-                let div = document.createElement("div");
-                // Make sure "me" and "other" match your CSS
+                const div = document.createElement("div");
+                // "me" vs "other" should match your whatsapp.css
                 div.className = "message " + (m.sender === "teacher" ? "me" : "other");
                 div.innerText = m.message;
                 chatBody.appendChild(div);
@@ -34,9 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // ------------ SEND MESSAGE ------------
     async function sendMessage() {
+        if (!sid) return;
         const msg = messageBox.value.trim();
-        if (msg === "" || !sid) return;
+        if (msg === "") return;
 
         try {
             await fetch(`${BASE_URL}/chat/send/${sid}/`, {
@@ -52,16 +59,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    sendBtn.addEventListener("click", sendMessage);
+    // ------------ CLEAR CHAT ------------
+    async function clearChat() {
+        if (!sid) return;
 
-    messageBox.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            sendMessage();
+        const ok = confirm("Are you sure you want to clear this chat?");
+        if (!ok) return;
+
+        try {
+            await fetch(`${BASE_URL}/chat/clear/${sid}/`, {
+                method: "POST"
+            });
+
+            chatBody.innerHTML = "";
+            alert("Chat cleared successfully.");
+        } catch (err) {
+            console.error("Error clearing chat:", err);
         }
-    });
+    }
 
-    // auto refresh chat every 1.5s
+    // ------------ EVENT LISTENERS ------------
+    if (sendBtn) {
+        sendBtn.addEventListener("click", sendMessage);
+    }
+
+    if (messageBox) {
+        messageBox.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", clearChat);
+    }
+
+    // Auto refresh every 1.5 seconds
     setInterval(loadMessages, 1500);
     loadMessages();
 });

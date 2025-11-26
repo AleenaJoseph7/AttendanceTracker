@@ -1,534 +1,539 @@
 <!doctype html>
 {% load static %}
-<html lang="en" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" dir="ltr" data-pc-theme="light">
-  <!-- [Head] start -->
+<html lang="en" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" dir="ltr"
+      data-pc-theme="light">
+<!-- [Head] start -->
 
-  <head>
+<head>
     <title>STRACK</title>
     <!-- [Meta] -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta
-      name="description"
-      content="Datta Able is trending dashboard template made using Bootstrap 5 design framework. Datta Able is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies."
+            name="description"
+            content="Datta Able is trending dashboard template made using Bootstrap 5 design framework. Datta Able is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies."
     />
     <meta
-      name="keywords"
-      content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard"
+            name="keywords"
+            content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard"
     />
-    <meta name="author" content="CodedThemes" />
+    <meta name="author" content="CodedThemes"/>
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{% static 'teacheradmin/assets/images/favicon.svg' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'teacheradmin/assets/images/favicon.svg' %}" type="image/x-icon"/>
 
-     <!-- [Font] Family -->
-     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- [Font] Family -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
     <!-- [phosphor Icons] https://phosphoricons.com/ -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/phosphor/duotone/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/phosphor/duotone/style.css' %}"/>
     <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/tabler-icons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/tabler-icons.min.css' %}"/>
     <!-- [Feather Icons] https://feathericons.com -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/feather.css' %}" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/feather.css' %}"/>
     <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/fontawesome.css' %}"/>
     <!-- [Material Icons] https://fonts.google.com/icons -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/material.css' %}" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/material.css' %}"/>
     <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="{% static 'teacheradmin/assets/css/style.css' %}" id="main-style-link" />
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/css/style.css' %}" id="main-style-link"/>
 
-  </head>
-  <!-- [Head] end -->
-  <!-- [Body] Start -->
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
 
-  <body>
-    <!-- [ Pre-loader ] start -->
+<body>
+<!-- [ Pre-loader ] start -->
 <div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034]">
-  <div class="loader-track h-[5px] w-full inline-block absolute overflow-hidden top-0">
-    <div class="loader-fill w-[300px] h-[5px] bg-primary-500 absolute top-0 left-0 animate-[hitZak_0.6s_ease-in-out_infinite_alternate]"></div>
-  </div>
+    <div class="loader-track h-[5px] w-full inline-block absolute overflow-hidden top-0">
+        <div class="loader-fill w-[300px] h-[5px] bg-primary-500 absolute top-0 left-0 animate-[hitZak_0.6s_ease-in-out_infinite_alternate]"></div>
+    </div>
 </div>
 <!-- [ Pre-loader ] End -->
- <!-- [ Sidebar Menu ] start -->
- <nav class="pc-sidebar">
-        <div class="navbar-wrapper">
-            <div class="m-header flex items-center py-4 px-6 h-header-height">
-                <a href="{% url 'Indexpage' %}" class="b-brand flex items-center gap-3">
-                    <h1 style="font-size:35px; font-weight:bold; font-family:Arial;">STRACK</h1>
-                </a>
-            </div>
-            <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
-                <ul class="pc-navbar">
-                    <li class="pc-item">
-                        <a href="{% url 'Indexpage' %}" class="pc-link">
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+    <div class="navbar-wrapper">
+        <div class="m-header flex items-center py-4 px-6 h-header-height">
+            <a href="{% url 'Indexpage' %}" class="b-brand flex items-center gap-3">
+                <h1 style="font-size:35px; font-weight:bold; font-family:Arial;">STRACK</h1>
+            </a>
+        </div>
+        <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
+            <ul class="pc-navbar">
+                <li class="pc-item">
+                    <a href="{% url 'Indexpage' %}" class="pc-link">
                             <span class="pc-micon">
                                 <i data-feather="home"></i>
                             </span>
-                            <span class="pc-mtext">Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li class="pc-item pc-caption">
-                        <label>Student</label>
-                        <i data-feather="users"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'Addstudentpage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="user-plus"></i></span>
-                            <span class="pc-mtext">Add Student Details</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'DisplaystudentPage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="list"></i></span>
-                            <span class="pc-mtext">View Student Details</span>
-                        </a>
-                    </li>
-
-                    <li class="pc-item pc-caption">
-                        <label>Subject</label>
-                        <i data-feather="book"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'AddsubjectPage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="plus-circle"></i></span>
-                            <span class="pc-mtext">Add Subject</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'DisplaysubjectPage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="book-open"></i></span>
-                            <span class="pc-mtext">View Subjects</span>
-                        </a>
-                    </li>
-
-                    <li class="pc-item pc-caption">
-                        <label>Internal Mark</label>
-                        <i data-feather="award"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'Addinternalpage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="edit-3"></i></span>
-                            <span class="pc-mtext">Add Internal Mark</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'Displayinternal' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="bar-chart-2"></i></span>
-                            <span class="pc-mtext">View Internal Mark</span>
-                        </a>
-                    </li>
-
-                    <li class="pc-item pc-caption">
-                        <label>Attendance</label>
-                        <i data-feather="maximize"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'AttendancePage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="maximize"></i></span>
-                            <span class="pc-mtext">Add Attendance</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'Displayattendancepage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="calendar"></i></span>
-                            <span class="pc-mtext">View Attendance Details</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'AttendancePercentagePage' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="pie-chart"></i></span>
-                            <span class="pc-mtext">View Total Attendance</span>
-                        </a>
-                    </li>
-
-                    <li class="pc-item pc-caption">
-                        <label>Messenger</label>
-                        <i data-feather="message-circle"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="{% url 'MessengerStudentList' %}" class="pc-link">
-                            <span class="pc-micon"><i data-feather="send"></i></span>
-                            <span class="pc-mtext">Message</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-<!-- [ Sidebar Menu ] end -->
- <!-- [ Header Topbar ] start -->
-<header class="pc-header">
-  <div class="header-wrapper flex max-sm:px-[15px] px-[25px] grow"><!-- [Mobile Media Block] start -->
-<div class="me-auto pc-mob-drp">
-  <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
-    <!-- ======= Menu collapse Icon ===== -->
-    <li class="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
-      <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide">
-        <i data-feather="menu"></i>
-      </a>
-    </li>
-    <li class="pc-h-item pc-sidebar-popup lg:hidden">
-      <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
-        <i data-feather="menu"></i>
-      </a>
-    </li>
-    <li class="dropdown pc-h-item">
-      <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
-        aria-haspopup="false" aria-expanded="false">
-        <i data-feather="search"></i>
-      </a>
-      <div class="dropdown-menu pc-h-dropdown drp-search">
-        <form class="px-2 py-1">
-          <input type="search" class="form-control !border-0 !shadow-none" placeholder="Search here. . ." />
-        </form>
-      </div>
-    </li>
-  </ul>
-</div>
-<!-- [Mobile Media Block end] -->
-
-<div class="ms-auto">
-  <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
-
-    <li class="dropdown pc-h-item header-user-profile">
-      <a class="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
-        aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
-        <i data-feather="user"></i>
-      </a>
-      <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2 overflow-hidden">
-        <div class="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500">
-          <div class="flex mb-1 items-center">
-            <div class="shrink-0">
-              <img src="{% static 'teacheradmin/assets/images/teacher.jpg' %}" alt="user-image" class="w-20 h-20 rounded-full" />
-            </div>
-            <div class="grow ms-3">
-                {% if request.session.Username %}
-              <h6 class="mb-1 text-white">Welcome, {{request.session.Username}}</h6>
-                {% endif %}
-            </div>
-          </div>
-        </div>
-        <div class="dropdown-body py-4 px-5">
-          <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
-
-            <div class="grid my-3">
-                <a href="{% url 'AdminLogout' %}">
-              <button  class="btn btn-primary flex items-center justify-center">
-                <svg class="pc-icon me-2 w-[22px] h-[22px]">
-                  <use xlink:href="#custom-logout-1-outline"></use>
-                </svg>
-                Logout
-              </button>
+                        <span class="pc-mtext">Dashboard</span>
                     </a>
-            </div>
-          </div>
+                </li>
+
+                <li class="pc-item pc-caption">
+                    <label>Student</label>
+                    <i data-feather="users"></i>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'Addstudentpage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="user-plus"></i></span>
+                        <span class="pc-mtext">Add Student Details</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'DisplaystudentPage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="list"></i></span>
+                        <span class="pc-mtext">View Student Details</span>
+                    </a>
+                </li>
+
+                <li class="pc-item pc-caption">
+                    <label>Subject</label>
+                    <i data-feather="book"></i>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'AddsubjectPage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="plus-circle"></i></span>
+                        <span class="pc-mtext">Add Subject</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'DisplaysubjectPage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="book-open"></i></span>
+                        <span class="pc-mtext">View Subjects</span>
+                    </a>
+                </li>
+
+                <li class="pc-item pc-caption">
+                    <label>Internal Mark</label>
+                    <i data-feather="award"></i>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'Addinternalpage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="edit-3"></i></span>
+                        <span class="pc-mtext">Add Internal Mark</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'Displayinternal' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="bar-chart-2"></i></span>
+                        <span class="pc-mtext">View Internal Mark</span>
+                    </a>
+                </li>
+
+                <li class="pc-item pc-caption">
+                    <label>Attendance</label>
+                    <i data-feather="maximize"></i>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'AttendancePage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="maximize"></i></span>
+                        <span class="pc-mtext">Add Attendance</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'Displayattendancepage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="calendar"></i></span>
+                        <span class="pc-mtext">View Attendance Details</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'AttendancePercentagePage' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="pie-chart"></i></span>
+                        <span class="pc-mtext">View Total Attendance</span>
+                    </a>
+                </li>
+
+                <li class="pc-item pc-caption">
+                    <label>Messenger</label>
+                    <i data-feather="message-circle"></i>
+                </li>
+                <li class="pc-item">
+                    <a href="{% url 'MessengerStudentList' %}" class="pc-link">
+                        <span class="pc-micon"><i data-feather="send"></i></span>
+                        <span class="pc-mtext">Message</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
-    </li>
-  </ul>
-</div></div>
+    </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+    <div class="header-wrapper flex max-sm:px-[15px] px-[25px] grow"><!-- [Mobile Media Block] start -->
+        <div class="me-auto pc-mob-drp">
+            <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
+                <!-- ======= Menu collapse Icon ===== -->
+                <li class="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
+                    <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide">
+                        <i data-feather="menu"></i>
+                    </a>
+                </li>
+                <li class="pc-h-item pc-sidebar-popup lg:hidden">
+                    <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
+                        <i data-feather="menu"></i>
+                    </a>
+                </li>
+                <li class="dropdown pc-h-item">
+                    <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                        <i data-feather="search"></i>
+                    </a>
+                    <div class="dropdown-menu pc-h-dropdown drp-search">
+                        <form class="px-2 py-1">
+                            <input type="search" class="form-control !border-0 !shadow-none"
+                                   placeholder="Search here. . ."/>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- [Mobile Media Block end] -->
+
+        <div class="ms-auto">
+            <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
+
+                <li class="dropdown pc-h-item header-user-profile">
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#"
+                       role="button"
+                       aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
+                        <i data-feather="user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2 overflow-hidden">
+                        <div class="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500">
+                            <div class="flex mb-1 items-center">
+                                <div class="shrink-0">
+                                    <img src="{% static 'teacheradmin/assets/images/teacher.jpg' %}" alt="user-image"
+                                         class="w-20 h-20 rounded-full"/>
+                                </div>
+                                <div class="grow ms-3">
+                                    {% if request.session.Username %}
+                                    <h6 class="mb-1 text-white">Welcome, {{request.session.Username}}</h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-body py-4 px-5">
+                            <div class="profile-notification-scroll position-relative"
+                                 style="max-height: calc(100vh - 225px)">
+
+                                <div class="grid my-3">
+                                    <a href="{% url 'AdminLogout' %}">
+                                        <button class="btn btn-primary flex items-center justify-center">
+                                            <svg class="pc-icon me-2 w-[22px] h-[22px]">
+                                                <use xlink:href="#custom-logout-1-outline"></use>
+                                            </svg>
+                                            Logout
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </header>
 <!-- [ Header ] end -->
 
 
+<!-- [ Main Content ] start -->
 
-    <!-- [ Main Content ] start -->
-
-    <div class="pc-container">
-      <div class="pc-content">
+<div class="pc-container">
+    <div class="pc-content">
         <!-- [ breadcrumb ] start -->
         <div class="page-header">
-  <div class="page-block flex items-center justify-between w-full">
+            <div class="page-block flex items-center justify-between w-full">
 
-    <div>
-      <div class="page-header-title">
-        <h5 class="mb-3 font-medium">Default</h5>
-      </div>
+                <div>
+                    <div class="page-header-title">
+                        <h5 class="mb-3 font-medium">Default</h5>
+                    </div>
 
-      <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'Indexpage' %}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'Indexpage' %}">Dashboard</a></li>
-        <li class="breadcrumb-item" aria-current="page">Default</li>
-      </ul>
-    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'Indexpage' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'Indexpage' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Default</li>
+                    </ul>
+                </div>
 
-    <!-- ✅ Right-Aligned Date -->
-    <div class="flex items-center gap-2">
-      <i data-feather="calendar" class="w-4 h-4"></i>
-      <span class="text-sm font-medium">{{ date }}</span>
-    </div>
+                <!-- ✅ Right-Aligned Date -->
+                <div class="flex items-center gap-2">
+                    <i data-feather="calendar" class="w-4 h-4"></i>
+                    <span class="text-sm font-medium">{{ date }}</span>
+                </div>
 
-  </div>
-</div>
+            </div>
+        </div>
 
         <!-- [ breadcrumb ] end -->
 
         <!-- [ Main Content ] start -->
         <div class="container mt-5">
-    {% block content %}
-    <!-- Statistics Cards -->
-    <div class="grid grid-cols-12 gap-x-6 mb-6">
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <div class="card stat-card student-stat">
-                <div class="card-body">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h6 class="text-muted mb-2">Total Students</h6>
-                            <h3 class="font-bold text-2xl">{{ student_count }}</h3>
-                            <p class="text-sm text-muted mt-1">Registered in system</p>
+            {% block content %}
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-12 gap-x-6 mb-6">
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <div class="card stat-card student-stat">
+                        <div class="card-body">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h6 class="text-muted mb-2">Total Students</h6>
+                                    <h3 class="font-bold text-2xl">{{ student_count }}</h3>
+                                    <p class="text-sm text-muted mt-1">Registered in system</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-primary-100 text-primary-500">
+                                    <i data-feather="users" class="w-6 h-6"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="p-3 rounded-full bg-primary-100 text-primary-500">
-                            <i data-feather="users" class="w-6 h-6"></i>
+                    </div>
+                </div>
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <div class="card stat-card subject-stat">
+                        <div class="card-body">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h6 class="text-muted mb-2">Total Subjects</h6>
+                                    <h3 class="font-bold text-2xl">{{ subject_count }}</h3>
+                                    <p class="text-sm text-muted mt-1">Available courses</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-success-100 text-success-500">
+                                    <i data-feather="book" class="w-6 h-6"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <div class="card stat-card attendance-stat">
+                        <div class="card-body">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h6 class="text-muted mb-2">Today's Attendance</h6>
+                                    <h3 class="font-bold text-2xl">{{today_percentage}}%</h3>
+                                    <p class="text-sm text-muted mt-1">Overall present rate</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-warning-100 text-warning-500">
+                                    <i data-feather="calendar" class="w-6 h-6"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <div class="card stat-card internal-stat">
+                        <div class="card-body">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h6 class="text-muted mb-2">Internal Marks</h6>
+                                    <h3 class="font-bold text-2xl">92%</h3>
+                                    <p class="text-sm text-muted mt-1">Average performance</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-danger-100 text-danger-500">
+                                    <i data-feather="award" class="w-6 h-6"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <div class="card stat-card subject-stat">
-                <div class="card-body">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h6 class="text-muted mb-2">Total Subjects</h6>
-                            <h3 class="font-bold text-2xl">{{ subject_count }}</h3>
-                            <p class="text-sm text-muted mt-1">Available courses</p>
+
+            <!-- Quick Access Cards -->
+            <div class="grid grid-cols-12 gap-x-6 mb-6">
+                <div class="col-span-12">
+                    <h4 class="mb-4 font-semibold">Quick Access</h4>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'Addstudentpage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-primary-100 text-primary-500 inline-block mb-3">
+                                    <i data-feather="user-plus" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">Add Student</h5>
+                                <p class="text-muted text-sm">Register new student details</p>
+                            </div>
                         </div>
-                        <div class="p-3 rounded-full bg-success-100 text-success-500">
-                            <i data-feather="book" class="w-6 h-6"></i>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'DisplaystudentPage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-info-100 text-info-500 inline-block mb-3">
+                                    <i data-feather="list" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">View Students</h5>
+                                <p class="text-muted text-sm">Browse all student records</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'AddsubjectPage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-success-100 text-success-500 inline-block mb-3">
+                                    <i data-feather="plus-circle" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">Add Subject</h5>
+                                <p class="text-muted text-sm">Create new course subject</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'DisplaysubjectPage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-warning-100 text-warning-500 inline-block mb-3">
+                                    <i data-feather="book-open" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">View Subjects</h5>
+                                <p class="text-muted text-sm">Browse all available subjects</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <div class="card stat-card attendance-stat">
-                <div class="card-body">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h6 class="text-muted mb-2">Today's Attendance</h6>
-                            <h3 class="font-bold text-2xl">{{today_percentage}}%</h3>
-                            <p class="text-sm text-muted mt-1">Overall present rate</p>
+
+            <!-- Additional Quick Access Cards -->
+            <div class="grid grid-cols-12 gap-x-6 mb-6">
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'AttendancePage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-purple-100 text-purple-500 inline-block mb-3">
+                                    <i data-feather="maximize" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">Attendance</h5>
+                                <p class="text-muted text-sm">Add Day to Day attendance </p>
+                            </div>
                         </div>
-                        <div class="p-3 rounded-full bg-warning-100 text-warning-500">
-                            <i data-feather="calendar" class="w-6 h-6"></i>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'Displayattendancepage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-pink-100 text-pink-500 inline-block mb-3">
+                                    <i data-feather="calendar" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">View Attendance</h5>
+                                <p class="text-muted text-sm">Check attendance details</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'AttendancePercentagePage' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-indigo-100 text-indigo-500 inline-block mb-3">
+                                    <i data-feather="pie-chart" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">Attendance %</h5>
+                                <p class="text-muted text-sm">View attendance statistics</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-span-12 xl:col-span-3 md:col-span-6">
+                    <a href="{% url 'MessengerStudentList' %}">
+                        <div class="card quick-access-card">
+                            <div class="card-body text-center">
+                                <div class="p-4 rounded-full bg-teal-100 text-teal-500 inline-block mb-3">
+                                    <i data-feather="send" class="w-8 h-8"></i>
+                                </div>
+                                <h5 class="font-semibold mb-2">Messenger</h5>
+                                <p class="text-muted text-sm">Send messages to students</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <div class="card stat-card internal-stat">
-                <div class="card-body">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h6 class="text-muted mb-2">Internal Marks</h6>
-                            <h3 class="font-bold text-2xl">92%</h3>
-                            <p class="text-sm text-muted mt-1">Average performance</p>
-                        </div>
-                        <div class="p-3 rounded-full bg-danger-100 text-danger-500">
-                            <i data-feather="award" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Access Cards -->
-    <div class="grid grid-cols-12 gap-x-6 mb-6">
-        <div class="col-span-12">
-            <h4 class="mb-4 font-semibold">Quick Access</h4>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'Addstudentpage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-primary-100 text-primary-500 inline-block mb-3">
-                            <i data-feather="user-plus" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">Add Student</h5>
-                        <p class="text-muted text-sm">Register new student details</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'DisplaystudentPage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-info-100 text-info-500 inline-block mb-3">
-                            <i data-feather="list" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">View Students</h5>
-                        <p class="text-muted text-sm">Browse all student records</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'AddsubjectPage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-success-100 text-success-500 inline-block mb-3">
-                            <i data-feather="plus-circle" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">Add Subject</h5>
-                        <p class="text-muted text-sm">Create new course subject</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'DisplaysubjectPage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-warning-100 text-warning-500 inline-block mb-3">
-                            <i data-feather="book-open" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">View Subjects</h5>
-                        <p class="text-muted text-sm">Browse all available subjects</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- Additional Quick Access Cards -->
-    <div class="grid grid-cols-12 gap-x-6 mb-6">
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'AttendancePage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-purple-100 text-purple-500 inline-block mb-3">
-                            <i data-feather="maximize" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">Attendance</h5>
-                        <p class="text-muted text-sm">Add Day to Day attendance </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'Displayattendancepage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-pink-100 text-pink-500 inline-block mb-3">
-                            <i data-feather="calendar" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">View Attendance</h5>
-                        <p class="text-muted text-sm">Check attendance details</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'AttendancePercentagePage' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-indigo-100 text-indigo-500 inline-block mb-3">
-                            <i data-feather="pie-chart" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">Attendance %</h5>
-                        <p class="text-muted text-sm">View attendance statistics</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-span-12 xl:col-span-3 md:col-span-6">
-            <a href="{% url 'MessengerStudentList' %}">
-                <div class="card quick-access-card">
-                    <div class="card-body text-center">
-                        <div class="p-4 rounded-full bg-teal-100 text-teal-500 inline-block mb-3">
-                            <i data-feather="send" class="w-8 h-8"></i>
-                        </div>
-                        <h5 class="font-semibold mb-2">Messenger</h5>
-                        <p class="text-muted text-sm">Send messages to students</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
             {% endblock %}
         </div>
     </div>
+</div>
+<!-- [ Main Content ] end -->
+<footer class="pc-footer">
+    <div class="footer-wrapper container-fluid mx-10">
+        <div class="grid grid-cols-12 gap-1.5">
+
+            <!-- Left Side -->
+            <div class="col-span-12 sm:col-span-6 my-1">
+                <p class="m-0 text-theme-bodycolor dark:text-themedark-bodycolor">
+                    © 2025 Student Attendance Tracker.
+                    <span class="text-primary-500 font-semibold">Manage smart. Track easy.</span>
+                </p>
+            </div>
+
+            <!-- Right Side -->
+            <div class="col-span-12 sm:col-span-6 my-1 justify-self-end">
+                <p class="m-0">
+                    Developed by <span class="text-primary-500 font-semibold">Aleena Joseph</span>
+                </p>
+            </div>
+
+        </div>
     </div>
-    <!-- [ Main Content ] end -->
-   <footer class="pc-footer">
-  <div class="footer-wrapper container-fluid mx-10">
-    <div class="grid grid-cols-12 gap-1.5">
-
-      <!-- Left Side -->
-      <div class="col-span-12 sm:col-span-6 my-1">
-        <p class="m-0 text-theme-bodycolor dark:text-themedark-bodycolor">
-          © 2025 Student Attendance Tracker.
-          <span class="text-primary-500 font-semibold">Manage smart. Track easy.</span>
-        </p>
-      </div>
-
-      <!-- Right Side -->
-      <div class="col-span-12 sm:col-span-6 my-1 justify-self-end">
-        <p class="m-0">
-          Developed by <span class="text-primary-500 font-semibold">Aleena Joseph</span>
-        </p>
-      </div>
-
-    </div>
-  </div>
 </footer>
 
 
-    <!-- Required Js -->
-    <script src="{% static 'teacheradmin/assets/js/plugins/simplebar.min.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/plugins/popper.min.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/icon/custom-icon.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/plugins/feather.min.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/component.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/theme.js' %}"></script>
-    <script src="{% static 'teacheradmin/assets/js/script.js' %}"></script>
+<!-- Required Js -->
+<script src="{% static 'teacheradmin/assets/js/plugins/simplebar.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/plugins/popper.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/icon/custom-icon.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/plugins/feather.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/component.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/theme.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/script.js' %}"></script>
 
-    <div class="floting-button fixed bottom-[50px] right-[30px] z-[1030]">
-    </div>
-
-
-    <script>
-      layout_change('false');
-    </script>
+<div class="floting-button fixed bottom-[50px] right-[30px] z-[1030]">
+</div>
 
 
-    <script>
-      layout_theme_sidebar_change('dark');
-    </script>
+<script>
+    layout_change('false');
+</script>
 
 
-    <script>
-      change_box_container('false');
-    </script>
-
-    <script>
-      layout_caption_change('true');
-    </script>
-
-    <script>
-      layout_rtl_change('false');
-    </script>
-
-    <script>
-      preset_change('preset-1');
-    </script>
-
-    <script>
-      main_layout_change('vertical');
-    </script>
+<script>
+    layout_theme_sidebar_change('dark');
+</script>
 
 
-  </body>
-  <!-- [Body] end -->
+<script>
+    change_box_container('false');
+</script>
+
+<script>
+    layout_caption_change('true');
+</script>
+
+<script>
+    layout_rtl_change('false');
+</script>
+
+<script>
+    preset_change('preset-1');
+</script>
+
+<script>
+    main_layout_change('vertical');
+</script>
+
+
+</body>
+<!-- [Body] end -->
 </html>

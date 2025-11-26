@@ -8,50 +8,52 @@
         <table class="table table-bordered table-hover align-middle" style="text-align:justify;">
 
             <thead class="table-dark">
-                <tr>
-                    <th>Profile</th>
-                    <th>Name</th>
-                    <th>Roll Number</th>
-                    <th>Reg ID</th>
-                    <th>Batch</th>
-                    <th>Semester</th>
-                    <th>Duration</th>
-                    <th>Mobile Number</th>
-                    <th>Password</th>
-                    <th colspan="2" style="text-align:center;">Actions</th>
-                </tr>
+            <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Reg ID</th>
+                <th>Batch</th>
+                <th>Semester</th>
+                <th>Duration</th>
+                <th>Mobile Number</th>
+                <th>Password</th>
+                <th colspan="2" style="text-align:center;">Actions</th>
+            </tr>
             </thead>
 
             <tbody>
-                {% for i in data %}
-                <tr>
-                    <td>
-                        <img src="{{ i.Student_prof.url }}" 
-                             class="rounded-circle"
-                             style="height: 80px; width: 80px; object-fit: cover;">
-                    </td>
+            {% for i in data %}
+            <tr>
+                <td>
+                    <img src="{{ i.Student_prof.url }}"
+                         class="rounded-circle"
+                         style="height: 80px; width: 80px; object-fit: cover;">
+                </td>
 
-                    <td>{{ i.Student_name }}</td>
-                    <td>{{ i.Student_rollno }}</td>
-                    <td>{{ i.Student_regid }}</td>
-                    <td>{{ i.Student_batch }}</td>
-                    <td>{{ i.Student_sem }}</td>
-                    <td>{{ i.Student_duration }}</td>
-                    <td>{{i.Student_phone}}</td>
-                    <td>{{i.Student_password}}</td>
-                    <td>
-                        <a href="{% url 'EditstudentPage' s_id=i.id %}">
-                            <button class="btn btn-success btn-sm px-3">Edit</button>
-                        </a>
-                    </td>
+                <td>{{ i.Student_name }}</td>
+                <td>{{ i.Student_rollno }}</td>
+                <td>{{ i.Student_regid }}</td>
+                <td>{{ i.Student_batch }}</td>
+                <td>{{ i.Student_sem }}</td>
+                <td>{{ i.Student_duration }}</td>
+                <td>{{i.Student_phone}}</td>
+                <td>{{i.Student_password}}</td>
+                <td>
+                    <a href="{% url 'EditstudentPage' s_id=i.id %}">
+                        <button class="btn btn-success btn-sm px-3">Edit</button>
+                    </a>
+                </td>
 
-                    <td>
-                        <a href="{% url 'deletestudent' s_id=i.id %}">
-                            <button class="btn btn-danger btn-sm px-3">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
+                <td>
+                    <a href="{% url 'deletestudent' s_id=i.id %}"
+                       onclick="return confirm('Are you sure you want to delete this student record?');">
+                        <button class="btn btn-danger btn-sm px-3">Delete</button>
+                    </a>
+
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
 
         </table>

@@ -8,38 +8,40 @@
         <table class="table table-bordered table-hover" style="text-align:justify;">
 
             <thead class="table-dark">
-                <tr>
-                    <th>Subject Name</th>
-                    <th>Subject Code</th>
-                    <th>Subject Teacher</th>
-                    <th>Semester</th>
-                    <th>Department</th>
-                    <th colspan="2" style="text-align:center;" >Actions</th>
-                </tr>
+            <tr>
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th>Subject Teacher</th>
+                <th>Semester</th>
+                <th>Department</th>
+                <th colspan="2" style="text-align:center;">Actions</th>
+            </tr>
             </thead>
 
             <tbody>
-                {% for i in data %}
-                <tr>
-                    <td>{{ i.Subject_name }}</td>
-                    <td>{{ i.Subject_code }}</td>
-                    <td>{{ i.Subject_teacher }}</td>
-                    <td>{{ i.Subject_sem }}</td>
-                    <td>{{ i.Subject_dep }}</td>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.Subject_name }}</td>
+                <td>{{ i.Subject_code }}</td>
+                <td>{{ i.Subject_teacher }}</td>
+                <td>{{ i.Subject_sem }}</td>
+                <td>{{ i.Subject_dep }}</td>
 
-                    <td>
-                        <a href="{% url 'EditsubjectPage' sub_id=i.id %}">
-                            <button class="btn btn-success btn-sm px-3">Edit</button>
-                        </a>
-                    </td>
+                <td>
+                    <a href="{% url 'EditsubjectPage' sub_id=i.id %}">
+                        <button class="btn btn-success btn-sm px-3">Edit</button>
+                    </a>
+                </td>
 
-                    <td>
-                        <a href="{% url 'Deletesubject' sub_id=i.id %}">
-                            <button class="btn btn-danger btn-sm px-3">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
+                <td>
+                    <a href="{% url 'Deletesubject' sub_id=i.id %}"
+                       onclick="return confirm('Are you sure you want to delete this subject?');">
+                        <button class="btn btn-danger btn-sm px-3">Delete</button>
+                    </a>
+
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
 
         </table>

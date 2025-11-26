@@ -32,11 +32,17 @@
 
         <div class="chat-header">
             <img src="{% static 'chatbot/images/teacher.jpg' %}" class="avatar">
-            <div>
+            <div style="flex:1;">
                 <h4 class="mb-0">Teacher</h4>
                 <small class="status">Online</small>
             </div>
+
+            <!-- ✅ Clear Chat button -->
+            <button id="clearChatBtn" class="btn btn-sm btn-outline-danger">
+                Clear Chat
+            </button>
         </div>
+
 
         <div id="chat-body" class="chat-body">
             <!-- Messages inserted by JS -->
