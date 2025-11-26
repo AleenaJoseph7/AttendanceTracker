@@ -3,26 +3,26 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'chatbot/whatsapp.css' %}">
+
 <script>
-    const studentID = "{{ student_id }}";   // <-- From Django
+    // This value comes from your view Chatbotpage(request, student_id)
+    const studentID = "{{ student_id }}";
 </script>
+
 <script src="{% static 'chatbot/whatsapp.js' %}"></script>
-
-
 
 <div class="messenger-wrapper">
 
-    <!-- LEFT CHAT LIST -->
+    <!-- LEFT PANEL (You can improve later) -->
     <div class="chat-list">
         <div class="chat-list-header">
             <h4 class="mb-0">Chats</h4>
         </div>
-
         <div class="chat-list-item active">
             <img src="{% static 'chatbot/images/teacher.jpg' %}" class="avatar">
             <div class="list-info">
                 <div class="name">Teacher</div>
-                <div class="preview">Online</div>
+                <div class="preview">Chatting with student</div>
             </div>
         </div>
     </div>
@@ -30,7 +30,6 @@
     <!-- RIGHT CHAT WINDOW -->
     <div class="chat-window">
 
-        <!-- Chat Header -->
         <div class="chat-header">
             <img src="{% static 'chatbot/images/teacher.jpg' %}" class="avatar">
             <div>
@@ -39,12 +38,10 @@
             </div>
         </div>
 
-        <!-- Chat Body -->
         <div id="chat-body" class="chat-body">
-            <!-- JS messages appear here -->
+            <!-- Messages inserted by JS -->
         </div>
 
-        <!-- Input -->
         <div class="chat-input">
             <input type="text" id="messageBox" placeholder="Type a message...">
             <button id="sendBtn">Send</button>
