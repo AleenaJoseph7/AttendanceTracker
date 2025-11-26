@@ -38,7 +38,7 @@ urlpatterns = [
     path("pdf/subject/<int:subject_id>/", views.subject_attendance_percentage_pdf, name="subject_attendance_pdf"),
 
     path('Chatbotpage/<int:student_id>/', views.Chatbotpage, name="Chatbotpage"),
-    path('MessengerStudentList/', views.MessengerStudentList, name="MessengerStudentList"),
+    path("Messenger/", views.MessengerShortcut, name="MessengerShortcut"),
     path('chat/<int:student_id>/', views.get_messages),
     path('chat/send/<int:student_id>/', views.send_message),
     path('chat/clear/<int:student_id>/', views.clear_chat, name="clear_chat"),

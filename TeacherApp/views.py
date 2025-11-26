@@ -398,15 +398,19 @@ def subject_attendance_percentage_pdf(request, subject_id):
 
 def Chatbotpage(request, student_id):
     students = Studentdb.objects.all()
+    current_student = Studentdb.objects.get(id=student_id)
+
     return render(request, "Chatbot.html", {
-        "student_id": student_id,
-        "students": students
+        "student_id": student_id,         # for JS
+        "students": students,             # for list on left
+        "current_student": current_student  # for header
     })
 
-
-def MessengerStudentList(request):
-    students = Studentdb.objects.all()
-    return render(request, "MessengerStudentList.html", {"students": students})
+def MessengerShortcut(request):
+    first = Studentdb.objects.order_by("id").first()
+    if first:
+        return redirect("Chatbotpage", student_id=first.id)
+    return redirect("DisplaystudentPage")  # fallback if no students exist
 
 
 
