@@ -397,13 +397,15 @@ def subject_attendance_percentage_pdf(request, subject_id):
 
 
 def Chatbotpage(request, student_id):
+    date=datetime.datetime.now()
     students = Studentdb.objects.all()
     current_student = Studentdb.objects.get(id=student_id)
 
     return render(request, "Chatbot.html", {
         "student_id": student_id,         # for JS
         "students": students,             # for list on left
-        "current_student": current_student  # for header
+        "current_student": current_student ,
+        'date':date# for header
     })
 
 def MessengerShortcut(request):
