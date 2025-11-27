@@ -20,9 +20,12 @@ import TeacherApp.urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns,static
 from . import settings
 
+import StudentApp.urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('TeacherAdmin/',include(TeacherApp.urls))
+    path('TeacherAdmin/',include(TeacherApp.urls)),
+    path('StudentPortal/',include(StudentApp.urls))
 ]
 
 urlpatterns+=staticfiles_urlpatterns()
