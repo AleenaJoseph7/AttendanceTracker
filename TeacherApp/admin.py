@@ -1,5 +1,5 @@
 from django.contrib import admin
-from TeacherApp.models import Studentdb,Subjectdb,Attendancedb,Internalmarkdb,ChatMessage
+from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 
 # Register your models here.
 admin.site.register(Subjectdb)

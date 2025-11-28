@@ -4,33 +4,34 @@
 
 <div class="container mt-5">
 
-  <!-- SUBJECT FILTER + PDF BUTTON -->
-<form method="get" class="mb-4" style="display:flex; justify-content:space-between; align-items:center; gap:30px; padding:10px;">
+    <!-- SUBJECT FILTER + PDF BUTTON -->
+    <form method="get" class="mb-4"
+          style="display:flex; justify-content:space-between; align-items:center; gap:30px; padding:10px;">
 
-    <!-- Subject Dropdown on left -->
-    <div style="flex:1;">
-        <select name="subject" class="form-select" onchange="this.form.submit()">
-            <option value="">-- Select Subject --</option>
+        <!-- Subject Dropdown on left -->
+        <div style="flex:1;">
+            <select name="subject" class="form-select" onchange="this.form.submit()">
+                <option value="">-- Select Subject --</option>
 
-            {% for s in subjects %}
+                {% for s in subjects %}
                 <option value="{{ s.id }}"
-                    {% if selected_subject == s.id|stringformat:"s" %}selected{% endif %}>
-                    {{ s.Subject_name }} ({{ s.Subject_code }})
+                        {% if selected_subject == s.id|stringformat:"s" %}selected{% endif %}>
+                {{ s.Subject_name }} ({{ s.Subject_code }})
                 </option>
-            {% endfor %}
-        </select>
-    </div>
+                {% endfor %}
+            </select>
+        </div>
 
-    <!-- PDF Button on right -->
-    <div>
-        {% if selected_subject %}
+        <!-- PDF Button on right -->
+        <div>
+            {% if selected_subject %}
             <a href="{% url 'subject_attendance_pdf' selected_subject %}" class="btn btn-primary">
                 <i class="bi bi-file-earmark-pdf"></i> Download PDF
             </a>
-        {% endif %}
-    </div>
+            {% endif %}
+        </div>
 
-</form>
+    </form>
 
 
     <!-- TABLE -->
@@ -38,43 +39,43 @@
         <table class="table table-bordered table-hover align-middle">
 
             <thead class="table-dark">
-                <tr>
-                    <th>Student Name</th>
-                    <th>Total Classes</th>
-                    <th>Present</th>
-                    <th>Absent</th>
-                    <th>Percentage (%)</th>
-                </tr>
+            <tr>
+                <th>Student Name</th>
+                <th>Total Classes</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Percentage (%)</th>
+            </tr>
             </thead>
 
             <tbody>
-                {% for d in data %}
-                <tr>
-                    <td>{{ d.Student__Student_name }}</td>
-                    <td>{{ d.total }}</td>
-                    <td style="color:green; font-weight:bold;">{{ d.present }}</td>
-                    <td style="color:red; font-weight:bold;">{{ d.absent }}</td>
+            {% for d in data %}
+            <tr>
+                <td>{{ d.Student__Student_name }}</td>
+                <td>{{ d.total }}</td>
+                <td style="color:green; font-weight:bold;">{{ d.present }}</td>
+                <td style="color:red; font-weight:bold;">{{ d.absent }}</td>
 
-                    <!-- Percentage with color logic -->
-                    <td>
-                        {% if d.percentage >= 75 %}
-                            <span style="color:green; font-weight:bold;">
+                <!-- Percentage with color logic -->
+                <td>
+                    {% if d.percentage >= 75 %}
+                    <span style="color:green; font-weight:bold;">
                                 {{ d.percentage }}%
                             </span>
-                        {% else %}
-                            <span style="color:red; font-weight:bold;">
+                    {% else %}
+                    <span style="color:red; font-weight:bold;">
                                 {{ d.percentage }}%
                             </span>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted">
-                        No Attendance Records Available
-                    </td>
-                </tr>
-                {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    No Attendance Records Available
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
 
         </table>

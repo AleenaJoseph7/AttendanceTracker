@@ -20,10 +20,10 @@
                         <label class="form-label">Select Student</label>
                         <select name="attendance_student" class="form-control" required>
                             {% for i in student %}
-                                <option value="{{ i.id }}" 
-                                {% if i.id == attendance.Student.id %}selected{% endif %}>
-                                    {{ i.Student_name }} ({{ i.Student_rollno }})
-                                </option>
+                            <option value="{{ i.id }}"
+                                    {% if i.id == attendance.Student.id %}selected{% endif %}>
+                                {{ i.Student_name }} ({{ i.Student_rollno }})
+                            </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -33,10 +33,10 @@
                         <label class="form-label">Select Subject</label>
                         <select name="attendance_subject" class="form-control" required>
                             {% for s in subject %}
-                                <option value="{{ s.id }}"
-                                {% if s.id == attendance.Subject.id %}selected{% endif %}>
-                                    {{ s.Subject_name }} ({{ s.Subject_code }})
-                                </option>
+                            <option value="{{ s.id }}"
+                                    {% if s.id == attendance.Subject.id %}selected{% endif %}>
+                                {{ s.Subject_name }} ({{ s.Subject_code }})
+                            </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -52,10 +52,10 @@
                     <div class="mb-3">
                         <label class="form-label">Attendance Status</label>
                         <select name="attendance_status" class="form-control" required>
-                            <option value="Present" 
-                                {% if attendance.Status == "Present" %}selected{% endif %}>Present</option>
-                            <option value="Absent" 
-                                {% if attendance.Status == "Absent" %}selected{% endif %}>Absent</option>
+                            <option value="Present"
+                                    {% if attendance.Status == "Present" %}selected{% endif %}>Present</option>
+                            <option value="Absent"
+                                    {% if attendance.Status == "Absent" %}selected{% endif %}>Absent</option>
                         </select>
                     </div>
 

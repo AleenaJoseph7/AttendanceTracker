@@ -19,9 +19,9 @@
                     <div class="mb-3">
                         <label class="form-label">Select Student</label>
                         <select name="attendance_student" class="form-control" required>
-                            <option >-- Select Student --</option>
+                            <option>-- Select Student --</option>
                             {% for i in student %}
-                                <option value="{{i.id}}" >{{i.Student_name}}({{i.Student_rollno}})</option>
+                            <option value="{{i.id}}">{{i.Student_name}}({{i.Student_rollno}})</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -30,9 +30,9 @@
                     <div class="mb-3">
                         <label class="form-label">Select Subject</label>
                         <select name="attendance_subject" class="form-control" required>
-                            <option >-- Select Subject --</option>
+                            <option>-- Select Subject --</option>
                             {% for i in subject %}
-                                <option value="{{i.id}}" >{{i.Subject_name}}({{i.Subject_code}})</option>
+                            <option value="{{i.id}}">{{i.Subject_name}}({{i.Subject_code}})</option>
                             {% endfor %}
                         </select>
                     </div>

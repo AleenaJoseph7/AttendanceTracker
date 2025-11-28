@@ -22,29 +22,29 @@
         </div>
 
         {% for s in students %}
-            <a href="{% url 'Chatbotpage' s.id %}"
-               class="chat-list-item {% if s.id == current_student.id %}active{% endif %}">
+        <a href="{% url 'Chatbotpage' s.id %}"
+           class="chat-list-item {% if s.id == current_student.id %}active{% endif %}">
 
-                {% if s.Student_prof %}
-                    <img src="{{ s.Student_prof.url }}" class="avatar">
-                {% else %}
-                    <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
-                {% endif %}
+            {% if s.Student_prof %}
+            <img src="{{ s.Student_prof.url }}" class="avatar">
+            {% else %}
+            <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
+            {% endif %}
 
-                <div class="list-info">
-                    <div class="name">{{ s.Student_name }}</div>
-                    <div class="preview">
-                        {% if s.id == current_student.id %}
-                            Active Chat
-                        {% else %}
-                            Click to open chat
-                        {% endif %}
-                    </div>
+            <div class="list-info">
+                <div class="name">{{ s.Student_name }}</div>
+                <div class="preview">
+                    {% if s.id == current_student.id %}
+                    Active Chat
+                    {% else %}
+                    Click to open chat
+                    {% endif %}
                 </div>
+            </div>
 
-            </a>
+        </a>
         {% empty %}
-            <div class="p-3 text-muted">No students found</div>
+        <div class="p-3 text-muted">No students found</div>
         {% endfor %}
     </div>
 
@@ -55,9 +55,9 @@
         <div class="chat-header">
 
             {% if current_student.Student_prof %}
-                <img src="{{ current_student.Student_prof.url }}" class="avatar">
+            <img src="{{ current_student.Student_prof.url }}" class="avatar">
             {% else %}
-                <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
+            <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
             {% endif %}
 
             <div style="flex:1;">
