@@ -37,7 +37,8 @@ class Attendancedb(models.Model):
     Status = models.CharField(max_length=10, default="Absent", choices=[("Present", "Present"),
                                                                         ("Absent", "Absent")])
 
-    # ("Present", "Present") 1st data to be stored to db, 2nd visible to user
+# ("Present", "Present") 1st data to be stored to db, 2nd visible to user
+
     def __str__(self):
         return f"{self.Student.Student_name} - {self.Subject.Subject_code} - {self.Date}"
 
@@ -48,9 +49,6 @@ class Internalmarkdb(models.Model):
     Internalmark = models.IntegerField(null=False, blank=False)
     Totalmark = models.IntegerField(null=False, blank=False, default=50)
 
-    # class Meta:
-    #     unique_together = ('Student', 'Subject', 'Date')  # Prevent duplicate attendance
-
     def __str__(self):
         return f"{self.Student.Student_name} - {self.Subject.Subject_name}"
 
@@ -60,11 +58,9 @@ class ChatMessage(models.Model):
     student = models.ForeignKey(Studentdb, on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-
-    # NEW FIELD
     read_status = models.CharField(
         max_length=10,
-        default="sent",  # sent → delivered → read
+        default="sent",
         choices=[
             ("sent", "Sent"),
             ("delivered", "Delivered"),

@@ -26,6 +26,7 @@ urlpatterns = [
     path('Deleteinternal/<int:i_id>/', views.Deleteinternal, name="Deleteinternal"),
 
     path('AttendancePage/', views.AttendancePage, name="AttendancePage"),
+    path("toggle-attendance/<int:record_id>/", views.toggle_attendance, name="toggle_attendance"),
     path('saveattendance/', views.saveattendance, name="saveattendance"),
     path('Displayattendancepage/', views.Displayattendancepage, name="Displayattendancepage"),
     path('Editattendancepage/<int:a_id>/', views.Editattendancepage, name="Editattendancepage"),

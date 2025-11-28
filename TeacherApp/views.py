@@ -203,23 +203,11 @@ def Saveinternal(request):
 def Displayinternal(request):
     import datetime
     date = datetime.datetime.now()
-
-    # Get filter values from request
     selected_subject = request.GET.get("subject")  # Subject filter
-    student_id = request.GET.get("student")  # Optional student filter
 
-    # Base queryset
     data = Internalmarkdb.objects.all()
-
-    # Filter by subject if selected
     if selected_subject:
         data = data.filter(Subject_id=selected_subject)
-
-    # Optional: filter by student if student dropdown is added later
-    if student_id:
-        data = data.filter(Student_id=student_id)
-
-    # Get all subjects for the dropdown
     subjects = Subjectdb.objects.all()
 
     return render(
@@ -228,9 +216,8 @@ def Displayinternal(request):
         {
             "data": data,
             "date": date,
-            "subjects": subjects,  # For dropdown
-            "selected_subject": selected_subject,  # For PDF button & dropdown
-            "student_id": student_id  # Optional if student filter added
+            "subjects": subjects,
+            "selected_subject": selected_subject,
         }
     )
 
@@ -268,10 +255,44 @@ def Deleteinternal(request, i_id):
 
 
 def AttendancePage(request):
-    subject = Subjectdb.objects.all()
-    student = Studentdb.objects.all()
+    subjects = Subjectdb.objects.all()
+    subject_id = request.GET.get("subject")
     date = datetime.datetime.now()
-    return render(request, "addattendance.html", {'date': date, 'subject': subject, 'student': student})
+
+    sheet = []
+
+    if subject_id:
+        subject = Subjectdb.objects.get(id=subject_id)
+        students = Studentdb.objects.all()
+
+        for s in students:
+            record, created = Attendancedb.objects.get_or_create(
+                Student=s,
+                Subject=subject,
+                Date=date.today(),
+                defaults={"Status": "Present"}
+            )
+            sheet.append(record)
+
+    return render(request, "addattendance.html", {
+        "subjects": subjects,
+        "sheet": sheet,
+        "selected_subject": subject_id,
+        "date": date
+    })
+
+
+def toggle_attendance(request, record_id):
+    record = Attendancedb.objects.get(id=record_id)
+
+    if record.Status == "Present":
+        record.Status = "Absent"
+    else:
+        record.Status = "Present"
+
+    record.save()
+
+    return JsonResponse({"status": record.Status})
 
 
 def saveattendance(request):
@@ -294,7 +315,7 @@ def saveattendance(request):
 
 
 def Displayattendancepage(request):
-    subject_id = request.GET.get("subject")  # subject selected from dropdown
+    subject_id = request.GET.get("subject")
 
     if subject_id:
         data = Attendancedb.objects.filter(Subject_id=subject_id)
@@ -368,7 +389,7 @@ def internal_pdf(request, subject_id):
     for r in records:
         data_rows.append([r.Student.Student_name, r.Internalmark, r.Totalmark])
 
-    pdf_title = f"{subject.Subject_name}({subject.Subject_code}) Internal Report"  # e.g., "CST01 Internal Marks"
+    pdf_title = f"{subject.Subject_name}({subject.Subject_code}) Internal Report"
     pdf_buffer = generate_pdf_table(pdf_title, data_rows)
 
     return FileResponse(pdf_buffer, as_attachment=True, filename="internal_marks.pdf")
@@ -382,7 +403,6 @@ def student_attendance_pdf(request, student_id):
     for record in data:
         data_rows.append([record.Student.Student_name, str(record.Date), record.Status])
 
-    # Pass column 2 (Status) for coloring
     column_color_map = {
         2: lambda v: colors.green if v == "Present" else colors.red
     }
@@ -401,7 +421,6 @@ def subject_attendance_percentage_pdf(request, subject_id):
         absent=Count('id', filter=Q(Status="Absent"))
     )
 
-    # Compute percentage
     for d in data:
         d['percentage'] = round((d['present'] / d['total']) * 100, 2) if d['total'] else 0
 
@@ -409,7 +428,6 @@ def subject_attendance_percentage_pdf(request, subject_id):
     for d in data:
         data_rows.append([d['Student__Student_name'], d['total'], d['present'], d['absent'], d['percentage']])
 
-    # Column 4 is Percentage
     column_color_map = {4: lambda v: colors.green if float(v) >= 75 else colors.red}
 
     pdf_buffer = generate_pdf_table(f"{subject.Subject_name}({subject.Subject_code})", data_rows, column_color_map)
@@ -425,7 +443,7 @@ def Chatbotpage(request, student_id):
         "student_id": student_id,  # for JS
         "students": students,  # for list on left
         "current_student": current_student,
-        'date': date  # for header
+        'date': date
     })
 
 
@@ -433,7 +451,7 @@ def MessengerShortcut(request):
     first = Studentdb.objects.order_by("id").first()
     if first:
         return redirect("Chatbotpage", student_id=first.id)
-    return redirect("DisplaystudentPage")  # fallback if no students exist
+    return redirect("DisplaystudentPage")
 
 
 def get_messages(request, student_id):
@@ -441,7 +459,7 @@ def get_messages(request, student_id):
     data = [{
         "sender": m.sender,
         "message": m.message,
-        "read_status": m.read_status  # ✔ now included
+        "read_status": m.read_status
     } for m in messages]
 
     return JsonResponse({"messages": data})
@@ -453,7 +471,7 @@ def send_message(request, student_id):
 
     ChatMessage.objects.create(
         sender="teacher",
-        student_id=student_id,  # ✔ correct FK assignment
+        student_id=student_id,
         message=data["message"]
     )
 
@@ -462,7 +480,6 @@ def send_message(request, student_id):
 
 @csrf_exempt
 def clear_chat(request, student_id):
-    # delete all chat messages for this student
     ChatMessage.objects.filter(student_id=student_id).delete()
     return JsonResponse({"status": "cleared"})
 

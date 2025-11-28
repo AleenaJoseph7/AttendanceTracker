@@ -3,69 +3,91 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
 
-            <div class="card shadow-lg p-4" style="border:1px solid lightgrey; border-radius:10px;">
-                <h3 class="text-center mb-4"
-                    style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">
-                    Add Attendance
-                </h3>
+    <h3 class="text-center mb-4" style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Add Attendance</h3>
 
-                <form method="POST" action="{% url 'saveattendance' %}">
-                    {% csrf_token %}
+    <!-- SUBJECT SELECTION -->
+    <form method="get" class="mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <select name="subject" class="form-select" onchange="this.form.submit()">
+                    <option value="">-- Select Subject --</option>
 
-                    <!-- Student Select -->
-                    <div class="mb-3">
-                        <label class="form-label">Select Student</label>
-                        <select name="attendance_student" class="form-control" required>
-                            <option>-- Select Student --</option>
-                            {% for i in student %}
-                            <option value="{{i.id}}">{{i.Student_name}}({{i.Student_rollno}})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Subject Select -->
-                    <div class="mb-3">
-                        <label class="form-label">Select Subject</label>
-                        <select name="attendance_subject" class="form-control" required>
-                            <option>-- Select Subject --</option>
-                            {% for i in subject %}
-                            <option value="{{i.id}}">{{i.Subject_name}}({{i.Subject_code}})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Date -->
-                    <div class="mb-3">
-                        <label class="form-label">Date</label>
-                        <input type="date" name="attendance_date" value="{{ today }}" class="form-control" required>
-                    </div>
-
-                    <!-- Status -->
-                    <div class="mb-3">
-                        <label class="form-label">Attendance Status</label>
-                        <select name="attendance_status" class="form-control" required>
-                            <option value="Present">Present</option>
-                            <option value="Absent">Absent</option>
-                        </select>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit"
-                                class="btn btn-primary mt-3"
-                                style="width:95%; border-radius:10px;">
-                            Save Attendance
-                        </button>
-                    </div>
-
-                </form>
+                    {% for s in subjects %}
+                    <option value="{{ s.id }}"
+                            {% if selected_subject == s.id|stringformat:"s" %}selected{% endif %}>
+                    {{ s.Subject_name }} ({{ s.Subject_code }})
+                    </option>
+                    {% endfor %}
+                </select>
             </div>
-
         </div>
-    </div>
+    </form>
+
+
+
+
+    {% if sheet %}
+    <table class="table table-bordered text-center mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th style="text-align:left;">Student Name</th>
+            <th>Subject Code</th>
+            <th>Date</th>
+            <th>Status (Click to Change)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for r in sheet %}
+        <tr  style="text-align:left;">
+            <td>{{ r.Student.Student_name }}</td>
+            <td>{{ r.Subject.Subject_code }}</td>
+            <td>{{ r.Date }}</td>
+
+            <td  style="text-align:justify; padding-left:70px;">
+                <button class="btn toggle-btn"
+                        data-url="{% url 'toggle_attendance' r.id %}"
+                        style="font-size:24px; color:{% if r.Status == 'Present' %}green{% else %}red{% endif %}; border:none;">
+
+                    {% if r.Status == "Present" %}
+                    ✔
+                    {% else %}
+                    ❌
+                    {% endif %}
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    {% endif %}
 </div>
+
+<!-- JAVASCRIPT TO HANDLE CLICK AND SAVE -->
+<script>
+    document.querySelectorAll(".toggle-btn").forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            let url = btn.getAttribute("data-url");
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.status === "Present") {
+                        btn.innerHTML = "✔";
+                        btn.style.color = "green";
+                    } else {
+                        btn.innerHTML = "❌";
+                        btn.style.color = "red";
+                    }
+                })
+                .catch(error => console.log("Error:", error));
+        });
+    });
+</script>
 
 {% endblock %}
