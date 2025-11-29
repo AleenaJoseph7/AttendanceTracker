@@ -5,4 +5,5 @@ urlpatterns = [
     path('StudentHomePage/', views.StudentHomePage, name="StudentHomePage"),
     path('StudentLoginPage/', views.StudentLoginPage, name="StudentLoginPage"),
     path('StudentLogin/', views.StudentLogin, name="StudentLogin"),
+    path('StudentLogout/', views.StudentLogout, name="StudentLogout"),
 ]

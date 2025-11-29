@@ -24,3 +24,8 @@ def StudentLogin(request):
             return redirect(StudentHomePage)
         else:
             return redirect(StudentLoginPage)
+
+def StudentLogout(request):
+    del request.session['Username']
+    del request.session['Password']
+    return render(StudentLoginPage)
