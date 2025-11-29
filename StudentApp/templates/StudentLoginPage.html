@@ -137,7 +137,7 @@
 
         <!-- LEFT ILLUSTRATION -->
         <div class="illustration">
-            <img src="{% static 'StudentLogin/undraw_remotely_2j6y.svg' %}" alt="">
+            <img src="{% static 'StudentLogin/images/undraw_remotely_2j6y.svg' %}" alt="">
         </div>
 
         <!-- RIGHT LOGIN CARD -->
@@ -165,7 +165,7 @@
 
                     <!-- EYE ICON -->
                     <span class="toggle-password" onclick="togglePassword()">
-                        <img id="eyeIcon" src="{% static 'StudentLogin/eye-open.svg' %}" alt="eye">
+                        <img id="eyeIcon" src="{% static 'StudentLogin/images/eye-closed.svg' %}" alt="eye">
                     </span>
                 </div>
 
@@ -185,10 +185,10 @@
 
             if (pass.type === "password") {
                 pass.type = "text";
-                icon.src = "{% static 'StudentLogin/eye-closed.svg' %}";
+                icon.src = "{% static 'StudentLogin/images/eye-open.svg' %}";
             } else {
                 pass.type = "password";
-                icon.src = "{% static 'StudentLogin/eye-open.svg' %}";
+                icon.src = "{% static 'StudentLogin/images/eye-closes.svg' %}";
             }
         }
     </script>

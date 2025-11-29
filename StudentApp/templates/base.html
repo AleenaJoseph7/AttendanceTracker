@@ -5,6 +5,10 @@
     <title>student portal</title>
 </head>
 <body>
-<h1>STUDENT PAGE TOOOOOOOOOO</h1>
+{% if request.session.Username %}
+<h1>Welcome, {{request.session.Username}}</h1>
+{% else %}
+<h1>No session created</h1>
+{% endif %}
 </body>
 </html>
