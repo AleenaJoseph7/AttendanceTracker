@@ -16,7 +16,11 @@ def StudentLogin(request):
         regid = request.POST.get('regid')
         password = request.POST.get('password')
 
+
         if Studentdb.objects.filter(Student_regid=regid, Student_password=password).exists():
+            student = Studentdb.objects.get(Student_regid=regid)
+            request.session['Username']=student.Student_name
+            request.session['Password']=password
             return redirect(StudentHomePage)
         else:
             return redirect(StudentLoginPage)
