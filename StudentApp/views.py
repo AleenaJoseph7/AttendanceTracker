@@ -11,3 +11,7 @@ def StudentLoginPage(request):
 
 def StudentLogin(request):
     if request.method=='POST':
+        regid=request.POST.get('regid')
+        password=request.POST.get('password')
+
+

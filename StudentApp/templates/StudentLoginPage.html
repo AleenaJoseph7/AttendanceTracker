@@ -20,65 +20,52 @@
 
 <body>
 
-    <div class="content">
-        <div class="container">
-            <div class="row">
+<div class="content">
+    <div class="container">
+        <div class="row">
 
-                <!-- LEFT IMAGE -->
-                <div class="col-md-6">
-                    <img src="{% static 'images/undraw_remotely_2j6y.svg' %}" alt="Image" class="img-fluid">
-                </div>
+            <!-- LEFT IMAGE -->
+            <div class="col-md-6">
+                <img src="{% static 'images/undraw_remotely_2j6y.svg' %}" alt="Image" class="img-fluid">
+            </div>
 
-                <!-- RIGHT LOGIN FORM -->
-                <div class="col-md-6 contents">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
+            <!-- RIGHT LOGIN FORM -->
+            <div class="col-md-6 contents">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
 
-                            <div class="mb-4 text-center">
-                                <h3>Student Login</h3>
-                                <p class="mb-4">Access your STRACK dashboard securely.</p>
+                        <div class="mb-4 text-center">
+                            <h3>Student Login</h3>
+                        </div>
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+
+                            <!-- REGISTRATION ID -->
+                            <div class="form-group first">
+                                <label>Registration ID</label>
+                                <input type="text" class="form-control" name="regid" placeholder="Enter your Registration ID" required>
                             </div>
 
-                            <form action="" method="post">
-                                {% csrf_token %}
+                            <!-- PASSWORD -->
+                            <div class="form-group mb-4">
+                                <label >Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Enter your Password" required>
+                            </div>
 
-                                <!-- REGISTRATION ID -->
-                                <div class="form-group first">
-                                    <label for="regid">Registration ID</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           id="regid"
-                                           name="regid"
-                                           placeholder="Enter your Registration ID"
-                                           required>
-                                </div>
+                            <!-- LOGIN BUTTON -->
+                            <input type="submit"  class="btn btn-block btn-primary">
 
-                                <!-- PASSWORD -->
-                                <div class="form-group mb-4">
-                                    <label for="password">Password</label>
-                                    <input type="password"
-                                           class="form-control"
-                                           id="password"
-                                           name="password"
-                                           placeholder="Enter your Password"
-                                           required>
-                                </div>
+                        </form>
 
-                                <!-- LOGIN BUTTON -->
-                                <input type="submit"
-                                       value="Log In"
-                                       class="btn btn-block btn-primary">
-
-                            </form>
-
-                        </div>
                     </div>
-
                 </div>
 
             </div>
+
         </div>
     </div>
+</div>
 
 </body>
 
