@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* MAIN LAYOUT */
         .container-box {
             display: flex;
             align-items: center;
@@ -33,13 +32,11 @@
             max-width: 1300px;
         }
 
-        /* LEFT IMAGE */
         .illustration img {
             width: 100%;
             max-width: 520px;
         }
 
-        /* LOGIN CARD */
         .login-card {
             background: #ffffff;
             padding: 45px;
@@ -61,29 +58,26 @@
             font-size: 14px;
         }
 
-        /* FORM ALIGNMENT FIX */
         .form-group {
             margin-bottom: 25px;
             display: flex;
             flex-direction: column;
         }
 
-        /* LABEL */
         .form-label {
             font-weight: 600;
             margin-bottom: 6px;
         }
 
-        /* COLORLIB INPUT STYLE */
         .form-control {
             height: 52px;
             border-radius: 10px;
             border: none;
             background: #f2f3f7;
             padding-left: 18px;
-            padding-right: 50px; /* space for toggle */
+            padding-right: 50px;
             font-size: 15px;
-            box-shadow: none !important;
+            box-shadow: none;
         }
 
         .form-control:focus {
@@ -92,26 +86,32 @@
             border: none;
         }
 
-        /* PASSWORD TOGGLE */
+        /* PASSWORD WRAPPER */
         .password-wrapper {
             position: relative;
         }
 
+        /* TOGGLE ICON */
         .toggle-password {
             position: absolute;
-            right: 15px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 20px;
-            color: #6c63ff;
+            width: 22px;
+            height: 22px;
         }
 
-        .toggle-password:hover {
-            color: #4e46cf;
+        .toggle-password img {
+            width: 22px;
+            opacity: 0.65;
+            transition: 0.2s ease;
         }
 
-        /* LOGIN BUTTON */
+        .toggle-password:hover img {
+            opacity: 1;
+        }
+
         .btn-login {
             background: #6c63ff;
             color: white;
@@ -135,37 +135,40 @@
 
     <div class="container-box">
 
-        <!-- LEFT IMAGE -->
+        <!-- LEFT ILLUSTRATION -->
         <div class="illustration">
             <img src="{% static 'StudentLogin/undraw_remotely_2j6y.svg' %}" alt="">
         </div>
 
-        <!-- RIGHT LOGIN FORM -->
+        <!-- RIGHT LOGIN CARD -->
         <div class="login-card">
 
             <h3>Student Login</h3>
             <p>Access your STRACK dashboard securely.</p>
 
-            <form method="POST">
+            <form method="POST" action="{% url 'StudentLogin' %}">
                 {% csrf_token %}
 
-                <!-- REGISTRATION FIELD -->
+                <!-- Registration ID -->
                 <div class="form-group">
                     <label class="form-label">Registration ID</label>
                     <input type="text" class="form-control" name="regid"
                         placeholder="Enter your Registration ID" required>
                 </div>
 
-                <!-- PASSWORD FIELD WITH TOGGLE -->
+                <!-- Password -->
                 <div class="form-group password-wrapper">
                     <label class="form-label">Password</label>
+
                     <input type="password" class="form-control" id="password" name="password"
                         placeholder="Enter your Password" required>
 
-                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                    <!-- EYE ICON -->
+                    <span class="toggle-password" onclick="togglePassword()">
+                        <img id="eyeIcon" src="{% static 'StudentLogin/eye-open.svg' %}" alt="eye">
+                    </span>
                 </div>
 
-                <!-- LOGIN BUTTON -->
                 <button type="submit" class="btn-login">Log In</button>
 
             </form>
@@ -174,11 +177,19 @@
 
     </div>
 
-    <!-- TOGGLE SCRIPT -->
+    <!-- PASSWORD TOGGLE SCRIPT -->
     <script>
         function togglePassword() {
-            const p = document.getElementById("password");
-            p.type = p.type === "password" ? "text" : "password";
+            const pass = document.getElementById("password");
+            const icon = document.getElementById("eyeIcon");
+
+            if (pass.type === "password") {
+                pass.type = "text";
+                icon.src = "{% static 'StudentLogin/eye-closed.svg' %}";
+            } else {
+                pass.type = "password";
+                icon.src = "{% static 'StudentLogin/eye-open.svg' %}";
+            }
         }
     </script>
 
