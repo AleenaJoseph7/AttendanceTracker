@@ -2,85 +2,86 @@
 {% load static %}
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>STRACK – Student Dashboard</title>
+    <meta charset="utf-8">
+    <title>STRACK – Student Dashboard</title>
 
-	<link rel="icon" type="image/png" href="{% static 'Studentside/vendors/images/student-fav.png' %}">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'Studentside/vendors/images/student-fav.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-	<link rel="stylesheet" href="{% static 'Studentside/vendors/styles/core.css' %}">
-	<link rel="stylesheet" href="{% static 'Studentside/vendors/styles/icon-font.min.css' %}">
-	<link rel="stylesheet" href="{% static 'Studentside/vendors/styles/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/core.css' %}">
+    <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/style.css' %}">
 
-	<style>
+    <style>
 
-		/* FOOTER bottom */
-		.pd-ltr-20 {
-			min-height: calc(100vh - 70px);
-			display: flex;
-			flex-direction: column;
-		}
-		.footer-wrap {
-			margin-top: auto;
-		}
+        /* FOOTER bottom */
+        .pd-ltr-20 {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-wrap {
+            margin-top: auto;
+        }
 
-		/* PROFILE LEFT BOX */
-		.profile-box {
-			text-align: center;
-			padding: 20px;
-		}
-		.profile-box h4 {
-			margin-top: 10px;
-			font-weight: 600;
-		}
+        /* PROFILE LEFT BOX */
+        .profile-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .profile-box h4 {
+            margin-top: 10px;
+            font-weight: 600;
+        }
 
-		/* RIGHT INFO BOX */
-		.info-box {
-			background: #f8f9fa;
-			padding: 20px;
-			border-radius: 10px;
-			font-size: 16px;
-			line-height: 1.6;
-		}
+        /* RIGHT INFO BOX */
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
 
-		/* EMAIL ROW CARDS */
-		.small-card {
-			background: #f8f9fa;
-			padding: 15px;
-			border-radius: 10px;
-			margin-bottom: 15px;
-		}
+        /* EMAIL ROW CARDS */
+        .small-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
 
-		/* SIDEBAR TOGGLE */
-		.left-side-bar {
-			transition: transform 0.3s ease;
-		}
-		.sidebar-hidden {
-			transform: translateX(-260px);
-		}
-		.mobile-menu-overlay.active {
-			display: block !important;
-		}
+        /* SIDEBAR TOGGLE */
+        .left-side-bar {
+            transition: transform 0.3s ease;
+        }
+        .sidebar-hidden {
+            transform: translateX(-260px);
+        }
+        .mobile-menu-overlay.active {
+            display: block !important;
+        }
 
-		.close-sidebar {
-			font-size: 26px;
-			color: white;
-			cursor: pointer;
-			margin-right: 10px;
-		}
+        .close-sidebar {
+            font-size: 26px;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
 
-		.account-circle {
-			width: 38px;
-			height: 38px;
-			border-radius: 50%;
-			background: #d9d9d9;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 20px;
-		}
+        .account-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #d9d9d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
 
         /* Sidebar starts visible */
 .left-side-bar {
@@ -99,178 +100,192 @@
 }
 
 
-	</style>
+    </style>
 </head>
 
 <body>
 
-	<!-- PRELOADER -->
-	<div class="pre-loader">
-		<div class="pre-loader-box">
-			<div class='loader-progress' id="progress_div">
-				<div class='bar' id='bar1'></div>
-			</div>
-			<div class='percent' id='percent1'>0%</div>
-			<div class="loading-text">STRACK Loading...</div>
-		</div>
-	</div>
+<!-- PRELOADER -->
+<div class="pre-loader">
+    <div class="pre-loader-box">
+        <div class='loader-progress' id="progress_div">
+            <div class='bar' id='bar1'></div>
+        </div>
+        <div class='percent' id='percent1'>0%</div>
+        <div class="loading-text">STRACK Loading...</div>
+    </div>
+</div>
 
-	<!-- HEADER -->
-	<div class="header">
-		<div class="header-left">
-			<div class="menu-icon dw dw-menu" id="toggleSidebar" style="color:#000; font-size:24px; cursor:pointer;"></div>
+<!-- HEADER -->
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon dw dw-menu" id="toggleSidebar" style="color:#000; font-size:24px; cursor:pointer;"></div>
 
-		</div>
+    </div>
 
-		<div class="header-right">
-			<div class="user-info-dropdown">
-				<div class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown">
-						<span class="user-icon account-circle">👤</span>
-						<span class="user-name">Student Name</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-						<a class="dropdown-item"><i class="dw dw-logout"></i> Logout</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="header-right">
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                    <span class="user-icon account-circle">👤</span>
+                    <span class="user-name">Student Name</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item"><i class="dw dw-logout"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<!-- SIDEBAR (visible by default now) -->
-	<div class="left-side-bar" id="sidebar">
-		<div class="brand-logo">
-			<a>STRACK
-		</div>
+<!-- SIDEBAR (visible by default now) -->
+<div class="left-side-bar" id="sidebar">
+    <div class="brand-logo">
+        <a>STRACK
+    </div>
 
-		<div class="menu-block customscroll">
-			<div class="sidebar-menu">
-				<ul id="accordion-menu">
-					<li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a></li>
-					<li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span class="mtext">Attendance</span></a></li>
-					<li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internal Marks</span></a></li>
-					<li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a></li>
-					<li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-logout"></span><span class="mtext">Logout</span></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a>
+                </li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span
+                        class="mtext">Attendance</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internal Marks</span></a>
+                </li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a>
+                </li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-logout"></span><span class="mtext">Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-	<div class="mobile-menu-overlay" id="overlay"></div>
+<div class="mobile-menu-overlay" id="overlay"></div>
 
-	<!-- MAIN -->
-	<div class="main-container">
-		<div class="pd-ltr-20">
+<!-- MAIN -->
+<div class="main-container">
+    <div class="pd-ltr-20">
 
-			<!-- ROW 1: WELCOME -->
-			<h2 class="text-center mb-4">Welcome back, <span class="text-blue">Student Name!</span></h2>
+        <!-- ROW 1: WELCOME -->
+        <h2 class="text-center mb-4">Welcome back, <span class="text-blue">Student Name!</span></h2>
 
-			<!-- ROW 2: PROFILE SECTION -->
-			<div class="card-box pd-20 mb-30">
-				<div class="row">
+        <!-- ROW 2: PROFILE SECTION -->
+        <div class="card-box pd-20 mb-30">
+            <div class="row">
 
-					<!-- LEFT PROFILE COLUMN -->
-					<div class="col-md-4 profile-box">
-						<img src="{% static 'Studentside/vendors/images/student.png' %}" class="rounded-circle" style="width:150px;">
-						<h4>Student Name</h4>
-						<p><b>Reg No:</b> AEC21CS000</p>
-						<p><b>Class:</b> S7 CSE</p>
-						<p><b>Batch:</b> 2021–2025</p>
-					</div>
+                <!-- LEFT PROFILE COLUMN -->
+                <div class="col-md-4 profile-box">
+                    <img src="{% static 'Studentside/vendors/images/student.png' %}" class="rounded-circle"
+                         style="width:150px;">
+                    <h4>Student Name</h4>
+                    <p><b>Reg No:</b> AEC21CS000</p>
+                    <p><b>Class:</b> S7 CSE</p>
+                    <p><b>Batch:</b> 2021–2025</p>
+                </div>
 
-					<!-- RIGHT BASIC DETAILS -->
-					<div class="col-md-8">
-						<div class="info-box">
-							<p><b>Name:</b> Student Name</p>
-							<p><b>Reg No:</b> AEC21CS000</p>
-							<p><b>Class:</b> S7 CSE</p>
-							<p><b>Batch:</b> 2021–2025</p>
-						</div>
-					</div>
+                <!-- RIGHT BASIC DETAILS -->
+                <div class="col-md-8">
+                    <div class="info-box">
+                        <p><b>Name:</b> Student Name</p>
+                        <p><b>Reg No:</b> AEC21CS000</p>
+                        <p><b>Class:</b> S7 CSE</p>
+                        <p><b>Batch:</b> 2021–2025</p>
+                    </div>
+                </div>
 
-				</div>
-			</div>
+            </div>
+        </div>
 
-			<!-- ROW 3: EMAIL, PHONE, DEPT, ADVISOR -->
-			<div class="row mb-4">
-				<div class="col-md-3"><div class="small-card"><b>Email:</b><br>student@example.com</div></div>
-				<div class="col-md-3"><div class="small-card"><b>Phone:</b><br>9876543210</div></div>
-				<div class="col-md-3"><div class="small-card"><b>Department:</b><br>Computer Science</div></div>
-				<div class="col-md-3"><div class="small-card"><b>Advisor:</b><br>Class Advisor</div></div>
-			</div>
+        <!-- ROW 3: EMAIL, PHONE, DEPT, ADVISOR -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="small-card"><b>Email:</b><br>student@example.com</div>
+            </div>
+            <div class="col-md-3">
+                <div class="small-card"><b>Phone:</b><br>9876543210</div>
+            </div>
+            <div class="col-md-3">
+                <div class="small-card"><b>Department:</b><br>Computer Science</div>
+            </div>
+            <div class="col-md-3">
+                <div class="small-card"><b>Advisor:</b><br>Class Advisor</div>
+            </div>
+        </div>
 
-			<!-- ROW 4: QUICK ACCESS -->
-			<div class="row">
+        <!-- ROW 4: QUICK ACCESS -->
+        <div class="row">
 
-				<div class="col-xl-3 mb-30">
-					<div class="card-box widget-style1 text-center">
-						<div id="attendanceDonut" style="height:120px;"></div>
-						<h5 class="mt-2">85% Attendance</h5>
-					</div>
-				</div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box widget-style1 text-center">
+                    <div id="attendanceDonut" style="height:120px;"></div>
+                    <h5 class="mt-2">85% Attendance</h5>
+                </div>
+            </div>
 
-				<div class="col-xl-3 mb-30">
-					<div class="card-box widget-style1 text-center">
-						<i class="dw dw-edit2" style="font-size:40px;"></i>
-						<h5 class="mt-2">Internals</h5>
-					</div>
-				</div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box widget-style1 text-center">
+                    <i class="dw dw-edit2" style="font-size:40px;"></i>
+                    <h5 class="mt-2">Internals</h5>
+                </div>
+            </div>
 
-				<div class="col-xl-3 mb-30">
-					<div class="card-box widget-style1 text-center">
-						<i class="dw dw-chat3" style="font-size:40px;"></i>
-						<h5 class="mt-2">Chat</h5>
-					</div>
-				</div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box widget-style1 text-center">
+                    <i class="dw dw-chat3" style="font-size:40px;"></i>
+                    <h5 class="mt-2">Chat</h5>
+                </div>
+            </div>
 
-			</div>
+        </div>
 
-			<!-- FOOTER -->
-			<div class="footer-wrap pd-20 card-box mb-0">
-				© 2025 STRACK Student Portal
-			</div>
+        <!-- FOOTER -->
+        <div class="footer-wrap pd-20 card-box mb-0">
+            © 2025 STRACK Student Portal
+        </div>
 
-		</div>
-	</div>
+    </div>
+</div>
 
-	<!-- JS -->
-	<script src="{% static 'Studentside/vendors/scripts/core.js' %}"></script>
-	<script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
-	<script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
-	<script src="{% static 'Studentside/vendors/scripts/layout-settings.js' %}"></script>
-	<script src="{% static 'Studentside/src/plugins/apexcharts/apexcharts.min.js' %}"></script>
+<!-- JS -->
+<script src="{% static 'Studentside/vendors/scripts/core.js' %}"></script>
+<script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
+<script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
+<script src="{% static 'Studentside/vendors/scripts/layout-settings.js' %}"></script>
+<script src="{% static 'Studentside/src/plugins/apexcharts/apexcharts.min.js' %}"></script>
 
-	<script>
-	// Donut chart
-	var chart = new ApexCharts(document.querySelector("#attendanceDonut"), {
-		series: [85],
-		chart: { type: 'radialBar', height: 150 },
-		colors: ['#1b5cff'],
-		plotOptions: { radialBar: { hollow: { size: '40%' } } }
-	});
-	chart.render();
+<script>
+    // Donut chart
+    var chart = new ApexCharts(document.querySelector("#attendanceDonut"), {
+        series: [85],
+        chart: { type: 'radialBar', height: 150 },
+        colors: ['#1b5cff'],
+        plotOptions: { radialBar: { hollow: { size: '40%' } } }
+    });
+    chart.render();
 
-	// Sidebar toggle
-	const sidebar = document.getElementById("sidebar");
-	const overlay = document.getElementById("overlay");
-	const toggleSidebar = document.getElementById("toggleSidebar");
-	const closeSidebar = document.getElementById("closeSidebar");
+    // Sidebar toggle
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const toggleSidebar = document.getElementById("toggleSidebar");
+    const closeSidebar = document.getElementById("closeSidebar");
 
-	toggleSidebar.onclick = () => {
-		sidebar.classList.remove("sidebar-hidden");
-		overlay.classList.add("active");
-	};
+    toggleSidebar.onclick = () => {
+        sidebar.classList.remove("sidebar-hidden");
+        overlay.classList.add("active");
+    };
 
-	closeSidebar.onclick = () => {
-		sidebar.classList.add("sidebar-hidden");
-		overlay.classList.remove("active");
-	};
+    closeSidebar.onclick = () => {
+        sidebar.classList.add("sidebar-hidden");
+        overlay.classList.remove("active");
+    };
 
-	overlay.onclick = () => {
-		sidebar.classList.add("sidebar-hidden");
-		overlay.classList.remove("active");
-	};
-	</script>
+    overlay.onclick = () => {
+        sidebar.classList.add("sidebar-hidden");
+        overlay.classList.remove("active");
+    };
+</script>
 
 
 </body>

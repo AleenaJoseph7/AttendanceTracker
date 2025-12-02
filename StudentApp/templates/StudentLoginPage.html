@@ -133,65 +133,65 @@
 
 <body>
 
-    <div class="container-box">
+<div class="container-box">
 
-        <!-- LEFT ILLUSTRATION -->
-        <div class="illustration">
-            <img src="{% static 'StudentLogin/images/undraw_remotely_2j6y.svg' %}" alt="">
-        </div>
+    <!-- LEFT ILLUSTRATION -->
+    <div class="illustration">
+        <img src="{% static 'StudentLogin/images/undraw_remotely_2j6y.svg' %}" alt="">
+    </div>
 
-        <!-- RIGHT LOGIN CARD -->
-        <div class="login-card">
+    <!-- RIGHT LOGIN CARD -->
+    <div class="login-card">
 
-            <h3>Student Login</h3>
-            <p>Access your STRACK dashboard securely.</p>
+        <h3>Student Login</h3>
+        <p>Access your STRACK dashboard securely.</p>
 
-            <form method="POST" action="{% url 'StudentLogin' %}">
-                {% csrf_token %}
+        <form method="POST" action="{% url 'StudentLogin' %}">
+            {% csrf_token %}
 
-                <!-- Registration ID -->
-                <div class="form-group">
-                    <label class="form-label">Registration ID</label>
-                    <input type="text" class="form-control" name="regid"
-                        placeholder="Enter your Registration ID" required>
-                </div>
+            <!-- Registration ID -->
+            <div class="form-group">
+                <label class="form-label">Registration ID</label>
+                <input type="text" class="form-control" name="regid"
+                       placeholder="Enter your Registration ID" required>
+            </div>
 
-                <!-- Password -->
-                <div class="form-group password-wrapper">
-                    <label class="form-label">Password</label>
+            <!-- Password -->
+            <div class="form-group password-wrapper">
+                <label class="form-label">Password</label>
 
-                    <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Enter your Password" required>
+                <input type="password" class="form-control" id="password" name="password"
+                       placeholder="Enter your Password" required>
 
-                    <!-- EYE ICON -->
-                    <span class="toggle-password" onclick="togglePassword()">
+                <!-- EYE ICON -->
+                <span class="toggle-password" onclick="togglePassword()">
                         <img id="eyeIcon" src="{% static 'StudentLogin/images/eye-closed.svg' %}" alt="eye">
                     </span>
-                </div>
+            </div>
 
-                <button type="submit" class="btn-login">Log In</button>
+            <button type="submit" class="btn-login">Log In</button>
 
-            </form>
-
-        </div>
+        </form>
 
     </div>
 
-    <!-- PASSWORD TOGGLE SCRIPT -->
-    <script>
-        function togglePassword() {
-            const pass = document.getElementById("password");
-            const icon = document.getElementById("eyeIcon");
+</div>
 
-            if (pass.type === "password") {
-                pass.type = "text";
-                icon.src = "{% static 'StudentLogin/images/eye-open.svg' %}";
-            } else {
-                pass.type = "password";
-                icon.src = "{% static 'StudentLogin/images/eye-closes.svg' %}";
-            }
+<!-- PASSWORD TOGGLE SCRIPT -->
+<script>
+    function togglePassword() {
+        const pass = document.getElementById("password");
+        const icon = document.getElementById("eyeIcon");
+
+        if (pass.type === "password") {
+            pass.type = "text";
+            icon.src = "{% static 'StudentLogin/images/eye-open.svg' %}";
+        } else {
+            pass.type = "password";
+            icon.src = "{% static 'StudentLogin/images/eye-closes.svg' %}";
         }
-    </script>
+    }
+</script>
 
 </body>
 
