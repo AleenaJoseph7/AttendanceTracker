@@ -259,9 +259,15 @@ def Deleteinternal(request, i_id):
 
 
 def AttendancePage(request):
+    date = datetime.datetime.now()
     subjects = Subjectdb.objects.all()
     subject_id = request.GET.get("subject")
-    date = datetime.datetime.now()
+    selected_date = request.GET.get("date")
+
+    if selected_date:
+        selected_date = datetime.datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        selected_date = datetime.date.today()
 
     sheet = []
 
@@ -273,7 +279,7 @@ def AttendancePage(request):
             record, created = Attendancedb.objects.get_or_create(
                 Student=s,
                 Subject=subject,
-                Date=date.today(),
+                Date=selected_date,
                 defaults={"Status": "Present"}
             )
             sheet.append(record)
@@ -282,8 +288,10 @@ def AttendancePage(request):
         "subjects": subjects,
         "sheet": sheet,
         "selected_subject": subject_id,
-        "date": date
+        "selected_date": selected_date,
+        "date":date
     })
+
 
 
 def toggle_attendance(request, record_id):
