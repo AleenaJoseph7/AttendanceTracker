@@ -10,7 +10,8 @@
                 <h3 class="text-center mb-4"
                     style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Edit Student</h3>
 
-                <form method="POST" enctype="multipart/form-data" action="{% url 'updatestudent' s_id=student.id %}">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'updatestudent' s_id=student.id %}"
+                      name="myform" onsubmit="return validation()">
                     {% csrf_token %}
 
                     <div class="mb-3">
@@ -76,6 +77,12 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="text" placeholder="Confirm Password" name="student_confirm" class="form-control"
+                               value="{{student.Student_confirm}}">
+                    </div>
+
+                    <div class="mb-3">
                         <img src="{{student.Student_prof.url}}" height="150px" width="150px">
                         <label class="form-label">Profile Image</label>
                         <input type="file" placeholder="Upload Your Profile Image" name="student_prof"
@@ -93,6 +100,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    function validation(){
+        pwd1=document.myform.student_password.value;
+        pwd2=document.myform.student_confirm.value;
+
+        if (pwd1 === "" || pwd1 === null){
+            alert("Password cannot be Null or Blank........!");
+            return false;
+        }
+        else if (pwd2 === "" || pwd2 === null){
+            alert("Confirm Password cannot be Null or Blank........!");
+            return false;
+        }
+        else if (pwd1.length<6){
+            alert("Password should be atleast 6 characters........!");
+            return false;
+        }
+        else if (pwd1 !== pwd2){
+            alert("Password doesn't match.......!");
+            return false;
+        }
+    return true;
+    }
+</script>
 
 
 {% endblock %}

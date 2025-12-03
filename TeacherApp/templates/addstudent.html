@@ -10,7 +10,8 @@
                 <h3 class="text-center mb-4"
                     style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Add Student</h3>
 
-                <form method="POST" enctype="multipart/form-data" action="{% url 'savestudent' %}">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'savestudent' %}" name="myform"
+                      onsubmit="return validation()">
                     {% csrf_token %}
 
                     <div class="mb-3">
@@ -70,6 +71,11 @@
                         <input type="text" placeholder="Password" name="student_password" class="form-control">
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="text" placeholder="Confirm Password" name="student_confirm" class="form-control">
+                    </div>
+
 
                     <div class="mb-3">
                         <label class="form-label">Profile Image</label>
@@ -88,6 +94,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    function validation(){
+        pwd1=document.myform.student_password.value;
+        pwd2=document.myform.student_confirm.value;
+
+        if (pwd1 === "" || pwd1 === null){
+            alert("Password cannot be Null or Blank........!");
+            return false;
+        }
+        else if (pwd2 === "" || pwd2 === null){
+            alert("Confirm Password cannot be Null or Blank........!");
+            return false;
+        }
+        else if (pwd1.length<6){
+            alert("Password should be atleast 6 characters........!");
+            return false;
+        }
+        else if (pwd1 !== pwd2){
+            alert("Password doesn't match.......!");
+            return false;
+        }
+    return true;
+    }
+</script>
 
 
 {% endblock %}
