@@ -5,113 +5,87 @@
     <meta charset="utf-8">
     <title>STRACK – Student Dashboard</title>
 
-    <link rel="icon" type="image/png" href="{% static 'Studentside/vendors/images/student-fav.png' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/core.css' %}">
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/icon-font.min.css' %}">
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/style.css' %}">
 
     <style>
-
-        /* FOOTER bottom */
-        .pd-ltr-20 {
-            min-height: calc(100vh - 70px);
-            display: flex;
-            flex-direction: column;
-        }
-        .footer-wrap {
-            margin-top: auto;
-        }
-
-        /* PROFILE LEFT BOX */
-        .profile-box {
-            text-align: center;
-            padding: 20px;
-        }
-        .profile-box h4 {
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        /* RIGHT INFO BOX */
-        .info-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        /* EMAIL ROW CARDS */
-        .small-card {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* SIDEBAR TOGGLE */
-        .left-side-bar {
-            transition: transform 0.3s ease;
-        }
-        .sidebar-hidden {
-            transform: translateX(-260px);
-        }
-        .mobile-menu-overlay.active {
-            display: block !important;
-        }
-
-        .close-sidebar {
-            font-size: 26px;
-            color: white;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .account-circle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #d9d9d9;
+        /* === STRACK TEXT LOADER === */
+        .pre-loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
         }
 
-        /* Sidebar starts visible */
-.left-side-bar {
-    transform: translateX(0);
-    transition: transform .3s ease;
-}
+        .pre-loader-box {
+            text-align: center;
+        }
 
-/* Hide when toggled */
-.left-side-bar.hide {
-    transform: translateX(-260px);
-}
+        .loader-progress {
+            width: 220px;
+            height: 8px;
+            background: #e1e7ff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-/* Overlay also toggles */
-.mobile-menu-overlay.show {
-    display: block !important;
-}
+        .loader-progress .bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #1b5cff, #5a7bff);
+            animation: loadbar 2.2s infinite;
+        }
 
+        @keyframes loadbar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
 
+        .loading-text {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1b5cff;
+        }
+
+        /* QUICK CARD HOVER ANIMATION */
+        .quick-card {
+            padding: 35px;
+            border-radius: 18px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            transition: all .25s ease;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
     </style>
 </head>
 
 <body>
 
-<!-- PRELOADER -->
+<!-- STRACK LOADER -->
 <div class="pre-loader">
     <div class="pre-loader-box">
-        <div class='loader-progress' id="progress_div">
-            <div class='bar' id='bar1'></div>
+        <div class="loader-progress">
+            <div class="bar"></div>
         </div>
-        <div class='percent' id='percent1'>0%</div>
         <div class="loading-text">STRACK Loading...</div>
     </div>
 </div>
@@ -119,18 +93,18 @@
 <!-- HEADER -->
 <div class="header">
     <div class="header-left">
-        <div class="menu-icon dw dw-menu" id="toggleSidebar" style="color:#000; font-size:24px; cursor:pointer;"></div>
-
+        <div class="menu-icon dw dw-menu"></div>
     </div>
 
     <div class="header-right">
         <div class="user-info-dropdown">
             <div class="dropdown">
-                <a class="dropdown-toggle" role="button" data-toggle="dropdown">
-                    <span class="user-icon account-circle">👤</span>
-                    <span class="user-name">Student Name</span>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="user-icon">👤</span>
+                    <span class="user-name">Student</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item"><i class="dw dw-user1"></i> Profile</a>
                     <a class="dropdown-item"><i class="dw dw-logout"></i> Logout</a>
                 </div>
             </div>
@@ -138,56 +112,63 @@
     </div>
 </div>
 
-<!-- SIDEBAR (visible by default now) -->
-<div class="left-side-bar" id="sidebar">
+<!-- SIDEBAR -->
+<div class="left-side-bar">
     <div class="brand-logo">
-        <a>STRACK
+        <a>STRACK</a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
     </div>
 
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a>
-                </li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span
-                        class="mtext">Attendance</span></a></li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internal Marks</span></a>
-                </li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a>
-                </li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-logout"></span><span class="mtext">Logout</span></a>
-                </li>
+                <li><a class="dropdown-toggle no-arrow" href="{% url 'StudentHomePage' %}"><span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span class="mtext">Attendance</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internals</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-logout"></span><span class="mtext">Logout</span></a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<div class="mobile-menu-overlay" id="overlay"></div>
+<div class="mobile-menu-overlay"></div>
 
-<!-- MAIN -->
+<!-- MAIN CONTENT -->
 <div class="main-container">
     <div class="pd-ltr-20">
 
-        <!-- ROW 1: WELCOME -->
-        <h2 class="text-center mb-4">Welcome back, <span class="text-blue">Student Name!</span></h2>
+        <!-- WELCOME BANNER -->
+        <div class="card-box pd-30 mb-30"
+             style="border-radius:18px; background: linear-gradient(135deg, #1b5cff, #6ea8ff); color:white; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+            <h2 class="text-center" style="font-weight:700; letter-spacing:1px;">Welcome back,</h2>
+            <h1 class="text-center" style="font-weight:800; font-size:35px; margin-top:-5px;">Student Name 👋</h1>
+            <p class="text-center mt-2" style="font-size:16px; opacity:0.9;">
+                Here’s a quick overview of your academic performance today.
+            </p>
+        </div>
 
-        <!-- ROW 2: PROFILE SECTION -->
-        <div class="card-box pd-20 mb-30">
-            <div class="row">
+        <!-- PROFILE SECTION -->
+        <div class="card-box pd-30 mb-30" style="border-radius:18px; background:#ffffff; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
+            <div class="row align-items-center">
 
-                <!-- LEFT PROFILE COLUMN -->
-                <div class="col-md-4 profile-box">
-                    <img src="{% static 'Studentside/vendors/images/student.png' %}" class="rounded-circle"
-                         style="width:150px;">
-                    <h4>Student Name</h4>
+                <!-- PHOTO -->
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'Studentside/vendors/images/student.png' %}" class="rounded-circle mb-3"
+                         style="width:150px; border:5px solid #1b5cff;">
+                    <h3 style="font-weight:700;">Student Name</h3>
                     <p><b>Reg No:</b> AEC21CS000</p>
                     <p><b>Class:</b> S7 CSE</p>
                     <p><b>Batch:</b> 2021–2025</p>
                 </div>
 
-                <!-- RIGHT BASIC DETAILS -->
+                <!-- INFO BOX -->
                 <div class="col-md-8">
-                    <div class="info-box">
+                    <div style="background:#f3f6ff; padding:25px; border-radius:12px;">
+                        <h4 style="font-weight:700; color:#1b5cff;">Profile Details</h4>
+                        <hr>
                         <p><b>Name:</b> Student Name</p>
                         <p><b>Reg No:</b> AEC21CS000</p>
                         <p><b>Class:</b> S7 CSE</p>
@@ -198,50 +179,75 @@
             </div>
         </div>
 
-        <!-- ROW 3: EMAIL, PHONE, DEPT, ADVISOR -->
-        <div class="row mb-4">
+        <!-- CONTACT CARDS -->
+        <div class="row mb-30">
+
             <div class="col-md-3">
-                <div class="small-card"><b>Email:</b><br>student@example.com</div>
+                <div class="card-box" style="background:#e8f0ff; border-radius:15px; padding:20px; text-align:center;">
+                    <h5 style="color:#1b5cff; font-weight:700;">Email</h5>
+                    <p>student@example.com</p>
+                </div>
             </div>
+
             <div class="col-md-3">
-                <div class="small-card"><b>Phone:</b><br>9876543210</div>
+                <div class="card-box" style="background:#fff3d6; border-radius:15px; padding:20px; text-align:center;">
+                    <h5 style="color:#ff9900; font-weight:700;">Phone</h5>
+                    <p>9876543210</p>
+                </div>
             </div>
+
             <div class="col-md-3">
-                <div class="small-card"><b>Department:</b><br>Computer Science</div>
+                <div class="card-box" style="background:#eaffea; border-radius:15px; padding:20px; text-align:center;">
+                    <h5 style="color:#23a832; font-weight:700;">Department</h5>
+                    <p>Computer Science</p>
+                </div>
             </div>
+
             <div class="col-md-3">
-                <div class="small-card"><b>Advisor:</b><br>Class Advisor</div>
+                <div class="card-box" style="background:#fde7ec; border-radius:15px; padding:20px; text-align:center;">
+                    <h5 style="color:#e63950; font-weight:700;">Advisor</h5>
+                    <p>Class Advisor</p>
+                </div>
             </div>
+
         </div>
 
-        <!-- ROW 4: QUICK ACCESS -->
+        <!-- QUICK ACCESS -->
+        <h3 class="mb-3" style="font-weight:700; color:#1b5cff;">Quick Access</h3>
         <div class="row">
 
-            <div class="col-xl-3 mb-30">
-                <div class="card-box widget-style1 text-center">
-                    <div id="attendanceDonut" style="height:120px;"></div>
-                    <h5 class="mt-2">85% Attendance</h5>
+            <!-- ATTENDANCE -->
+            <div class="col-xl-4 mb-30">
+                <div class="quick-card"
+                     style="background:linear-gradient(135deg,#66bb6a,#43a047);">
+                    <i class="dw dw-analytics-21" style="font-size:55px;"></i>
+                    <h4 style="font-weight:700; margin-top:10px;">Attendance</h4>
                 </div>
             </div>
 
-            <div class="col-xl-3 mb-30">
-                <div class="card-box widget-style1 text-center">
-                    <i class="dw dw-edit2" style="font-size:40px;"></i>
-                    <h5 class="mt-2">Internals</h5>
+            <!-- INTERNAL MARKS -->
+            <div class="col-xl-4 mb-30">
+                <div class="quick-card"
+                     style="background:linear-gradient(135deg,#ffa726,#fb8c00);">
+                    <i class="dw dw-edit2" style="font-size:55px;"></i>
+                    <h4 style="font-weight:700; margin-top:10px;">Internal Marks</h4>
                 </div>
             </div>
 
-            <div class="col-xl-3 mb-30">
-                <div class="card-box widget-style1 text-center">
-                    <i class="dw dw-chat3" style="font-size:40px;"></i>
-                    <h5 class="mt-2">Chat</h5>
+            <!-- CHAT -->
+            <div class="col-xl-4 mb-30">
+                <div class="quick-card"
+                     style="background:linear-gradient(135deg,#42a5f5,#1e88e5);">
+                    <i class="dw dw-chat3" style="font-size:55px;"></i>
+                    <h4 style="font-weight:700; margin-top:10px;">Chat</h4>
                 </div>
             </div>
 
         </div>
 
         <!-- FOOTER -->
-        <div class="footer-wrap pd-20 card-box mb-0">
+        <div class="footer-wrap pd-20 card-box mb-0 text-center"
+             style="border-radius:15px; font-weight:500;">
             © 2025 STRACK Student Portal
         </div>
 
@@ -253,40 +259,12 @@
 <script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
 <script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
 <script src="{% static 'Studentside/vendors/scripts/layout-settings.js' %}"></script>
-<script src="{% static 'Studentside/src/plugins/apexcharts/apexcharts.min.js' %}"></script>
 
 <script>
-    // Donut chart
-    var chart = new ApexCharts(document.querySelector("#attendanceDonut"), {
-        series: [85],
-        chart: { type: 'radialBar', height: 150 },
-        colors: ['#1b5cff'],
-        plotOptions: { radialBar: { hollow: { size: '40%' } } }
-    });
-    chart.render();
-
-    // Sidebar toggle
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    const toggleSidebar = document.getElementById("toggleSidebar");
-    const closeSidebar = document.getElementById("closeSidebar");
-
-    toggleSidebar.onclick = () => {
-        sidebar.classList.remove("sidebar-hidden");
-        overlay.classList.add("active");
-    };
-
-    closeSidebar.onclick = () => {
-        sidebar.classList.add("sidebar-hidden");
-        overlay.classList.remove("active");
-    };
-
-    overlay.onclick = () => {
-        sidebar.classList.add("sidebar-hidden");
-        overlay.classList.remove("active");
+    window.onload = () => {
+        document.querySelector('.pre-loader').style.display = "none";
     };
 </script>
-
 
 </body>
 </html>
