@@ -6,7 +6,11 @@ from django.contrib import messages
 
 # Create your views here.
 def StudentHomePage(request):
-    student=Studentdb.objects.filter(Student_name=request.session['Username']).first()
+    student_id=request.session.get('StudentId')
+    if not student_id :
+        messages.warning(request,"Please login!")
+        return redirect(StudentLoginPage)
+    student=Studentdb.objects.get(id=student_id)
     return render(request, "base.html",{'student':student})
 
 
@@ -21,8 +25,7 @@ def StudentLogin(request):
 
         if Studentdb.objects.filter(Student_regid=regid, Student_password=password).exists():
             student = Studentdb.objects.get(Student_regid=regid)
-            request.session['Username'] = student.Student_name
-            request.session['Password'] = password
+            request.session['StudentId'] = student.id
             messages.success(request, "Login Successfully!")
             return redirect(StudentHomePage)
         else:
@@ -31,7 +34,6 @@ def StudentLogin(request):
 
 
 def StudentLogout(request):
-    del request.session['Username']
-    del request.session['Password']
+    del request.session['StudentId']
     messages.success(request, "Logout Successfully!")
     return redirect(StudentLoginPage)
