@@ -217,6 +217,7 @@
                                  style="max-height: calc(100vh - 225px)">
 
                                 <div class="grid my-3">
+                                    {% if request.session.Username %}
                                     <a href="{% url 'AdminLogout' %}">
                                         <button class="btn btn-primary flex items-center justify-center">
                                             <svg class="pc-icon me-2 w-[22px] h-[22px]">
@@ -225,6 +226,17 @@
                                             Logout
                                         </button>
                                     </a>
+                                    {% else %}
+                                    <a href="{% url 'AdminLoginPage' %}">
+                                        <button class="btn btn-primary flex items-center justify-center">
+                                            <svg class="pc-icon me-2 w-[22px] h-[22px]">
+                                                <use xlink:href="#custom-logout-1-outline"></use>
+                                            </svg>
+                                            Login
+                                        </button>
+                                    </a>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </div>
@@ -531,7 +543,25 @@
 <script>
     main_layout_change('vertical');
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+{% if messages %}
+    {% for i in messages %}
+        {% if 'success' in i.tags %}
+            <script> swal('{{i}}', '', 'success'); </script>
+
+        {% elif 'warning' in i.tags %}
+            <script> swal('{{i}}', '', 'warning'); </script>
+
+        {% elif 'info' in i.tags %}
+            <script> swal('{{i}}', '', 'info'); </script>
+
+        {% elif 'error' in i.tags %}
+            <script> swal('{{i}}', '', 'error'); </script>
+
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 </body>
 <!-- [Body] end -->

@@ -17,7 +17,7 @@ import json
 
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 
-
+from django.contrib import messages
 # Create your views here.
 def Indexpage(request):
     date = datetime.datetime.now()
@@ -67,6 +67,7 @@ def savestudent(request):
                        Student_prof=student_prof)
 
         ob.save()
+        messages.success(request,"Student added Succesfully")
         return redirect(Addstudentpage)
 
 
@@ -111,13 +112,14 @@ def updatestudent(request, s_id):
                                                  Student_password=student_password,
                                                  Student_confirm=student_confirm,
                                                  Student_prof=files)
-
+        messages.success(request,"Student updated Succesfully")
         return redirect(DisplaystudentPage)
 
 
 def deletestudent(request, s_id):
     data = Studentdb.objects.filter(id=s_id)
     data.delete()
+    messages.error(request, "Student deleted Succesfully")
     return redirect(DisplaystudentPage)
 
 
@@ -141,6 +143,7 @@ def savesubject(request):
                        Subject_dep=subject_dep)
 
         ob.save()
+        messages.success(request,"Subject added Succesfully")
         return redirect(AddsubjectPage)
 
 
@@ -169,13 +172,14 @@ def Updatesubject(request, sub_id):
                                                    Subject_teacher=subject_teacher,
                                                    Subject_sem=subject_sem,
                                                    Subject_dep=subject_dep)
-
+        messages.success(request,"Subject updated Succesfully")
         return redirect(DisplaysubjectPage)
 
 
 def Deletesubject(request, sub_id):
     data = Subjectdb.objects.filter(id=sub_id)
     data.delete()
+    messages.error(request, "Subject deleted Succesfully")
     return redirect(DisplaysubjectPage)
 
 
@@ -201,6 +205,7 @@ def Saveinternal(request):
                             Internalmark=internalmark,
                             Totalmark=totalmark)
         ob.save()
+        messages.success(request,"Internal added Succesfully")
         return redirect(Addinternalpage)
 
 
@@ -249,12 +254,14 @@ def Updateinternal(request, i_id):
                                                       Subject=subject,
                                                       Internalmark=internalmark,
                                                       Totalmark=totalmark)
+        messages.success(request,"Internal updated Succesfully")
         return redirect(Displayinternal)
 
 
 def Deleteinternal(request, i_id):
     data = Internalmarkdb.objects.filter(id=i_id)
     data.delete()
+    messages.error(request, "Internal deleted Succesfully")
     return redirect(Displayinternal)
 
 
@@ -303,7 +310,6 @@ def toggle_attendance(request, record_id):
         record.Status = "Present"
 
     record.save()
-
     return JsonResponse({"status": record.Status})
 
 
@@ -323,6 +329,7 @@ def saveattendance(request):
                           Status=attendance_status)
 
         ob.save()
+        messages.success(request, "Attendance added Succesfully")
         return redirect(AttendancePage)
 
 
@@ -362,12 +369,14 @@ def updateattendance(request, a_id):
                                                     Subject=attendance_subjectobj,
                                                     Date=attendance_date,
                                                     Status=attendance_status)
+        messages.success(request, "Attendance updated Succesfully")
         return redirect(Displayattendancepage)
 
 
 def deleteattendance(request, a_id):
     data = Attendancedb.objects.filter(id=a_id)
     data.delete()
+    messages.error(request, "Attendance deleted Succesfully")
     return redirect(Displayattendancepage)
 
 
@@ -512,15 +521,19 @@ def AdminLogin(request):
                 login(request, data)
                 request.session['Username'] = admin_username
                 request.session['Password'] = admin_password
+                messages.success(request, "Admin Login Succesfully")
                 return redirect(Indexpage)
 
             else:
+                messages.warning(request, "Incorrect Username or Password!")
                 return redirect(AdminLoginPage)
         else:
+            messages.warning(request, "Username Doesn't exist!")
             return redirect(AdminLoginPage)
 
 
 def AdminLogout(request):
     del request.session['Username']
     del request.session['Password']
+    messages.success(request, "Admin Logout Succesfully")
     return redirect(AdminLoginPage)
