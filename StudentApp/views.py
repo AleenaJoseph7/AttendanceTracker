@@ -1,5 +1,7 @@
+from django.contrib.messages.context_processors import messages
 from django.shortcuts import render, redirect
 from TeacherApp.models import Studentdb, Internalmarkdb, ChatMessage, Attendancedb, Subjectdb
+from django.contrib import messages
 
 
 # Create your views here.
@@ -20,12 +22,15 @@ def StudentLogin(request):
             student = Studentdb.objects.get(Student_regid=regid)
             request.session['Username'] = student.Student_name
             request.session['Password'] = password
+            messages.success(request,"Login Successfully!")
             return redirect(StudentHomePage)
         else:
+            messages.success(request,"Username doesnt exist!")
             return redirect(StudentLoginPage)
 
 
 def StudentLogout(request):
     del request.session['Username']
     del request.session['Password']
+    messages.success(request, "Logout Successfully!")
     return render(StudentLoginPage)
