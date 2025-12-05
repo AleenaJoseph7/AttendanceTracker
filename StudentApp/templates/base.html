@@ -143,8 +143,7 @@
         <!-- WELCOME BANNER -->
         <div class="card-box pd-30 mb-30"
              style="border-radius:18px; background: linear-gradient(135deg, #1b5cff, #6ea8ff); color:white; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
-            <h2 class="text-center" style="font-weight:700; letter-spacing:1px;">Welcome back,</h2>
-            <h1 class="text-center" style="font-weight:800; font-size:35px; margin-top:-5px;">Student Name 👋</h1>
+            <h2 class="text-center" style="font-weight:700; letter-spacing:1px;">Welcome back, {{student.Student_name}} 👋</h2>
             <p class="text-center mt-2" style="font-size:16px; opacity:0.9;">
                 Here’s a quick overview of your academic performance today.
             </p>
@@ -158,10 +157,10 @@
                 <div class="col-md-4 text-center">
                     <img src="{% static 'Studentside/vendors/images/student.png' %}" class="rounded-circle mb-3"
                          style="width:150px; border:5px solid #1b5cff;">
-                    <h3 style="font-weight:700;">Student Name</h3>
-                    <p><b>Reg No:</b> AEC21CS000</p>
-                    <p><b>Class:</b> S7 CSE</p>
-                    <p><b>Batch:</b> 2021–2025</p>
+                    <h3 style="font-weight:700;">{{student.Student_name}}</h3>
+                    <p><b>Reg No:</b>{{student.Student_regid}}</p>
+                    <p><b>Class:</b> {{student.Student_sem}} : {{student.Student_batch}}</p>
+                    <p><b>Batch:</b> {{student.Student_duration}}</p>
                 </div>
 
                 <!-- INFO BOX -->
@@ -169,10 +168,10 @@
                     <div style="background:#f3f6ff; padding:25px; border-radius:12px;">
                         <h4 style="font-weight:700; color:#1b5cff;">Profile Details</h4>
                         <hr>
-                        <p><b>Name:</b> Student Name</p>
-                        <p><b>Reg No:</b> AEC21CS000</p>
-                        <p><b>Class:</b> S7 CSE</p>
-                        <p><b>Batch:</b> 2021–2025</p>
+                        <p><b>Name:</b>{{student.Student_name}} </p>
+                        <p><b>Reg No:</b>{{student.Student_regid}}</p>
+                        <p><b>Class:</b>{{student.Student_sem}} : {{student.Student_batch}}</p>
+                        <p><b>Batch:</b> {{student.Student_duration}}</p>
                     </div>
                 </div>
 
@@ -185,7 +184,7 @@
             <div class="col-md-3">
                 <div class="card-box" style="background:#e8f0ff; border-radius:15px; padding:20px; text-align:center;">
                     <h5 style="color:#1b5cff; font-weight:700;">Email</h5>
-                    <p>student@example.com</p>
+                    <p>{{student}}</p>
                 </div>
             </div>
 

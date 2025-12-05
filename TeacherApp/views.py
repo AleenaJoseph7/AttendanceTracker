@@ -51,6 +51,7 @@ def savestudent(request):
         student_sem = request.POST.get('student_sem')
         student_duration = request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
+        student_email=request.POST.get('student_email')
         student_password = request.POST.get('student_password')
         student_confirm = request.POST.get('student_confirm')
         student_prof = request.FILES.get('student_prof')
@@ -62,6 +63,7 @@ def savestudent(request):
                        Student_sem=student_sem,
                        Student_duration=student_duration,
                        Student_phone=student_phone,
+                       Student_email=student_email,
                        Student_password=student_password,
                        Student_confirm=student_confirm,
                        Student_prof=student_prof)
@@ -92,6 +94,7 @@ def updatestudent(request, s_id):
         student_sem = request.POST.get('student_sem')
         student_duration = request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
+        student_email=request.POST.get('student_email')
         student_password = request.POST.get('student_password')
         student_confirm = request.POST.get('student_confirm')
         try:
@@ -109,6 +112,7 @@ def updatestudent(request, s_id):
                                                  Student_sem=student_sem,
                                                  Student_duration=student_duration,
                                                  Student_phone=student_phone,
+                                                 Student_email=student_email,
                                                  Student_password=student_password,
                                                  Student_confirm=student_confirm,
                                                  Student_prof=files)

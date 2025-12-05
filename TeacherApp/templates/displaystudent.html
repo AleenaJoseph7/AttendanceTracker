@@ -17,6 +17,7 @@
                 <th>Semester</th>
                 <th>Duration</th>
                 <th>Mobile Number</th>
+                <th>Email ID</th>
                 <th>Password</th>
                 <th colspan="2" style="text-align:center;">Actions</th>
             </tr>
@@ -38,6 +39,7 @@
                 <td>{{ i.Student_sem }}</td>
                 <td>{{ i.Student_duration }}</td>
                 <td>{{i.Student_phone}}</td>
+                <td>{{i.Student_email}}</td>
                 <td>{{i.Student_password}}</td>
                 <td>
                     <a href="{% url 'EditstudentPage' s_id=i.id %}">
