@@ -22,10 +22,10 @@ def StudentLogin(request):
             student = Studentdb.objects.get(Student_regid=regid)
             request.session['Username'] = student.Student_name
             request.session['Password'] = password
-            messages.success(request,"Login Successfully!")
+            messages.success(request, "Login Successfully!")
             return redirect(StudentHomePage)
         else:
-            messages.success(request,"Username doesnt exist!")
+            messages.warning(request, "Username or Password!")
             return redirect(StudentLoginPage)
 
 
@@ -33,4 +33,4 @@ def StudentLogout(request):
     del request.session['Username']
     del request.session['Password']
     messages.success(request, "Logout Successfully!")
-    return render(StudentLoginPage)
+    return redirect(StudentLoginPage)
