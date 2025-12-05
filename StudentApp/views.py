@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # Create your views here.
 def StudentHomePage(request):
-    student=Studentdb.objects.filter(Student_regid=request.session['Username']).first()
+    student=Studentdb.objects.filter(Student_name=request.session['Username']).first()
     return render(request, "base.html",{'student':student})
 
 
