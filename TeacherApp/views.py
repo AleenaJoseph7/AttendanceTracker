@@ -143,7 +143,7 @@ def savesubject(request):
                        Subject_dep=subject_dep)
 
         ob.save()
-        messages.success(request,"Subject added Succesfully")
+        messages.success(request,"Subject added Successfully")
         return redirect(AddsubjectPage)
 
 
@@ -179,7 +179,7 @@ def Updatesubject(request, sub_id):
 def Deletesubject(request, sub_id):
     data = Subjectdb.objects.filter(id=sub_id)
     data.delete()
-    messages.success(request, "Subject deleted Succesfully")
+    messages.success(request, "Subject deleted Successfully")
     return redirect(DisplaysubjectPage)
 
 
@@ -205,7 +205,7 @@ def Saveinternal(request):
                             Internalmark=internalmark,
                             Totalmark=totalmark)
         ob.save()
-        messages.success(request,"Internal added Succesfully")
+        messages.success(request,"Internal added Successfully")
         return redirect(Addinternalpage)
 
 
@@ -254,14 +254,14 @@ def Updateinternal(request, i_id):
                                                       Subject=subject,
                                                       Internalmark=internalmark,
                                                       Totalmark=totalmark)
-        messages.success(request,"Internal updated Succesfully")
+        messages.success(request,"Internal updated Successfully")
         return redirect(Displayinternal)
 
 
 def Deleteinternal(request, i_id):
     data = Internalmarkdb.objects.filter(id=i_id)
     data.delete()
-    messages.success(request, "Internal deleted Succesfully")
+    messages.success(request, "Internal deleted Successfully")
     return redirect(Displayinternal)
 
 
@@ -329,7 +329,7 @@ def saveattendance(request):
                           Status=attendance_status)
 
         ob.save()
-        messages.success(request, "Attendance added Succesfully")
+        messages.success(request, "Attendance added Successfully")
         return redirect(AttendancePage)
 
 
@@ -376,7 +376,7 @@ def updateattendance(request, a_id):
 def deleteattendance(request, a_id):
     data = Attendancedb.objects.filter(id=a_id)
     data.delete()
-    messages.success(request, "Attendance deleted Succesfully")
+    messages.success(request, "Attendance deleted Successfully")
     return redirect(Displayattendancepage)
 
 
@@ -521,7 +521,7 @@ def AdminLogin(request):
                 login(request, data)
                 request.session['Username'] = admin_username
                 request.session['Password'] = admin_password
-                messages.success(request, "Admin Login Succesfully")
+                messages.success(request, "Admin Login Successfully")
                 return redirect(Indexpage)
 
             else:
@@ -535,5 +535,5 @@ def AdminLogin(request):
 def AdminLogout(request):
     del request.session['Username']
     del request.session['Password']
-    messages.success(request, "Admin Logout Succesfully")
+    messages.success(request, "Admin Logout Successfully")
     return redirect(AdminLoginPage)
