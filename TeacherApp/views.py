@@ -179,7 +179,7 @@ def Updatesubject(request, sub_id):
 def Deletesubject(request, sub_id):
     data = Subjectdb.objects.filter(id=sub_id)
     data.delete()
-    messages.error(request, "Subject deleted Succesfully")
+    messages.success(request, "Subject deleted Succesfully")
     return redirect(DisplaysubjectPage)
 
 
@@ -261,7 +261,7 @@ def Updateinternal(request, i_id):
 def Deleteinternal(request, i_id):
     data = Internalmarkdb.objects.filter(id=i_id)
     data.delete()
-    messages.error(request, "Internal deleted Succesfully")
+    messages.success(request, "Internal deleted Succesfully")
     return redirect(Displayinternal)
 
 
@@ -376,7 +376,7 @@ def updateattendance(request, a_id):
 def deleteattendance(request, a_id):
     data = Attendancedb.objects.filter(id=a_id)
     data.delete()
-    messages.error(request, "Attendance deleted Succesfully")
+    messages.success(request, "Attendance deleted Succesfully")
     return redirect(Displayattendancepage)
 
 
