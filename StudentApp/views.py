@@ -6,11 +6,10 @@ from django.contrib import messages
 
 # Create your views here.
 def StudentHomePage(request):
-    student_id=request.session.get('StudentId')
-    if not student_id :
-        messages.warning(request,"Please login!")
+    student=Studentdb.objects.get(id=request.session['StudentId'])
+    if not student:
+        messages.error(request,"please Login !")
         return redirect(StudentLoginPage)
-    student=Studentdb.objects.get(id=student_id)
     return render(request, "base.html",{'student':student})
 
 
