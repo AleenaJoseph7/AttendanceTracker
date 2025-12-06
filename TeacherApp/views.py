@@ -524,7 +524,6 @@ def AdminLogin(request):
             if data is not None:
                 login(request, data)
                 request.session['Username'] = admin_username
-                request.session['Password'] = admin_password
                 messages.success(request, "Admin Login Successfully")
                 return redirect(Indexpage)
 
@@ -538,6 +537,5 @@ def AdminLogin(request):
 
 def AdminLogout(request):
     del request.session['Username']
-    del request.session['Password']
     messages.success(request, "Admin Logout Successfully")
     return redirect(AdminLoginPage)
