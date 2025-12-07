@@ -138,6 +138,7 @@
 
 <!-- MAIN CONTENT -->
 <div class="main-container">
+    {% block content %}
     <div class="pd-ltr-20">
 
         <!-- WELCOME BANNER -->
@@ -240,6 +241,8 @@
             </div>
 
         </div>
+
+        {% endblock %}
 
         <!-- FOOTER -->
         <div class="footer-wrap pd-20 card-box mb-0 text-center"
