@@ -14,13 +14,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for i in internal %}
+            {% for i in attendance %}
             <tr class="text-center">
-                <td style="text-align:justify;">{{i.Subject.Subject_name}}</td>
-                <td>{{i.Subject.Subject_code}}</td>
-                <td>{{i.Internalmark}}</td>
-                <td>{{i.Totalmark}}</td>
-                <td>0</td>
+                <td style="text-align:justify;">{{i.subject}}</td>
+                <td>{{i.subjectcode}}</td>
+                <td>{{i.internalmark}}</td>
+                <td>{{i.totalmark}}</td>
+                <td>{{i.percentages}}</td>
             </tr>
             {% endfor %}
             </tbody>

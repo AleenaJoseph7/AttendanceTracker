@@ -15,7 +15,24 @@ def StudentHomePage(request):
 def StudentReportPage(request):
     student=Studentdb.objects.get(id=request.session['StudentId'])
     internal=Internalmarkdb.objects.filter(Student=request.session['StudentId'])
-    return render(request,'StudentReport.html',{'student':student,'internal':internal})
+
+    attendance=[]
+
+    for i in internal:
+        subject=i.Subject
+        Total_class=Attendancedb.objects.filter(Student=student,Subject=subject).count()
+        present_class=Attendancedb.objects.filter(Student=student,Subject=subject,Status="Present").count()
+        if Total_class==0:
+            percentages=0
+        else:
+            percentages=round((present_class/Total_class)*100)
+        attendance.append({'subject':subject,
+                           'subjectcode':subject.Subject_code,
+                           'internalmark':i.Internalmark,
+                           'totalmark':i.Totalmark,
+                           'percentages':percentages})
+
+    return render(request,'StudentReport.html',{'student':student,'internal':internal,'attendance':attendance})
 
 
 def StudentLoginPage(request):
