@@ -98,6 +98,7 @@ def DownloadInternalPdf(request):
     return FileResponse(pdf_buffer, as_attachment=True, filename=filename)
 
 
+
 def StudentLoginPage(request):
     return render(request, "StudentLoginPage.html")
 
