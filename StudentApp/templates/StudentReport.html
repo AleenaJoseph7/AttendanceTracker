@@ -16,7 +16,11 @@
             <tbody>
             {% for i in internal %}
             <tr class="text-center">
-
+                <td>{{i.Subject.Subject_name}}</td>
+                <td>{{i.Subject.Subject_code}}</td>
+                <td>{{i.Internalmark}}</td>
+                <td>{{i.Totalmark}}</td>
+                <td>0</td>
             </tr>
             {% endfor %}
             </tbody>
