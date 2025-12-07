@@ -3,41 +3,44 @@ from django.shortcuts import render, redirect
 from TeacherApp.models import Studentdb, Internalmarkdb, ChatMessage, Attendancedb, Subjectdb
 from django.contrib import messages
 
-from TeacherApp.utils.pdf_generator import  generate_pdf_table
+from TeacherApp.utils.pdf_generator import generate_pdf_table
 from django.http import FileResponse
 from reportlab.lib import colors
 
+
 # Create your views here.
 def StudentHomePage(request):
-    student=Studentdb.objects.get(id=request.session['StudentId'])
+    student = Studentdb.objects.get(id=request.session['StudentId'])
     if not student:
-        messages.error(request,"please Login !")
+        messages.error(request, "please Login !")
         return redirect(StudentLoginPage)
-    return render(request, "base.html",{'student':student})
+    return render(request, "base.html", {'student': student})
+
 
 def StudentReportPage(request):
     # get student id
-    student=Studentdb.objects.get(id=request.session['StudentId'])
-    internal=Internalmarkdb.objects.filter(Student=request.session['StudentId'])
+    student = Studentdb.objects.get(id=request.session['StudentId'])
+    internal = Internalmarkdb.objects.filter(Student=request.session['StudentId'])
 
-    attendance=[]
+    attendance = []
 
     for i in internal:
         # fetches sub id
-        subject=i.Subject
-        Total_class=Attendancedb.objects.filter(Student=student,Subject=subject).count()
-        present_class=Attendancedb.objects.filter(Student=student,Subject=subject,Status="Present").count()
-        if Total_class==0:
-            percentages=0
+        subject = i.Subject
+        Total_class = Attendancedb.objects.filter(Student=student, Subject=subject).count()
+        present_class = Attendancedb.objects.filter(Student=student, Subject=subject, Status="Present").count()
+        if Total_class == 0:
+            percentages = 0
         else:
-            percentages=round((present_class/Total_class)*100)
-        attendance.append({'subject':subject.Subject_name,
-                           'subjectcode':subject.Subject_code,
-                           'internalmark':i.Internalmark,
-                           'totalmark':i.Totalmark,
-                           'percentages':percentages})
+            percentages = round((present_class / Total_class) * 100)
+        attendance.append({'subject': subject.Subject_name,
+                           'subjectcode': subject.Subject_code,
+                           'internalmark': i.Internalmark,
+                           'totalmark': i.Totalmark,
+                           'percentages': percentages})
 
-    return render(request,'StudentReport.html',{'student':student,'internal':internal,'attendance':attendance})
+    return render(request, 'StudentReport.html', {'student': student, 'internal': internal, 'attendance': attendance})
+
 
 def DownloadInternalPdf(request):
     student = Studentdb.objects.get(id=request.session['StudentId'])
@@ -85,7 +88,7 @@ def DownloadInternalPdf(request):
         return colors.green
 
     column_color_map = {
-        4: attendance_color   # 0-based index → 4th column = "Attendance %"
+        4: attendance_color  # 0-based index → 4th column = "Attendance %"
     }
 
     pdf_buffer = generate_pdf_table(
@@ -96,7 +99,6 @@ def DownloadInternalPdf(request):
 
     filename = f"{student.Student_name}_Internal_Report.pdf"
     return FileResponse(pdf_buffer, as_attachment=True, filename=filename)
-
 
 
 def StudentLoginPage(request):
