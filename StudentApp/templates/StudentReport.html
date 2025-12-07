@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container" style="padding:50px;">
-    <div>
+
+<div class="pd-ltr-20">
+
+    <!-- TOP BAR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="font-weight:700; color:#1b5cff;">Internal Marks Report</h3>
+
+        <a href="#"
+           class="btn btn-primary"
+           style="background:#1b5cff; border:none; padding:10px 20px; border-radius:8px; font-weight:600;">
+            ⬇ Download PDF
+        </a>
+    </div>
+
+    <!-- REPORT CARD -->
+    <div class="card-box p-4"
+         style="border-radius:18px; background:#ffffff; box-shadow:0 4px 18px rgba(0,0,0,0.1);">
+
         <table class="table table-bordered table-hover">
-            <thead>
-            <tr class="text-center" style="background-color:lightgrey;" >
+            <thead style="background-color:#e8ecf7;">
+            <tr class="text-center">
                 <th>Subject</th>
                 <th>Subject Code</th>
                 <th>Internal Mark</th>
@@ -13,18 +29,35 @@
                 <th>Attendance</th>
             </tr>
             </thead>
+
             <tbody>
             {% for i in attendance %}
             <tr class="text-center">
-                <td style="text-align:justify;">{{i.subject}}</td>
-                <td>{{i.subjectcode}}</td>
-                <td>{{i.internalmark}}</td>
-                <td>{{i.totalmark}}</td>
-                <td>{{i.percentages}}</td>
+                <td style="text-align:left; font-weight:500;">{{ i.subject }}</td>
+                <td>{{ i.subjectcode }}</td>
+                <td>{{ i.internalmark }}</td>
+                <td>{{ i.totalmark }}</td>
+
+                <!-- COLORED BADGE LOGIC -->
+                <td>
+                    {% if i.percentages < 75 %}
+                        <span style="background:#ff4d4d; color:white; padding:6px 12px; border-radius:8px; font-weight:600;">
+                            {{ i.percentages }}%
+                        </span>
+                    {% else %}
+                        <span style="background:#28a745; color:white; padding:6px 12px; border-radius:8px; font-weight:600;">
+                            {{ i.percentages }}%
+                        </span>
+                    {% endif %}
+                </td>
+
             </tr>
             {% endfor %}
             </tbody>
         </table>
+
     </div>
+
 </div>
+
 {% endblock %}
