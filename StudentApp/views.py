@@ -12,6 +12,10 @@ def StudentHomePage(request):
         return redirect(StudentLoginPage)
     return render(request, "base.html",{'student':student})
 
+def StudentReportPage(request):
+    student=Studentdb.objects.get(id=request.session['StudentId'])
+    return render(request,'StudentReport.html',{'student':student})
+
 
 def StudentLoginPage(request):
     return render(request, "StudentLoginPage.html")
