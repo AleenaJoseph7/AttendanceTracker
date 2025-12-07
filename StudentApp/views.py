@@ -89,7 +89,7 @@ def DownloadInternalPdf(request):
     }
 
     pdf_buffer = generate_pdf_table(
-        title=f"{student.Student_name} - Internal Marks Report",
+        title='',
         data_rows=data_rows,
         column_color_map=column_color_map
     )
