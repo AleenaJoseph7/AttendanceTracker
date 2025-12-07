@@ -251,49 +251,50 @@
                         <h4 style="font-weight:700; margin-top:10px;">Chat</h4>
                     </div>
                 </div>
-                {% endblock %}
-            </div>
-            </div>
 
-
-            <!-- FOOTER -->
-            <div class="footer-wrap pd-20 card-box mb-0 text-center"
-                 style="border-radius:15px; font-weight:500;">
-                © 2025 STRACK Student Portal
             </div>
-
+            {% endblock %}
         </div>
+
+
+        <!-- FOOTER -->
+        <div class="footer-wrap pd-20 card-box mb-0 text-center"
+             style="border-radius:15px; font-weight:500;">
+            © 2025 STRACK Student Portal
+        </div>
+
     </div>
+</div>
 
-    <!-- JS -->
-    <script src="{% static 'Studentside/vendors/scripts/core.js' %}"></script>
-    <script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
-    <script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
+<!-- JS -->
+<script src="{% static 'Studentside/vendors/scripts/core.js' %}"></script>
+<script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
+<script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
 
 
-    <script>
-        window.onload = () => {
-            document.querySelector('.pre-loader').style.display = "none";
-        };
-    </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    window.onload = () => {
+        document.querySelector('.pre-loader').style.display = "none";
+    };
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    {% if messages %}
-    {% for i in messages %}
-    {% if 'success' in i.tags %}
-    <script> swal('{{i}}', '', 'success'); </script>
+{% if messages %}
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script> swal('{{i}}', '', 'success'); </script>
 
-    {% elif 'warning' in i.tags %}
-    <script> swal('{{i}}', '', 'warning'); </script>
+{% elif 'warning' in i.tags %}
+<script> swal('{{i}}', '', 'warning'); </script>
 
-    {% elif 'info' in i.tags %}
-    <script> swal('{{i}}', '', 'info'); </script>
+{% elif 'info' in i.tags %}
+<script> swal('{{i}}', '', 'info'); </script>
 
-    {% elif 'error' in i.tags %}
-    <script> swal('{{i}}', '', 'error'); </script>
+{% elif 'error' in i.tags %}
+<script> swal('{{i}}', '', 'error'); </script>
 
-    {% endif %}
-    {% endfor %}
-    {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
 </body>
 </html>
