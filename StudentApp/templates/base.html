@@ -124,16 +124,11 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-                <li><a class="dropdown-toggle no-arrow" href="{% url 'StudentHomePage' %}"><span
-                        class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a></li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span
-                        class="mtext">Attendance</span></a></li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internals</span></a>
-                </li>
-                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a>
-                </li>
-                <li><a class="dropdown-toggle no-arrow" href="{% url 'StudentLogout' %}"><span
-                        class="micon dw dw-logout"></span><span class="mtext">Logout</span></a></li>
+                <li><a class="dropdown-toggle no-arrow" href="{% url 'StudentHomePage' %}"><span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-analytics-21"></span><span class="mtext">Attendance</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-edit2"></span><span class="mtext">Internals</span></a></li>
+                <li><a class="dropdown-toggle no-arrow"><span class="micon dw dw-chat3"></span><span class="mtext">Messenger</span></a></li>
+                <li><a class="dropdown-toggle no-arrow" href="{% url 'StudentLogout' %}"><span class="micon dw dw-logout"></span><span class="mtext">Logout</span></a></li>
             </ul>
         </div>
     </div>
@@ -148,16 +143,14 @@
         <!-- WELCOME BANNER -->
         <div class="card-box pd-30 mb-30"
              style="border-radius:18px; background: linear-gradient(135deg, #1b5cff, #6ea8ff); color:white; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
-            <h2 class="text-center" style="font-weight:700; letter-spacing:1px;">Welcome back, {{student.Student_name}}
-                👋</h2>
+            <h2 class="text-center" style="font-weight:700; letter-spacing:1px;">Welcome back, {{student.Student_name}} 👋</h2>
             <p class="text-center mt-2" style="font-size:16px; opacity:0.9;">
                 Here’s a quick overview of your academic performance today.
             </p>
         </div>
 
         <!-- PROFILE SECTION -->
-        <div class="card-box pd-30 mb-30"
-             style="border-radius:18px; background:#ffffff; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
+        <div class="card-box pd-30 mb-30" style="border-radius:18px; background:#ffffff; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
             <div class="row align-items-center">
 
                 <!-- PHOTO -->
@@ -261,7 +254,7 @@
 <script src="{% static 'Studentside/vendors/scripts/core.js' %}"></script>
 <script src="{% static 'Studentside/vendors/scripts/script.min.js' %}"></script>
 <script src="{% static 'Studentside/vendors/scripts/process.js' %}"></script>
-<script src="{% static 'Studentside/vendors/scripts/layout-settings.js' %}"></script>
+
 
 <script>
     window.onload = () => {
@@ -271,21 +264,21 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {% if messages %}
-{% for i in messages %}
-{% if 'success' in i.tags %}
-<script> swal('{{i}}', '', 'success'); </script>
+    {% for i in messages %}
+        {% if 'success' in i.tags %}
+            <script> swal('{{i}}', '', 'success'); </script>
 
-{% elif 'warning' in i.tags %}
-<script> swal('{{i}}', '', 'warning'); </script>
+        {% elif 'warning' in i.tags %}
+            <script> swal('{{i}}', '', 'warning'); </script>
 
-{% elif 'info' in i.tags %}
-<script> swal('{{i}}', '', 'info'); </script>
+        {% elif 'info' in i.tags %}
+            <script> swal('{{i}}', '', 'info'); </script>
 
-{% elif 'error' in i.tags %}
-<script> swal('{{i}}', '', 'error'); </script>
+        {% elif 'error' in i.tags %}
+            <script> swal('{{i}}', '', 'error'); </script>
 
-{% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 {% endif %}
 </body>
 </html>
