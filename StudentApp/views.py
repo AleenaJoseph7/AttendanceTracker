@@ -14,6 +14,7 @@ def StudentHomePage(request):
 
 def StudentReportPage(request):
     student=Studentdb.objects.get(id=request.session['StudentId'])
+    internal=Internalmarkdb.objects.get(id=request.session['StudentId'])
     return render(request,'StudentReport.html',{'student':student})
 
 
