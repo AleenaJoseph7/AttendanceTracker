@@ -102,7 +102,7 @@ def DownloadInternalPdf(request):
 
 def StudentAttendanceDisplayPage(request):
     student=Studentdb.objects.get(id=request.session['StudentId'])
-    return render(request,'StudentAttendancePage.html')
+    return render(request,'StudentAttendanceDisplay.html')
 
 
 def StudentLoginPage(request):
