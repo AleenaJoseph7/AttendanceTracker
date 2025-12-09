@@ -100,6 +100,10 @@ def DownloadInternalPdf(request):
     filename = f"{student.Student_name}_Internal_Report.pdf"
     return FileResponse(pdf_buffer, as_attachment=True, filename=filename)
 
+def StudentAttendanceDisplayPage(request):
+    student=Studentdb.objects.get(id=request.session['StudentId'])
+    return render(request,'StudentAttendancePage.html')
+
 
 def StudentLoginPage(request):
     return render(request, "StudentLoginPage.html")

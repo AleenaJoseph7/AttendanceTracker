@@ -7,6 +7,8 @@ urlpatterns = [
     path('StudentReportPage/', views.StudentReportPage, name="StudentReportPage"),
     path('DownloadInternalPdf/', views.DownloadInternalPdf, name="DownloadInternalPdf"),
 
+    path('StudentAttendanceDisplayPage/',views.StudentAttendanceDisplayPage,name="StudentAttendanceDisplayPage"),
+
     path('StudentLoginPage/', views.StudentLoginPage, name="StudentLoginPage"),
     path('StudentLogin/', views.StudentLogin, name="StudentLogin"),
     path('StudentLogout/', views.StudentLogout, name="StudentLogout"),
