@@ -19,14 +19,33 @@
     />
     <meta name="author" content="CodedThemes"/>
 
+    <!-- [Favicon] icon -->
+    <link rel="icon" href="{% static 'teacheradmin/assets/images/favicon.svg' %}" type="image/x-icon"/>
+
+    <!-- [Font] Family -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <!-- [phosphor Icons] https://phosphoricons.com/ -->
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/phosphor/duotone/style.css' %}"/>
     <!-- [Tabler Icons] https://tablericons.com -->
     <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/tabler-icons.min.css' %}"/>
+    <!-- [Feather Icons] https://feathericons.com -->
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/feather.css' %}"/>
+    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/fontawesome.css' %}"/>
+    <!-- [Material Icons] https://fonts.google.com/icons -->
+    <link rel="stylesheet" href="{% static 'teacheradmin/assets/fonts/material.css' %}"/>
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="{% static 'teacheradmin/assets/css/style.css' %}" id="main-style-link"/>
 
 </head>
 <body>
-
+<!-- [ Pre-loader ] start -->
+<div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034]">
+    <div class="loader-track h-[5px] w-full inline-block absolute overflow-hidden top-0">
+        <div class="loader-fill w-[300px] h-[5px] bg-primary-500 absolute top-0 left-0 animate-[hitZak_0.6s_ease-in-out_infinite_alternate]"></div>
+    </div>
+</div>
+<!-- [ Pre-loader ] End -->
 
 <!-- [ Sidebar Menu ] start -->
 <nav class="pc-sidebar">
@@ -483,9 +502,16 @@
 
 
 <!-- Required Js -->
+<script src="{% static 'teacheradmin/assets/js/plugins/simplebar.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/plugins/popper.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/icon/custom-icon.js' %}"></script>
 <script src="{% static 'teacheradmin/assets/js/plugins/feather.min.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/component.js' %}"></script>
+<script src="{% static 'teacheradmin/assets/js/theme.js' %}"></script>
 <script src="{% static 'teacheradmin/assets/js/script.js' %}"></script>
 
+<div class="floting-button fixed bottom-[50px] right-[30px] z-[1030]">
+</div>
 
 
 <script>
