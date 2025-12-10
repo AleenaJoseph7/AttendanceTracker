@@ -21,7 +21,7 @@
     <style>
 
         /* ================================
-           GLOBAL LAYOUT (TEACHER-STYLE)
+           GLOBAL LAYOUT
         ================================= */
         html, body {
             height: 100%;
@@ -40,7 +40,7 @@
             display: flex;
             width: 100%;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden; /* FIX scroll issue */
         }
 
         /* =======================
@@ -63,21 +63,31 @@
             padding: 12px 18px;
             color: white;
             font-size: 15px;
+            border-radius: 6px;
         }
 
         .sidebar ul li a:hover {
             background: rgba(255,255,255,0.1);
-            border-radius: 6px;
         }
 
-        /* SIDEBAR COLLAPSED */
+        /* ACTIVE LINK HIGHLIGHT */
+        .active-link {
+            background: rgba(255,255,255,0.18) !important;
+            font-weight: 600;
+        }
+
+        .active-link i {
+            color: #6ea8ff !important;
+        }
+
+        /* COLLAPSED SIDEBAR */
         body.sidebar-collapsed .sidebar {
             width: 0 !important;
             overflow: hidden !important;
         }
 
         /* =======================
-           RIGHT SIDE WRAPPER
+           RIGHT SIDE
         ==========================*/
         .main-wrapper {
             width: 100%;
@@ -94,7 +104,7 @@
         }
 
         /* =======================
-           HEADER — FIXED, CLEAN
+           HEADER
         ==========================*/
         .header {
             height: 70px;
@@ -122,7 +132,6 @@
             background: #eef3ff;
         }
 
-        /* USER DROPDOWN BUTTON */
         .user-info-dropdown .dropdown-toggle {
             display: flex;
             align-items: center;
@@ -186,7 +195,9 @@
             }
         }
 
-        /* Loader */
+        /* =======================
+           LOADER
+        ==========================*/
         .pre-loader {
             position: fixed;
             inset: 0;
@@ -216,6 +227,19 @@
             100% { width: 100%; }
         }
 
+        /* =======================
+           QUICK CARD HOVER
+        ==========================*/
+        .quick-card {
+            transition: 0.25s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .quick-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+
     </style>
 
 </head>
@@ -236,18 +260,49 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="brand-logo" style="padding:15px;">
+        <div class="brand-logo" style="padding:20px 1px; margin-top:15px;">
             <a href="{% url 'StudentHomePage' %}"
                style="color:white; font-size:30px; font-weight:bold;">STRACK</a>
         </div>
 
-        <ul style="list-style:none; padding-left:0; margin-top:20px;">
-            <li><a href="{% url 'StudentHomePage' %}"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-            <li><a href="{% url 'StudentAttendanceDisplayPage' %}"><i class="fa-solid fa-chart-line"></i> Attendance</a>
+        <ul style="list-style:none; padding-left:0; margin-top:10px;">
+
+            <!-- DASHBOARD ACTIVE -->
+            <li>
+                <a href="{% url 'StudentHomePage' %}" style="font-size:18px;"
+                   class="{% if request.resolver_match.url_name == 'StudentHomePage' %}active-link{% endif %}">
+                    <i class="fa-solid fa-house" style="margin-right:5px;"></i> Dashboard
+                </a>
             </li>
-            <li><a href="{% url 'StudentReportPage' %}"><i class="fa-solid fa-pen-to-square"></i> Internals</a></li>
-            <li><a><i class="fa-solid fa-comments"></i> Messenger</a></li>
-            <li><a href="{% url 'StudentLogout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+
+            <!-- ATTENDANCE ACTIVE -->
+            <li>
+                <a href="{% url 'StudentAttendanceDisplayPage' %}" style="font-size:18px;"
+                   class="{% if request.resolver_match.url_name == 'StudentAttendanceDisplayPage' %}active-link{% endif %}">
+                    <i class="fa-solid fa-chart-line" style="margin-right:5px;"></i> Attendance
+                </a>
+            </li>
+
+            <!-- INTERNALS ACTIVE -->
+            <li>
+                <a href="{% url 'StudentReportPage' %}" style="font-size:18px;"
+                   class="{% if request.resolver_match.url_name == 'StudentReportPage' %}active-link{% endif %}">
+                    <i class="fa-solid fa-pen-to-square" style="margin-right:5px;"></i> Internals
+                </a>
+            </li>
+
+            <!-- MESSENGER NO ACTIVE -->
+            <li>
+                <a style="font-size:18px;"><i class="fa-solid fa-comments" style="margin-right:5px;"></i> Messenger</a>
+            </li>
+
+            <!-- LOGOUT NO ACTIVE -->
+            <li>
+                <a href="{% url 'StudentLogout' %}" style="font-size:18px;">
+                    <i class="fa-solid fa-right-from-bracket" style="margin-right:5px;"></i> Logout
+                </a>
+            </li>
+
         </ul>
     </aside>
 
@@ -282,7 +337,8 @@
 
             {% block content %}
 
-            <!-- 🔥 FULL HOMEPAGE CONTENT BELOW 🔥 -->
+            <!-- 🔥 FULL HOMEPAGE CONTENT BELOW — NO CHANGES MADE 🔥 -->
+
             <div class="pd-ltr-20">
 
                 <!-- WELCOME BANNER -->
@@ -358,9 +414,9 @@
 
                 <div class="row mt-4 mb-5">
 
-                    <div class="col-xl-4 mb-30">
+                    <div class="col-xl-4 mb-30" style="gap:30px;" >
                         <div class="quick-card"
-                             style="background:linear-gradient(135deg,#66bb6a,#43a047);">
+                             style="background:linear-gradient(135deg,#66bb6a,#43a047); width:350px; height:150px; text-align:center; padding:30px 20px;border-radius:40px;">
                             <i class="fa-solid fa-chart-column" style="font-size:55px;"></i>
                             <h4>Attendance</h4>
                         </div>
@@ -368,7 +424,7 @@
 
                     <div class="col-xl-4 mb-30">
                         <div class="quick-card"
-                             style="background:linear-gradient(135deg,#ffa726,#fb8c00);">
+                             style="background:linear-gradient(135deg,#ffa726,#fb8c00); width:350px; height:150px; text-align:center; padding:30px 20px; border-radius:40px;">
                             <i class="fa-solid fa-pen-to-square" style="font-size:55px;"></i>
                             <h4>Internal Marks</h4>
                         </div>
@@ -376,7 +432,7 @@
 
                     <div class="col-xl-4 mb-30">
                         <div class="quick-card"
-                             style="background:linear-gradient(135deg,#42a5f5,#1e88e5);">
+                             style="background:linear-gradient(135deg,#42a5f5,#1e88e5); width:350px; height:150px; text-align:center; padding:30px 20px; border-radius:40px;">
                             <i class="fa-solid fa-comments" style="font-size:55px;"></i>
                             <h4>Chat</h4>
                         </div>
@@ -401,7 +457,7 @@
 
 <div class="mobile-menu-overlay"></div>
 
-<!-- SWEETALERT -->
+<!-- SWEETALERT (UNTOUCHED) -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% if messages %} {% for i in messages %} {% if 'success' in i.tags %}
 <script> swal('{{i}}', '', 'success'); </script>
