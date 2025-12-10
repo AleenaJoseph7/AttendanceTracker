@@ -20,9 +20,6 @@
 
     <style>
 
-        /* ================================
-           GLOBAL LAYOUT
-        ================================= */
         html, body {
             height: 100%;
             margin: 0;
@@ -43,9 +40,7 @@
             overflow-x: hidden; /* FIX scroll issue */
         }
 
-        /* =======================
-           SIDEBAR
-        ==========================*/
+
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -86,9 +81,6 @@
             overflow: hidden !important;
         }
 
-        /* =======================
-           RIGHT SIDE
-        ==========================*/
         .main-wrapper {
             width: 100%;
             margin-left: 250px;
@@ -103,9 +95,7 @@
             width: 100% !important;
         }
 
-        /* =======================
-           HEADER
-        ==========================*/
+
         .header {
             height: 70px;
             width: 100%;
@@ -147,17 +137,12 @@
             color: #1b5cff;
         }
 
-        /* =======================
-           CONTENT
-        ==========================*/
+
         .content-area {
             padding: 25px;
             flex: 1;
         }
 
-        /* =======================
-           FOOTER
-        ==========================*/
         .footer-wrap {
             background: #fff;
             text-align: center;
@@ -166,9 +151,6 @@
             box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
         }
 
-        /* =======================
-           MOBILE SIDEBAR
-        ==========================*/
         .mobile-menu-overlay {
             position: fixed;
             inset: 0;
@@ -195,9 +177,6 @@
             }
         }
 
-        /* =======================
-           LOADER
-        ==========================*/
         .pre-loader {
             position: fixed;
             inset: 0;
@@ -227,9 +206,7 @@
             100% { width: 100%; }
         }
 
-        /* =======================
-           QUICK CARD HOVER
-        ==========================*/
+
         .quick-card {
             transition: 0.25s ease;
             box-shadow: 0 6px 18px rgba(0,0,0,0.15);
@@ -267,7 +244,6 @@
 
         <ul style="list-style:none; padding-left:0; margin-top:10px;">
 
-            <!-- DASHBOARD ACTIVE -->
             <li>
                 <a href="{% url 'StudentHomePage' %}" style="font-size:18px;"
                    class="{% if request.resolver_match.url_name == 'StudentHomePage' %}active-link{% endif %}">
@@ -275,7 +251,6 @@
                 </a>
             </li>
 
-            <!-- ATTENDANCE ACTIVE -->
             <li>
                 <a href="{% url 'StudentAttendanceDisplayPage' %}" style="font-size:18px;"
                    class="{% if request.resolver_match.url_name == 'StudentAttendanceDisplayPage' %}active-link{% endif %}">
@@ -283,7 +258,6 @@
                 </a>
             </li>
 
-            <!-- INTERNALS ACTIVE -->
             <li>
                 <a href="{% url 'StudentReportPage' %}" style="font-size:18px;"
                    class="{% if request.resolver_match.url_name == 'StudentReportPage' %}active-link{% endif %}">
@@ -291,12 +265,10 @@
                 </a>
             </li>
 
-            <!-- MESSENGER NO ACTIVE -->
             <li>
                 <a style="font-size:18px;"><i class="fa-solid fa-comments" style="margin-right:5px;"></i> Messenger</a>
             </li>
 
-            <!-- LOGOUT NO ACTIVE -->
             <li>
                 <a href="{% url 'StudentLogout' %}" style="font-size:18px;">
                     <i class="fa-solid fa-right-from-bracket" style="margin-right:5px;"></i> Logout
@@ -306,7 +278,6 @@
         </ul>
     </aside>
 
-    <!-- RIGHT SIDE -->
     <div class="main-wrapper">
 
         <!-- HEADER -->
@@ -334,11 +305,7 @@
 
         <!-- CONTENT -->
         <main class="content-area">
-
             {% block content %}
-
-            <!-- 🔥 FULL HOMEPAGE CONTENT BELOW — NO CHANGES MADE 🔥 -->
-
             <div class="pd-ltr-20">
 
                 <!-- WELCOME BANNER -->
@@ -372,7 +339,6 @@
                     </div>
                 </div>
 
-                <!-- CONTACT CARDS -->
                 <div class="row mb-30">
 
                     <div class="col-md-3">
@@ -414,7 +380,7 @@
 
                 <div class="row mt-4 mb-5">
 
-                    <div class="col-xl-4 mb-30" style="gap:30px;" >
+                    <div class="col-xl-4 mb-30" style="gap:30px;">
                         <div class="quick-card"
                              style="background:linear-gradient(135deg,#66bb6a,#43a047); width:350px; height:150px; text-align:center; padding:30px 20px;border-radius:40px;">
                             <i class="fa-solid fa-chart-column" style="font-size:55px;"></i>
@@ -457,7 +423,7 @@
 
 <div class="mobile-menu-overlay"></div>
 
-<!-- SWEETALERT (UNTOUCHED) -->
+<!--SWEETALERT-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% if messages %} {% for i in messages %} {% if 'success' in i.tags %}
 <script> swal('{{i}}', '', 'success'); </script>
@@ -469,7 +435,6 @@
 <script> swal('{{i}}', '', 'error'); </script>
 {% endif %} {% endfor %} {% endif %}
 
-<!-- LOADER REMOVE -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
