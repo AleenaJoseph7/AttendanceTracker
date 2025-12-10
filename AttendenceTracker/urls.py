@@ -24,7 +24,7 @@ import StudentApp.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('TeacherAdmin/',include(TeacherApp.urls)),
+    path('',include(TeacherApp.urls)),
     path('StudentPortal/',include(StudentApp.urls))
 ]
 

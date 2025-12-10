@@ -44,7 +44,7 @@ urlpatterns = [
     path('chat/send/<int:student_id>/', views.send_message),
     path('chat/clear/<int:student_id>/', views.clear_chat, name="clear_chat"),
 
-    path('AdminLoginPage/', views.AdminLoginPage, name="AdminLoginPage"),
+    path('', views.AdminLoginPage, name="AdminLoginPage"),
     path('AdminLogin/', views.AdminLogin, name="AdminLogin"),
     path('AdminLogout/', views.AdminLogout, name="AdminLogout"),
 ]
