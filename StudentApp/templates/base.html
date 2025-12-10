@@ -134,7 +134,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                        <a class="dropdown-item"><i class="fa-solid fa-user"></i> Profile</a>
+                        <a class="dropdown-item" href="{% url 'StudentHomePage' %}"><i class="fa-solid fa-user"></i> Profile</a>
 
                         {% if request.session.StudentId %}
                         <a class="dropdown-item" href="{% url 'StudentLogout' %}">
@@ -153,10 +153,9 @@
     </div>
 
     <!-- SIDEBAR -->
-    <div class="left-side-bar">
-        <div class="brand-logo">
-            <a>STRACK</a>
-            <div class="close-sidebar"><i class="fa-solid fa-xmark"></i></div>
+    <div class="left-side-bar" style="width:250px;">
+        <div class="brand-logo" style="padding:5px 1px ;">
+            <a href="{% url 'StudentHomePage' %}" style="color:white; font-weight:bold; font-size:30px;">STRACK</a>
         </div>
 
         <div class="menu-block customscroll">
@@ -258,7 +257,7 @@
 
                 <!-- QUICK ACCESS -->
                 <h3 style="color:#1b5cff;">Quick Access</h3>
-                <div class="row">
+                <div class="row mt-4 mb-5">
 
                     <div class="col-xl-4 mb-30">
                         <div class="quick-card" style="background:linear-gradient(135deg,#66bb6a,#43a047);">

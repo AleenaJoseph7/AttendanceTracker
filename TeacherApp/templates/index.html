@@ -174,16 +174,10 @@
                     </a>
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="false" aria-expanded="false">
-                        <i data-feather="search"></i>
+                    <a href="{% url 'StudentLoginPage' %}" class="btn btn-outline-primary" style="padding:6px 14px; border-radius:8px;">
+                        View Site
                     </a>
-                    <div class="dropdown-menu pc-h-dropdown drp-search">
-                        <form class="px-2 py-1">
-                            <input type="search" class="form-control !border-0 !shadow-none"
-                                   placeholder="Search here. . ."/>
-                        </form>
-                    </div>
+
                 </li>
             </ul>
         </div>
@@ -546,21 +540,21 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {% if messages %}
-    {% for i in messages %}
-        {% if 'success' in i.tags %}
-            <script> swal('{{i}}', '', 'success'); </script>
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script> swal('{{i}}', '', 'success'); </script>
 
-        {% elif 'warning' in i.tags %}
-            <script> swal('{{i}}', '', 'warning'); </script>
+{% elif 'warning' in i.tags %}
+<script> swal('{{i}}', '', 'warning'); </script>
 
-        {% elif 'info' in i.tags %}
-            <script> swal('{{i}}', '', 'info'); </script>
+{% elif 'info' in i.tags %}
+<script> swal('{{i}}', '', 'info'); </script>
 
-        {% elif 'error' in i.tags %}
-            <script> swal('{{i}}', '', 'error'); </script>
+{% elif 'error' in i.tags %}
+<script> swal('{{i}}', '', 'error'); </script>
 
-        {% endif %}
-    {% endfor %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
 </body>
