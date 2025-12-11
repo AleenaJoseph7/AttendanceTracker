@@ -10,12 +10,13 @@
     <div class="subject-box">
 
         {% for att in attendance %}
-        <div class="subject-row">
+        <div class="subject-row"
+             data-percent="{{ att.percentage }}">
 
             <!-- SUBJECT NAME -->
             <div class="subject-info">
                 <h5 class="subject-title">{{ att.subject_name }}</h5>
-                <small class="text-muted">({{ att.subject_code }})</small>
+                <small class="sub-code">({{ att.subject_code }})</small>
             </div>
 
             <!-- MINI PROGRESS CIRCLE -->
@@ -30,28 +31,38 @@
 
 </div>
 
-
 <style>
-/* Container */
+
+/* ----- Main Box ----- */
 .subject-box {
     width: 100%;
     max-width: 700px;
     margin: auto;
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
 }
 
-/* Each row */
+/* ----- Each Subject Row ----- */
 .subject-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 15px;
-    background: #f7faff;
-    border-radius: 12px;
-    margin-bottom: 15px;
+
+    padding: 20px 18px;
+    background: #f8faff;
+    border-radius: 14px;
+
+    margin-bottom: 18px;
+    transition: 0.25s ease;
+}
+
+/* Hover effect */
+.subject-row:hover {
+    background: #eef4ff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 /* Subject Title */
@@ -62,7 +73,11 @@
     color: #1b5cff;
 }
 
-/* MINI DONUT */
+.sub-code {
+    color: #6c757d;
+}
+
+/* ----- Mini Donut Circle ----- */
 .mini-circle {
     --size: 70px;
     --thickness: 10px;
@@ -74,36 +89,80 @@
     position: relative;
 
     background: conic-gradient(#1b5cff calc(var(--progress) * 1%), #e3e3e3 0);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: 0.4s ease;
 }
 
-/* Inside white circle */
+/* Donut Inner */
 .mini-circle::before {
     content: "";
     position: absolute;
+
     width: calc(var(--size) - var(--thickness)*2);
     height: calc(var(--size) - var(--thickness)*2);
+
     background: white;
     border-radius: 50%;
 }
 
-/* Percentage text */
+/* Text inside donut */
 .mini-circle span {
     position: absolute;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    color: #1b5cff;
 }
+
+/* ----- Glow on hover ----- */
+.subject-row:hover .mini-circle {
+    filter: drop-shadow(0 0 6px rgba(27,92,255,0.35));
+}
+
+/* ----- Smooth Color Change Based on Percentage ----- */
+.subject-row[data-percent] .mini-circle.blue {
+    --color: #1b5cff;
+}
+.subject-row[data-percent] .mini-circle.orange {
+    --color: #ff9f1c;
+}
+.subject-row[data-percent] .mini-circle.red {
+    --color: #e63946;
+}
+
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
     document.querySelectorAll(".mini-circle").forEach(circle => {
         let percent = parseFloat(circle.dataset.progress);
+
         circle.style.setProperty("--progress", percent);
+
+        let row = circle.closest(".subject-row");
+
+        // Select color based on attendance %
+        if (percent >= 75) {
+            circle.style.background =
+                `conic-gradient(#1b5cff ${percent * 3.6}deg, #e3e3e3 0deg)`;
+            circle.querySelector("span").style.color = "#1b5cff";
+        }
+        else if (percent >= 50) {
+            circle.style.background =
+                `conic-gradient(#ff9f1c ${percent * 3.6}deg, #e3e3e3 0deg)`;
+            circle.querySelector("span").style.color = "#ff9f1c";
+        }
+        else {
+            circle.style.background =
+                `conic-gradient(#e63946 ${percent * 3.6}deg, #e3e3e3 0deg)`;
+            circle.querySelector("span").style.color = "#e63946";
+        }
+
     });
+
 });
 </script>
 
