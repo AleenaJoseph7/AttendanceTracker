@@ -100,9 +100,33 @@ def DownloadInternalPdf(request):
     filename = f"{student.Student_name}_Internal_Report.pdf"
     return FileResponse(pdf_buffer, as_attachment=True, filename=filename)
 
+
 def StudentAttendanceDisplayPage(request):
-    student=Studentdb.objects.get(id=request.session['StudentId'])
-    return render(request,'StudentAttendanceDisplay.html')
+    student_id = request.session.get('StudentId')
+    if student_id:
+        student = Studentdb.objects.get(id=student_id)
+
+    attendance = []
+    subjects = Subjectdb.objects.all()
+
+    for i in subjects:
+        total = Attendancedb.objects.filter(Student=student, Subject=i).count()
+        present = Attendancedb.objects.filter(Student=student, Subject=i, Status='Present').count()
+        percentage = round((present / total) * 100) if total > 0 else 0
+
+        attendance.append({
+            'subject_name': i.Subject_name,
+            'subject_code': i.Subject_code,
+            'percentage': percentage
+        })
+
+    # For donut (right side) : first subject
+    default = attendance[0] if attendance else None
+
+    return render(request, 'StudentAttendanceDisplay.html', {
+        'attendance': attendance,
+        'default': default
+    })
 
 
 def StudentLoginPage(request):

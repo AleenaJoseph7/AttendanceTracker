@@ -1,6 +1,110 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<div class="pd-ltr-20">
-<h1>Student attendace page </h1>
+
+<h2 class="text-center mb-4" style="font-weight:700; color:#1b5cff;">
+    Attendance Overview
+</h2>
+
+<div class="container">
+
+    <div class="subject-box">
+
+        {% for att in attendance %}
+        <div class="subject-row">
+
+            <!-- SUBJECT NAME -->
+            <div class="subject-info">
+                <h5 class="subject-title">{{ att.subject_name }}</h5>
+                <small class="text-muted">({{ att.subject_code }})</small>
+            </div>
+
+            <!-- MINI PROGRESS CIRCLE -->
+            <div class="mini-circle" data-progress="{{ att.percentage }}">
+                <span>{{ att.percentage }}%</span>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
 </div>
+
+
+<style>
+/* Container */
+.subject-box {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* Each row */
+.subject-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 15px;
+    background: #f7faff;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* Subject Title */
+.subject-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    color: #1b5cff;
+}
+
+/* MINI DONUT */
+.mini-circle {
+    --size: 70px;
+    --thickness: 10px;
+    --progress: 0;
+
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    position: relative;
+
+    background: conic-gradient(#1b5cff calc(var(--progress) * 1%), #e3e3e3 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Inside white circle */
+.mini-circle::before {
+    content: "";
+    position: absolute;
+    width: calc(var(--size) - var(--thickness)*2);
+    height: calc(var(--size) - var(--thickness)*2);
+    background: white;
+    border-radius: 50%;
+}
+
+/* Percentage text */
+.mini-circle span {
+    position: absolute;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1b5cff;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".mini-circle").forEach(circle => {
+        let percent = parseFloat(circle.dataset.progress);
+        circle.style.setProperty("--progress", percent);
+    });
+});
+</script>
+
 {% endblock %}
