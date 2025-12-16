@@ -15,8 +15,9 @@
 
 <div class="messenger-wrapper">
 
-    <!-- LEFT CHAT LIST -->
+    <!-- ================= LEFT CHAT LIST ================= -->
     <div class="chat-list">
+
         <div class="chat-list-header">
             <h4>Chats</h4>
         </div>
@@ -26,59 +27,54 @@
            class="chat-list-item {% if s.id == current_student.id %}active{% endif %}">
 
             {% if s.Student_prof %}
-            <img src="{{ s.Student_prof.url }}" class="avatar">
+                <img src="{{ s.Student_prof.url }}" class="avatar">
             {% else %}
-            <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
+                <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
             {% endif %}
 
             <div class="list-info">
-
-                <div class="name-row">
-                    <span class="student-name">{{ s.Student_name }}</span>
-
-                    {% if unread_map|get_item:s.id and s.id != current_student.id %}
-                    <span class="unread-badge">
-                            {{ unread_map|get_item:s.id }}
-                        </span>
-                    {% endif %}
-                </div>
-
+                <div class="student-name">{{ s.Student_name }}</div>
                 <div class="preview">
                     {% if s.id == current_student.id %}
-                    Active Chat
+                        Active Chat
                     {% else %}
-                    Click to open chat
+                        Click to open chat
                     {% endif %}
                 </div>
-
             </div>
+
+            {% if unread_map|get_item:s.id and s.id != current_student.id %}
+                <span class="unread-badge">
+                    {{ unread_map|get_item:s.id }}
+                </span>
+            {% endif %}
+
         </a>
-        {% empty %}
-        <div class="p-3 text-muted">No students found</div>
         {% endfor %}
+
     </div>
 
-    <!-- RIGHT CHAT WINDOW -->
+    <!-- ================= RIGHT CHAT WINDOW ================= -->
     <div class="chat-window">
 
         <div class="chat-header">
             {% if current_student.Student_prof %}
-            <img src="{{ current_student.Student_prof.url }}" class="avatar">
+                <img src="{{ current_student.Student_prof.url }}" class="avatar">
             {% else %}
-            <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
+                <img src="{% static 'teacheradmin/assets/images/user/avatar-1.jpg' %}" class="avatar">
             {% endif %}
 
-            <div style="flex:1;">
+            <div class="header-info">
                 <h4>{{ current_student.Student_name }}</h4>
-                <small class="status">
+                <small>
                     Roll No: {{ current_student.Student_rollno }} |
                     Reg ID: {{ current_student.Student_regid }}
                 </small>
             </div>
 
             <button id="clearChatBtn"
-                    class="btn btn-sm btn-outline-danger"
-                    onclick="return confirm('Are you sure?')">
+                    onclick="return confirm('Clear this chat?')"
+                    class="clear-btn">
                 Clear Chat
             </button>
         </div>
@@ -86,7 +82,7 @@
         <div id="chat-body" class="chat-body"></div>
 
         <div class="chat-input">
-            <input type="text" id="messageBox" placeholder="Type a message...">
+            <input id="messageBox" placeholder="Type a message...">
             <button id="sendBtn">Send</button>
         </div>
 

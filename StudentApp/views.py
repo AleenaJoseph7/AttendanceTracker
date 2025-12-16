@@ -51,12 +51,10 @@ def DownloadInternalPdf(request):
     student = Studentdb.objects.get(id=request.session['StudentId'])
     internal = Internalmarkdb.objects.filter(Student=student)
 
-    # Build table header
     data_rows = [
         ["Subject", "Code", "Internal", "Total", "Attendance %"]
     ]
 
-    # Fill rows with marks + attendance
     for i in internal:
         subject = i.Subject
 
@@ -86,14 +84,13 @@ def DownloadInternalPdf(request):
 
     # Color logic for attendance column
     def attendance_color(cell_value):
-        # cell_value like "75%"
         num = int(str(cell_value).replace("%", ""))
         if num < 75:
             return colors.red
         return colors.green
 
     column_color_map = {
-        4: attendance_color  # 0-based index → 4th column = "Attendance %"
+        4: attendance_color
     }
 
     pdf_buffer = generate_pdf_table(
@@ -149,7 +146,6 @@ def StudentChatPage(request):
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 
-    # Step 1: mark teacher messages as DELIVERED
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher",
