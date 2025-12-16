@@ -7,6 +7,10 @@ from TeacherApp.utils.pdf_generator import generate_pdf_table
 from django.http import FileResponse
 from reportlab.lib import colors
 
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from TeacherApp.models import ChatMessage
 
 # Create your views here.
 def StudentHomePage(request):
@@ -127,6 +131,64 @@ def StudentAttendanceDisplayPage(request):
         'attendance': attendance,
         'default': default
     })
+
+def StudentChatPage(request):
+    student_id = request.session.get("StudentId")
+    if not student_id:
+        return redirect("StudentLoginPage")
+
+    # Mark teacher messages as READ
+    ChatMessage.objects.filter(
+        student_id=student_id,
+        sender="teacher",
+        read_status="delivered"
+    ).update(read_status="read")
+
+    return render(request, "student_chat.html")
+
+
+def get_student_messages(request):
+    student_id = request.session.get("StudentId")
+
+    # Mark teacher messages as DELIVERED
+    ChatMessage.objects.filter(
+        student_id=student_id,
+        sender="teacher",
+        read_status="sent"
+    ).update(read_status="delivered")
+
+    messages = ChatMessage.objects.filter(student_id=student_id)
+
+    data = [{
+        "sender": m.sender,
+        "message": m.message,
+        "read_status": m.read_status,
+        "time": m.timestamp.strftime("%I:%M %p")
+    } for m in messages]
+
+    return JsonResponse({"messages": data})
+
+
+@csrf_exempt
+def send_student_message(request):
+    student_id = request.session.get("StudentId")
+    data = json.loads(request.body)
+
+    ChatMessage.objects.create(
+        sender="student",
+        student_id=student_id,
+        message=data["message"]
+    )
+
+    return JsonResponse({"status": "success"})
+
+
+@csrf_exempt
+def clear_student_chat(request):
+    student_id = request.session.get("StudentId")
+    ChatMessage.objects.filter(student_id=student_id).delete()
+    return JsonResponse({"status": "cleared"})
+
 
 
 def StudentLoginPage(request):

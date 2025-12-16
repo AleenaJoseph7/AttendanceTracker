@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'chatbot/whatsapp.css' %}">
+
+<script>
+    const BASE_URL = "/StudentPortal";
+    const senderSide = "student";
+    const studentID = "";
+</script>
+
+</script>
+
+<script src="{% static 'chatbot/whatsapp.js' %}"></script>
+
+<div class="messenger-wrapper">
+    <div class="chat-window" style="width:100%;">
+        <div class="chat-header">
+            <h4>Chat with Teacher</h4>
+            <button id="clearChatBtn" onclick="return confirm('Are you sure ?')">Clear Chat</button>
+        </div>
+
+        <div id="chat-body" class="chat-body"></div>
+
+        <div class="chat-input">
+            <input id="messageBox" placeholder="Type a message">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

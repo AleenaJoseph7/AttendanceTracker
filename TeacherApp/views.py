@@ -18,6 +18,8 @@ import json
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 
 from django.contrib import messages
+
+
 # Create your views here.
 def Indexpage(request):
     date = datetime.datetime.now()
@@ -51,7 +53,7 @@ def savestudent(request):
         student_sem = request.POST.get('student_sem')
         student_duration = request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
-        student_email=request.POST.get('student_email')
+        student_email = request.POST.get('student_email')
         student_password = request.POST.get('student_password')
         student_confirm = request.POST.get('student_confirm')
         student_prof = request.FILES.get('student_prof')
@@ -69,7 +71,7 @@ def savestudent(request):
                        Student_prof=student_prof)
 
         ob.save()
-        messages.success(request,"Student added Succesfully")
+        messages.success(request, "Student added Succesfully")
         return redirect(Addstudentpage)
 
 
@@ -94,7 +96,7 @@ def updatestudent(request, s_id):
         student_sem = request.POST.get('student_sem')
         student_duration = request.POST.get('student_duration')
         student_phone = request.POST.get('student_phone')
-        student_email=request.POST.get('student_email')
+        student_email = request.POST.get('student_email')
         student_password = request.POST.get('student_password')
         student_confirm = request.POST.get('student_confirm')
         try:
@@ -116,7 +118,7 @@ def updatestudent(request, s_id):
                                                  Student_password=student_password,
                                                  Student_confirm=student_confirm,
                                                  Student_prof=files)
-        messages.success(request,"Student updated Succesfully")
+        messages.success(request, "Student updated Succesfully")
         return redirect(DisplaystudentPage)
 
 
@@ -147,7 +149,7 @@ def savesubject(request):
                        Subject_dep=subject_dep)
 
         ob.save()
-        messages.success(request,"Subject added Successfully")
+        messages.success(request, "Subject added Successfully")
         return redirect(AddsubjectPage)
 
 
@@ -176,7 +178,7 @@ def Updatesubject(request, sub_id):
                                                    Subject_teacher=subject_teacher,
                                                    Subject_sem=subject_sem,
                                                    Subject_dep=subject_dep)
-        messages.success(request,"Subject updated Succesfully")
+        messages.success(request, "Subject updated Succesfully")
         return redirect(DisplaysubjectPage)
 
 
@@ -209,7 +211,7 @@ def Saveinternal(request):
                             Internalmark=internalmark,
                             Totalmark=totalmark)
         ob.save()
-        messages.success(request,"Internal added Successfully")
+        messages.success(request, "Internal added Successfully")
         return redirect(Addinternalpage)
 
 
@@ -258,7 +260,7 @@ def Updateinternal(request, i_id):
                                                       Subject=subject,
                                                       Internalmark=internalmark,
                                                       Totalmark=totalmark)
-        messages.success(request,"Internal updated Successfully")
+        messages.success(request, "Internal updated Successfully")
         return redirect(Displayinternal)
 
 
@@ -300,9 +302,8 @@ def AttendancePage(request):
         "sheet": sheet,
         "selected_subject": subject_id,
         "selected_date": selected_date,
-        "date":date
+        "date": date
     })
-
 
 
 def toggle_attendance(request, record_id):
@@ -480,14 +481,23 @@ def MessengerShortcut(request):
 
 
 def get_messages(request, student_id):
+    ChatMessage.objects.filter(
+        student_id=student_id,
+        sender="student",
+        read_status="sent"
+    ).update(read_status="read")
+
     messages = ChatMessage.objects.filter(student_id=student_id)
+
     data = [{
         "sender": m.sender,
         "message": m.message,
-        "read_status": m.read_status
+        "read_status": m.read_status,
+        "time": m.timestamp.strftime("%I:%M %p")
     } for m in messages]
 
     return JsonResponse({"messages": data})
+
 
 
 @csrf_exempt

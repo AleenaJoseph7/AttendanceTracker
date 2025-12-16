@@ -7,8 +7,10 @@
 <!-- Pass student_id to JS -->
 <script>
     const studentID = "{{ current_student.id }}";
-    const BASE_URL = "/TeacherAdmin";
+    const BASE_URL = "";
+    const senderSide = "teacher";
 </script>
+
 
 
 <script src="{% static 'chatbot/whatsapp.js' %}"></script>
@@ -68,7 +70,7 @@
                 </small>
             </div>
 
-            <button id="clearChatBtn" class="btn btn-sm btn-outline-danger">
+            <button id="clearChatBtn" class="btn btn-sm btn-outline-danger"  onclick="return confirm('Are you sure ?')">
                 Clear Chat
             </button>
         </div>

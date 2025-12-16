@@ -1,49 +1,70 @@
-// static/chatbot/whatsapp.js
-
 document.addEventListener("DOMContentLoaded", function () {
-    const chatBody   = document.getElementById("chat-body");
+
+    // ================================
+    // ELEMENT REFERENCES
+    // ================================
+    const chatBody = document.getElementById("chat-body");
     const messageBox = document.getElementById("messageBox");
-    const sendBtn    = document.getElementById("sendBtn");
-    const clearBtn   = document.getElementById("clearChatBtn");
+    const sendBtn = document.getElementById("sendBtn");
+    const clearBtn = document.getElementById("clearChatBtn");
 
-    const BASE_URL = "/TeacherAdmin";
-    const sid = studentID;
+    // SAFETY CHECK
+    if (!chatBody || !messageBox || !sendBtn) {
+        console.error("Chat elements missing in DOM");
+        return;
+    }
 
+    // ================================
+    // HELPERS
+    // ================================
     function scrollDown() {
-        if (!chatBody) return;
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // ------------ LOAD MESSAGES ------------
+    // ================================
+    // LOAD MESSAGES
+    // ================================
     async function loadMessages() {
-        if (!sid || !chatBody) return;
-
         try {
-            const res = await fetch(`${BASE_URL}/chat/${sid}/`);
+            let url = "";
+
+            // Teacher side → needs studentID in URL
+            if (studentID) {
+                url = `${BASE_URL}/chat/${studentID}/`;
+            }
+            // Student side → session-based
+            else {
+                url = `${BASE_URL}/chat/get/`;
+            }
+
+            const res = await fetch(url);
             const data = await res.json();
 
             chatBody.innerHTML = "";
 
             data.messages.forEach(m => {
                 const div = document.createElement("div");
-                div.className = "message " + (m.sender === "teacher" ? "me" : "other");
 
-                // Generate ticks based on read_status
+                const isMe = m.sender === senderSide;
+                div.className = "message " + (isMe ? "me" : "other");
+
+                // READ TICKS (only for sender)
                 let ticks = "";
-                if (m.sender === "teacher") {
-                    if (m.read_status === "sent") {
-                        ticks = "✓";
-                    } else if (m.read_status === "delivered") {
+                if (isMe) {
+                    if (m.read_status === "sent") ticks = "✓";
+                    else if (m.read_status === "delivered") ticks = "✓✓";
+                    else if (m.read_status === "read") {
                         ticks = "✓✓";
-                    } else if (m.read_status === "read") {
-                        ticks = '✓✓'; // blue tick styled in CSS
                         div.classList.add("read");
                     }
                 }
 
                 div.innerHTML = `
                     <span>${m.message}</span>
-                    <small class="ticks">${ticks}</small>
+                    <div class="meta">
+                        <small>${m.time || ""}</small>
+                        <small class="ticks">${ticks}</small>
+                    </div>
                 `;
 
                 chatBody.appendChild(div);
@@ -52,19 +73,34 @@ document.addEventListener("DOMContentLoaded", function () {
             scrollDown();
 
         } catch (err) {
-            console.error("Error loading messages:", err);
+            console.error("Failed to load messages", err);
         }
     }
 
-    // ------------ SEND MESSAGE ------------
+    // ================================
+    // SEND MESSAGE
+    // ================================
     async function sendMessage() {
         const msg = messageBox.value.trim();
-        if (!msg || !sid) return;
+        if (!msg) return;
 
         try {
-            await fetch(`${BASE_URL}/chat/send/${sid}/`, {
+            let url = "";
+
+            // Teacher side
+            if (studentID) {
+                url = `${BASE_URL}/chat/send/${studentID}/`;
+            }
+            // Student side
+            else {
+                url = `${BASE_URL}/chat/send/`;
+            }
+
+            await fetch(url, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({ message: msg })
             });
 
@@ -72,43 +108,49 @@ document.addEventListener("DOMContentLoaded", function () {
             loadMessages();
 
         } catch (err) {
-            console.error("Error sending:", err);
+            console.error("Failed to send message", err);
         }
     }
 
-    // ------------ CLEAR CHAT ------------
+    // ================================
+    // CLEAR CHAT
+    // ================================
     async function clearChat() {
-        if (!sid) return;
-
-        const ok = confirm("Clear chat?");
-        if (!ok) return;
-
         try {
-            await fetch(`${BASE_URL}/chat/clear/${sid}/`, { method: "POST" });
+            let url = "";
 
+            if (studentID) {
+                url = `${BASE_URL}/chat/clear/${studentID}/`;
+            } else {
+                url = `${BASE_URL}/chat/clear/`;
+            }
+
+            await fetch(url, { method: "POST" });
             chatBody.innerHTML = "";
-            alert("Chat cleared!");
 
         } catch (err) {
-            console.error("Error clearing chat:", err);
+            console.error("Failed to clear chat", err);
         }
     }
 
-    // Listeners
-    if (sendBtn) sendBtn.addEventListener("click", sendMessage);
+    // ================================
+    // EVENTS
+    // ================================
+    sendBtn.addEventListener("click", sendMessage);
 
-    if (messageBox) {
-        messageBox.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
+    messageBox.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", clearChat);
     }
 
-    if (clearBtn) clearBtn.addEventListener("click", clearChat);
-
-    // Auto refresh every 1.5 sec
-    setInterval(loadMessages, 1500);
+    // ================================
+    // AUTO REFRESH
+    // ================================
     loadMessages();
+    setInterval(loadMessages, 1500);
 });
