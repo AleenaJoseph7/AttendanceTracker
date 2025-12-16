@@ -1,23 +1,24 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load chat_extras %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'chatbot/whatsapp.css' %}">
 
-<!-- Pass student_id to JS -->
+<!-- JS CONFIG -->
 <script>
     const studentID = "{{ current_student.id }}";
     const BASE_URL = "";
     const senderSide = "teacher";
 </script>
 
-
-
 <script src="{% static 'chatbot/whatsapp.js' %}"></script>
 
 <div class="messenger-wrapper">
 
-    <!-- LEFT LIST OF STUDENTS -->
+    <!-- ================================
+         LEFT STUDENT CHAT LIST
+    ================================= -->
     <div class="chat-list">
         <div class="chat-list-header">
             <h4 class="mb-0">Chats</h4>
@@ -34,7 +35,17 @@
             {% endif %}
 
             <div class="list-info">
-                <div class="name">{{ s.Student_name }}</div>
+                <div class="name-row">
+    <span class="student-name">{{ s.Student_name }}</span>
+
+    {% if unread_map|get_item:s.id and s.id != current_student.id %}
+        <span class="unread-badge">
+            {{ unread_map|get_item:s.id }}
+        </span>
+    {% endif %}
+</div>
+
+
                 <div class="preview">
                     {% if s.id == current_student.id %}
                     Active Chat
@@ -43,19 +54,19 @@
                     {% endif %}
                 </div>
             </div>
-
         </a>
         {% empty %}
         <div class="p-3 text-muted">No students found</div>
         {% endfor %}
     </div>
 
-    <!-- RIGHT CHAT WINDOW -->
+    <!-- ================================
+         RIGHT CHAT WINDOW
+    ================================= -->
     <div class="chat-window">
 
-        <!-- HEADER WITH STUDENT DETAILS -->
+        <!-- CHAT HEADER -->
         <div class="chat-header">
-
             {% if current_student.Student_prof %}
             <img src="{{ current_student.Student_prof.url }}" class="avatar">
             {% else %}
@@ -70,7 +81,10 @@
                 </small>
             </div>
 
-            <button id="clearChatBtn" class="btn btn-sm btn-outline-danger"  onclick="return confirm('Are you sure ?')">
+            <button
+                    id="clearChatBtn"
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="return confirm('Are you sure you want to clear this chat?')">
                 Clear Chat
             </button>
         </div>
@@ -85,7 +99,6 @@
         </div>
 
     </div>
-
 </div>
 
 {% endblock %}

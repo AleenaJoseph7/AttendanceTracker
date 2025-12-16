@@ -461,16 +461,26 @@ def subject_attendance_percentage_pdf(request, subject_id):
 
 
 def Chatbotpage(request, student_id):
-    date = datetime.datetime.now()
     students = Studentdb.objects.all()
+
+    unread_map = {
+        item["student"]: item["count"]
+        for item in ChatMessage.objects.filter(
+            sender="student"
+        ).exclude(read_status="read")
+        .values("student")
+        .annotate(count=Count("id"))
+    }
+
     current_student = Studentdb.objects.get(id=student_id)
 
-    return render(request, "Chatbot.html", {
-        "student_id": student_id,  # for JS
-        "students": students,  # for list on left
+    context = {
+        "students": students,
         "current_student": current_student,
-        'date': date
-    })
+        "unread_map": unread_map,
+    }
+
+    return render(request, "Chatbot.html", context)
 
 
 def MessengerShortcut(request):
@@ -496,8 +506,6 @@ def get_messages(request, student_id):
     } for m in messages]
 
     return JsonResponse({"messages": data})
-
-
 
 
 @csrf_exempt
