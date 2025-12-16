@@ -483,9 +483,8 @@ def MessengerShortcut(request):
 def get_messages(request, student_id):
     ChatMessage.objects.filter(
         student_id=student_id,
-        sender="student",
-        read_status="sent"
-    ).update(read_status="read")
+        sender="student"
+    ).exclude(read_status="read").update(read_status="read")
 
     messages = ChatMessage.objects.filter(student_id=student_id)
 
@@ -497,6 +496,7 @@ def get_messages(request, student_id):
     } for m in messages]
 
     return JsonResponse({"messages": data})
+
 
 
 

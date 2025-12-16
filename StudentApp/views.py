@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from TeacherApp.models import ChatMessage
 
+
 # Create your views here.
 def StudentHomePage(request):
     student = Studentdb.objects.get(id=request.session['StudentId'])
@@ -132,12 +133,10 @@ def StudentAttendanceDisplayPage(request):
         'default': default
     })
 
+
 def StudentChatPage(request):
     student_id = request.session.get("StudentId")
-    if not student_id:
-        return redirect("StudentLoginPage")
 
-    # Mark teacher messages as READ
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher",
@@ -147,10 +146,11 @@ def StudentChatPage(request):
     return render(request, "student_chat.html")
 
 
+
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 
-    # Mark teacher messages as DELIVERED
+    # Step 1: mark teacher messages as DELIVERED
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher",
@@ -188,7 +188,6 @@ def clear_student_chat(request):
     student_id = request.session.get("StudentId")
     ChatMessage.objects.filter(student_id=student_id).delete()
     return JsonResponse({"status": "cleared"})
-
 
 
 def StudentLoginPage(request):
