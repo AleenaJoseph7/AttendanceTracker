@@ -11,11 +11,11 @@ class Studentdb(models.Model):
     Student_batch = models.CharField(max_length=30, null=True, blank=True)
     Student_sem = models.CharField(max_length=30, null=True, blank=True)
     Student_duration = models.CharField(max_length=30, null=True, blank=True)
-    Student_email=models.EmailField(null=True,blank=True)
+    Student_email = models.EmailField(null=True, blank=True)
     Student_phone = models.IntegerField(null=True, blank=True)
     Student_prof = models.ImageField(upload_to="Student Profile Image", null=True, blank=True)
     Student_password = models.CharField(max_length=10, null=True, blank=True)
-    Student_confirm=models.CharField(max_length=10,null=True,blank=True)
+    Student_confirm = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.Student_name
@@ -39,7 +39,7 @@ class Attendancedb(models.Model):
     Status = models.CharField(max_length=10, default="Absent", choices=[("Present", "Present"),
                                                                         ("Absent", "Absent")])
 
-# ("Present", "Present") 1st data to be stored to db, 2nd visible to user
+    # ("Present", "Present") 1st data to be stored to db, 2nd visible to user
 
     def __str__(self):
         return f"{self.Student.Student_name} - {self.Subject.Subject_code} - {self.Date}"

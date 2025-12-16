@@ -11,7 +11,7 @@
 }
 
 /* ================================
-   CHAT LIST (TEACHER SIDE LEFT)
+   CHAT LIST (LEFT)
 ================================ */
 
 .chat-list {
@@ -51,9 +51,47 @@
     object-fit: cover;
 }
 
-.list-info .name {
+/* ================================
+   NAME + BADGE ROW
+================================ */
+
+.list-info {
+    flex: 1;
+}
+
+.name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-name {
     font-weight: 600;
     font-size: 15px;
+    max-width: 190px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* 🔴 UNREAD BADGE (FINAL VERSION) */
+.unread-badge {
+    width: 20px;
+    height: 20px;
+
+    background-color: #25D366;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px #ffffff;
 }
 
 .list-info .preview {
@@ -115,56 +153,42 @@
     padding: 10px 14px;
     border-radius: 14px;
     margin-bottom: 10px;
-    position: relative;
-    word-wrap: break-word;
     animation: fadeIn 0.2s ease;
 }
 
-/* Teacher / Student own message */
 .message.me {
     background: #d9fdd3;
     margin-left: auto;
     border-bottom-right-radius: 4px;
 }
 
-/* Other side message */
 .message.other {
     background: #ffffff;
     margin-right: auto;
     border-bottom-left-radius: 4px;
 }
 
-/* Message text */
 .message span {
     font-size: 14px;
-    display: block;
 }
 
 /* ================================
-   MESSAGE META (TIME + TICKS)
+   META (TIME + TICKS)
 ================================ */
 
 .meta {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     gap: 6px;
     margin-top: 4px;
     font-size: 11px;
     color: #666;
 }
 
-/* Left alignment for received messages */
 .message.other .meta {
     justify-content: flex-start;
 }
 
-/* Ticks */
-.ticks {
-    font-size: 12px;
-}
-
-/* Read message blue ticks */
 .message.read .ticks {
     color: #1b5cff;
     font-weight: bold;
@@ -188,7 +212,6 @@
     border-radius: 20px;
     border: 1px solid #ccc;
     outline: none;
-    font-size: 14px;
 }
 
 .chat-input button {
@@ -198,64 +221,13 @@
     background: #1b5cff;
     color: white;
     cursor: pointer;
-    font-size: 14px;
-}
-
-.chat-input button:hover {
-    background: #174ad6;
 }
 
 /* ================================
-   SCROLLBAR (OPTIONAL NICE TOUCH)
-================================ */
-
-.chat-body::-webkit-scrollbar {
-    width: 6px;
-}
-
-.chat-body::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 6px;
-}
-
-.name-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* 🔴 UNREAD MESSAGE COUNT CIRCLE */
-.unread-badge {
-    min-width: 20px;
-    height: 20px;
-
-    background-color: #25D366;   /* WhatsApp green */
-    color: #ffffff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-
-    padding: 0 6px;
-}
-
-
-
-/* ================================
-   ANIMATIONS
+   ANIMATION
 ================================ */
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }

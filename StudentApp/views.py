@@ -146,7 +146,6 @@ def StudentChatPage(request):
     return render(request, "student_chat.html")
 
 
-
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 

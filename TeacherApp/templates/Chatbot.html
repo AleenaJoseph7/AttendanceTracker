@@ -5,7 +5,6 @@
 
 <link rel="stylesheet" href="{% static 'chatbot/whatsapp.css' %}">
 
-<!-- JS CONFIG -->
 <script>
     const studentID = "{{ current_student.id }}";
     const BASE_URL = "";
@@ -16,12 +15,10 @@
 
 <div class="messenger-wrapper">
 
-    <!-- ================================
-         LEFT STUDENT CHAT LIST
-    ================================= -->
+    <!-- LEFT CHAT LIST -->
     <div class="chat-list">
         <div class="chat-list-header">
-            <h4 class="mb-0">Chats</h4>
+            <h4>Chats</h4>
         </div>
 
         {% for s in students %}
@@ -35,16 +32,16 @@
             {% endif %}
 
             <div class="list-info">
+
                 <div class="name-row">
-    <span class="student-name">{{ s.Student_name }}</span>
+                    <span class="student-name">{{ s.Student_name }}</span>
 
-    {% if unread_map|get_item:s.id and s.id != current_student.id %}
-        <span class="unread-badge">
-            {{ unread_map|get_item:s.id }}
-        </span>
-    {% endif %}
-</div>
-
+                    {% if unread_map|get_item:s.id and s.id != current_student.id %}
+                    <span class="unread-badge">
+                            {{ unread_map|get_item:s.id }}
+                        </span>
+                    {% endif %}
+                </div>
 
                 <div class="preview">
                     {% if s.id == current_student.id %}
@@ -53,6 +50,7 @@
                     Click to open chat
                     {% endif %}
                 </div>
+
             </div>
         </a>
         {% empty %}
@@ -60,12 +58,9 @@
         {% endfor %}
     </div>
 
-    <!-- ================================
-         RIGHT CHAT WINDOW
-    ================================= -->
+    <!-- RIGHT CHAT WINDOW -->
     <div class="chat-window">
 
-        <!-- CHAT HEADER -->
         <div class="chat-header">
             {% if current_student.Student_prof %}
             <img src="{{ current_student.Student_prof.url }}" class="avatar">
@@ -74,25 +69,22 @@
             {% endif %}
 
             <div style="flex:1;">
-                <h4 class="mb-0">{{ current_student.Student_name }}</h4>
+                <h4>{{ current_student.Student_name }}</h4>
                 <small class="status">
                     Roll No: {{ current_student.Student_rollno }} |
                     Reg ID: {{ current_student.Student_regid }}
                 </small>
             </div>
 
-            <button
-                    id="clearChatBtn"
+            <button id="clearChatBtn"
                     class="btn btn-sm btn-outline-danger"
-                    onclick="return confirm('Are you sure you want to clear this chat?')">
+                    onclick="return confirm('Are you sure?')">
                 Clear Chat
             </button>
         </div>
 
-        <!-- CHAT BODY -->
         <div id="chat-body" class="chat-body"></div>
 
-        <!-- CHAT INPUT -->
         <div class="chat-input">
             <input type="text" id="messageBox" placeholder="Type a message...">
             <button id="sendBtn">Send</button>

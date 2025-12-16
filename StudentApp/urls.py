@@ -7,7 +7,7 @@ urlpatterns = [
     path('StudentReportPage/', views.StudentReportPage, name="StudentReportPage"),
     path('DownloadInternalPdf/', views.DownloadInternalPdf, name="DownloadInternalPdf"),
 
-    path('StudentAttendanceDisplayPage/',views.StudentAttendanceDisplayPage,name="StudentAttendanceDisplayPage"),
+    path('StudentAttendanceDisplayPage/', views.StudentAttendanceDisplayPage, name="StudentAttendanceDisplayPage"),
 
     path("chat/", views.StudentChatPage, name="StudentChatPage"),
     path("chat/get/", views.get_student_messages, name="get_student_messages"),
