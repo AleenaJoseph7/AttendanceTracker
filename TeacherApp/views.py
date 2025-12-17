@@ -18,6 +18,7 @@ import json
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 
 from django.contrib import messages
+from django.utils.timezone import localtime
 
 
 # Create your views here.
@@ -502,7 +503,7 @@ def get_messages(request, student_id):
         "sender": m.sender,
         "message": m.message,
         "read_status": m.read_status,
-        "time": m.timestamp.strftime("%I:%M %p")
+        "time": localtime(m.timestamp).strftime("%I:%M %p")
     } for m in messages]
 
     return JsonResponse({"messages": data})

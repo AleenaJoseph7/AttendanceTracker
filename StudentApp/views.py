@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from TeacherApp.models import ChatMessage
 
+from django.utils.timezone import localtime
 
 # Create your views here.
 def StudentHomePage(request):
@@ -158,7 +159,7 @@ def get_student_messages(request):
         "sender": m.sender,
         "message": m.message,
         "read_status": m.read_status,
-        "time": m.timestamp.strftime("%I:%M %p")
+        "time": localtime(m.timestamp).strftime("%I:%M %p")
     } for m in messages]
 
     return JsonResponse({"messages": data})
