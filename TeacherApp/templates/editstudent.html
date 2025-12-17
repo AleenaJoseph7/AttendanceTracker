@@ -8,97 +8,119 @@
 
             <div class="card shadow-lg p-4" style="border:1px solid lightgrey; border-radius:10px;">
                 <h3 class="text-center mb-4"
-                    style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Edit Student</h3>
+                    style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">
+                    Edit Student
+                </h3>
 
-                <form method="POST" enctype="multipart/form-data" action="{% url 'updatestudent' s_id=student.id %}"
+                <form method="POST" enctype="multipart/form-data"
+                      action="{% url 'updatestudent' s_id=student.id %}"
                       name="myform" onsubmit="return validation()">
                     {% csrf_token %}
 
                     <div class="mb-3">
                         <label class="form-label">Student Name</label>
-                        <input type="text" placeholder="Student Name" name="student_name" class="form-control"
-                               value="{{student.Student_name}}">
+                        <input type="text" name="student_name" class="form-control"
+                               value="{{student.Student_name}}"
+                               onblur="validateName()">
+                        <small class="text-danger" id="err_name"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Roll Number</label>
-                        <input type="text" placeholder="Roll Number" name="student_rollno" class="form-control"
-                               value="{{student.Student_rollno}}">
-
+                        <input type="text" name="student_rollno" class="form-control"
+                               value="{{student.Student_rollno}}"
+                               onblur="validateRoll()">
+                        <small class="text-danger" id="err_roll"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Register Number</label>
-                        <input type="text" placeholder="Register Number" name="student_regid" class="form-control"
-                               value="{{student.Student_regid}}">
-
+                        <input type="text" name="student_regid" class="form-control"
+                               value="{{student.Student_regid}}"
+                               onblur="validateReg()">
+                        <small class="text-danger" id="err_reg"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Batch</label>
-                        <select name="student_batch" class="form-control">
-                            <option>{{student.Student_batch}}</option>
-                            <option>CSE</option>
-                            <option>EC</option>
-                            <option>EEE</option>
-                            <option>CE</option>
+                        <select name="student_batch" class="form-control"
+                                onchange="validateBatch()">
+                            <option value="">-- Select Batch --</option>
+                            <option value="CSE" {% if student.Student_batch == "CSE" %}selected{% endif %}>CSE</option>
+                            <option value="EC" {% if student.Student_batch == "EC" %}selected{% endif %}>EC</option>
+                            <option value="EEE" {% if student.Student_batch == "EEE" %}selected{% endif %}>EEE</option>
+                            <option value="CE" {% if student.Student_batch == "CE" %}selected{% endif %}>CE</option>
                         </select>
+                        <small class="text-danger" id="err_batch"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Semester</label>
-                        <select name="student_sem" class="form-control">
-                            <option>{{student.Student_sem}}</option>
-                            <option>S1</option>
-                            <option>S2</option>
-                            <option>S3</option>
-                            <option>S4</option>
-                            <option>S5</option>
-                            <option>S6</option>
+                        <select name="student_sem" class="form-control"
+                                onchange="validateSem()">
+                            <option value="">-- Select Semester --</option>
+                            <option value="S1" {% if student.Student_sem == "S1" %}selected{% endif %}>S1</option>
+                            <option value="S2" {% if student.Student_sem == "S2" %}selected{% endif %}>S2</option>
+                            <option value="S3" {% if student.Student_sem == "S3" %}selected{% endif %}>S3</option>
+                            <option value="S4" {% if student.Student_sem == "S4" %}selected{% endif %}>S4</option>
+                            <option value="S5" {% if student.Student_sem == "S5" %}selected{% endif %}>S5</option>
+                            <option value="S6" {% if student.Student_sem == "S6" %}selected{% endif %}>S6</option>
                         </select>
+                        <small class="text-danger" id="err_sem"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Duration</label>
-                        <input type="text" placeholder="Duration" name="student_duration" class="form-control"
-                               value="{{student.Student_duration}}">
+                        <input type="text" name="student_duration" class="form-control"
+                               value="{{student.Student_duration}}"
+                               onblur="validateDuration()">
+                        <small class="text-danger" id="err_duration"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Mobile Number</label>
-                        <input type="tel" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Mobile Number"
-                               name="student_phone" class="form-control" value="{{student.Student_phone}}">
+                        <input type="text" name="student_phone" class="form-control"
+                               value="{{student.Student_phone}}"
+                               onblur="validatePhone()">
+                        <small class="text-danger" id="err_phone"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Email Id</label>
-                        <input type="email"  placeholder="Email Id" name="student_email" class="form-control" value="{{student.Student_email}}">
+                        <input type="email" name="student_email" class="form-control"
+                               value="{{student.Student_email}}"
+                               onblur="validateEmail()">
+                        <small class="text-danger" id="err_email"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="text" placeholder="Password" name="student_password" class="form-control"
-                               value="{{student.Student_password}}">
+                        <input type="text" name="student_password" class="form-control"
+                               value="{{student.Student_password}}"
+                               onblur="validatePassword()">
+                        <small class="text-danger" id="err_pwd"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="text" placeholder="Confirm Password" name="student_confirm" class="form-control"
-                               value="{{student.Student_confirm}}">
+                        <input type="text" name="student_confirm" class="form-control"
+                               value="{{student.Student_confirm}}"
+                               onblur="validateConfirm()">
+                        <small class="text-danger" id="err_confirm"></small>
                     </div>
 
                     <div class="mb-3">
-                        <img src="{{student.Student_prof.url}}" height="150px" width="150px">
-                        <label class="form-label">Profile Image</label>
-                        <input type="file" placeholder="Upload Your Profile Image" name="student_prof"
-                               class="form-control">
+                        <img src="{{student.Student_prof.url}}" height="120px">
+                        <input type="file" name="student_prof" class="form-control mt-2">
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary mt-3" style="width:95%; border-radius:10px;">
+                        <button type="submit" class="btn btn-primary mt-3"
+                                style="width:95%; border-radius:10px;">
                             Update Student
                         </button>
                     </div>
+
                 </form>
             </div>
 
@@ -106,49 +128,92 @@
     </div>
 </div>
 
+<!-- ONLY JS ADDED -->
 <script>
-    function validation(){
-        pwd1=document.myform.student_password.value;
-        pwd2=document.myform.student_confirm.value;
+    function validateName(){
+    err_name.innerHTML=/^[A-Za-z.\s]+$/.test(myform.student_name.value.trim())
+    ?"":"Only alphabets, space and dot allowed";
+    }
 
-        if (pwd1 === "" || pwd1 === null){
-            alert("Password cannot be Null or Blank........!");
-            return false;
-        }
-        else if (pwd2 === "" || pwd2 === null){
-            alert("Confirm Password cannot be Null or Blank........!");
-            return false;
-        }
-        else if (pwd1.length<6){
-            alert("Password should be atleast 6 characters........!");
-            return false;
-        }
-        else if (pwd1 !== pwd2){
-            alert("Password doesn't match.......!");
-            return false;
-        }
-    return true;
+    function validateRoll(){
+    err_roll.innerHTML=/^(?:[1-9][0-9]?|100)$/.test(myform.student_rollno.value.trim())
+    ?"":"Enter valid roll number";
+    }
+
+    function validateReg(){
+    err_reg.innerHTML=/^[A-Z0-9]+$/.test(myform.student_regid.value.trim())
+    ?"":"CAPITAL letters and digits only";
+     }
+
+    function validateBatch(){ err_batch.innerHTML=myform.student_batch.value===""
+    ?"Please select a batch":"";
+    }
+
+    function validateSem(){
+    err_sem.innerHTML=myform.student_sem.value===""
+    ?"Please select a semester":"";
+    }
+
+    function validateDuration(){
+    err_duration.innerHTML=/^\d{4}-\d{4}$/.test(myform.student_duration.value.trim())
+    ?"":"YYYY-YYYY format required";
+    }
+    function validatePhone(){
+    err_phone.innerHTML=/^[6-9]\d{9}$/.test(myform.student_phone.value.trim())
+    ?"":"Invalid mobile number";
+    }
+
+    function validateEmail(){
+    err_email.innerHTML=/^[a-zA-Z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
+    ?"":"Only Gmail allowed";
+    }
+
+    function validatePassword(){
+     err_pwd.innerHTML=/^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$/.test(myform.student_password.value)
+     ?"":"Weak password";
+     }
+    function validateConfirm(){
+     err_confirm.innerHTML=myform.student_password.value===myform.student_confirm.value
+     ?"":"Passwords do not match";
+     }
+
+    function validation(){
+        validateName();
+        validateRoll();
+        validateReg();
+        validateBatch();
+        validateSem();
+        validateDuration();
+        validatePhone();
+        validateEmail();
+        validatePassword();
+        validateConfirm();
+        return document.querySelectorAll(".text-danger:not(:empty)").length===0;
     }
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {% if messages %}
-    {% for i in messages %}
-        {% if 'success' in i.tags %}
-            <script> swal('{{i}}', '', 'success'); </script>
-
-        {% elif 'warning' in i.tags %}
-            <script> swal('{{i}}', '', 'warning'); </script>
-
-        {% elif 'info' in i.tags %}
-            <script> swal('{{i}}', '', 'info'); </script>
-
-        {% elif 'error' in i.tags %}
-            <script> swal('{{i}}', '', 'error'); </script>
-
-        {% endif %}
-    {% endfor %}
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script>
+    swal('{{i}}', '', 'success');
+</script>
+{% elif 'warning' in i.tags %}
+<script>
+    swal('{{i}}', '', 'warning');
+</script>
+{% elif 'info' in i.tags %}
+<script>
+    swal('{{i}}', '', 'info');
+</script>
+{% elif 'error' in i.tags %}
+<script>
+    swal('{{i}}', '', 'error');
+</script>
+{% endif %}
+{% endfor %}
 {% endif %}
 
 {% endblock %}

@@ -151,6 +151,7 @@ def EditstudentPage(request, s_id):
 
 def updatestudent(request, s_id):
     if request.method == 'POST':
+
         student_name = request.POST.get('student_name')
         student_rollno = request.POST.get('student_rollno')
         student_regid = request.POST.get('student_regid')
@@ -161,26 +162,84 @@ def updatestudent(request, s_id):
         student_email = request.POST.get('student_email')
         student_password = request.POST.get('student_password')
         student_confirm = request.POST.get('student_confirm')
+
+
+        name_regex = r'^[A-Za-z.\s]+$'
+        roll_regex = r'^(?:[1-9][0-9]?|100)$'
+        reg_regex = r'^[A-Z0-9]+$'
+        duration_regex = r'^\d{4}-\d{4}$'
+        phone_regex = r'^[6-9]\d{9}$'
+        gmail_regex = r'^[a-zA-Z0-9._]+@gmail\.com$'
+        pwd_regex = r'^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$'
+
+
+        if not re.match(name_regex, student_name):
+            messages.error(request, "Name must contain only alphabets, space and dot")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(roll_regex, student_rollno):
+            messages.error(request, "Roll number must be between 1 and 100")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(reg_regex, student_regid):
+            messages.error(request, "Register ID must be CAPITAL letters and digits only")
+            return redirect('editstudent', s_id=s_id)
+
+        if not student_batch:
+            messages.error(request, "Please select a batch")
+            return redirect('editstudent', s_id=s_id)
+
+        if not student_sem:
+            messages.error(request, "Please select a semester")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(duration_regex, student_duration):
+            messages.error(request, "Duration must be in YYYY-YYYY format")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(phone_regex, student_phone):
+            messages.error(request, "Enter a valid 10-digit  mobile number")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(gmail_regex, student_email):
+            messages.error(request, "Only Gmail (@gmail.com) email IDs are allowed")
+            return redirect('editstudent', s_id=s_id)
+
+        if not re.match(pwd_regex, student_password):
+            messages.error(
+                request,
+                "Password must contain 1 uppercase, 1 digit, 1 special (@/#) and minimum 6 characters"
+            )
+            return redirect('editstudent', s_id=s_id)
+
+        if student_password != student_confirm:
+            messages.error(request, "Password and Confirm Password do not match")
+            return redirect('editstudent', s_id=s_id)
+
+
         try:
             student_prof = request.FILES['student_prof']
             fs = FileSystemStorage()
             files = fs.save(student_prof.name, student_prof)
-
         except MultiValueDictKeyError:
             files = Studentdb.objects.get(id=s_id).Student_prof
 
-        Studentdb.objects.filter(id=s_id).update(Student_name=student_name,
-                                                 Student_rollno=student_rollno,
-                                                 Student_regid=student_regid,
-                                                 Student_batch=student_batch,
-                                                 Student_sem=student_sem,
-                                                 Student_duration=student_duration,
-                                                 Student_phone=student_phone,
-                                                 Student_email=student_email,
-                                                 Student_password=student_password,
-                                                 Student_confirm=student_confirm,
-                                                 Student_prof=files)
-        messages.success(request, "Student updated Succesfully")
+
+        Studentdb.objects.filter(id=s_id).update(
+            Student_name=student_name,
+            Student_rollno=student_rollno,
+            Student_regid=student_regid,
+            Student_batch=student_batch,
+            Student_sem=student_sem,
+            Student_duration=student_duration,
+            Student_phone=student_phone,
+            Student_email=student_email,
+            Student_password=student_password,
+            Student_confirm=student_confirm,
+            Student_prof=files
+        )
+
+        messages.success(request, "Student updated successfully")
         return redirect(DisplaystudentPage)
 
 
