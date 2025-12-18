@@ -240,7 +240,7 @@ def updatestudent(request, s_id):
 def deletestudent(request, s_id):
     data = Studentdb.objects.filter(id=s_id)
     data.delete()
-    messages.error(request, "Student deleted Succesfully")
+    messages.success(request, "Student deleted Succesfully")
     return redirect(DisplaystudentPage)
 
 
