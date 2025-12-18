@@ -39,18 +39,12 @@
                 <label class="form-label">Semester</label>
                 <select name="subject_sem" class="form-control" onchange="Validatesem()">
                     <option value="">-- Select Semester --</option>
-                    <option value="S1" {% if subject.Subject_sem==
-                    "S1" %}selected{% endif %}>S1</option>
-                    <option value="S2" {% if subject.Subject_sem==
-                    "S2" %}selected{% endif %}>S2</option>
-                    <option value="S3" {% if subject.Subject_sem==
-                    "S3" %}selected{% endif %}>S3</option>
-                    <option value="S4" {% if subject.Subject_sem==
-                    "S4" %}selected{% endif %}>S4</option>
-                    <option value="S5" {% if subject.Subject_sem==
-                    "S5" %}selected{% endif %}>S5</option>
-                    <option value="S6" {% if subject.Subject_sem==
-                    "S6" %}selected{% endif %}>S6</option>
+                    <option value="S1" {% if subject.Subject_sem == "S1" %}selected{% endif %}>S1</option>
+                    <option value="S2" {% if subject.Subject_sem == "S2" %}selected{% endif %}>S2</option>
+                    <option value="S3" {% if subject.Subject_sem == "S3" %}selected{% endif %}>S3</option>
+                    <option value="S4" {% if subject.Subject_sem == "S4" %}selected{% endif %}>S4</option>
+                    <option value="S5" {% if subject.Subject_sem == "S5" %}selected{% endif %}>S5</option>
+                    <option value="S6" {% if subject.Subject_sem == "S6" %}selected{% endif %}>S6</option>
 
                 </select>
                 <small class="text-danger" id="err_sem"></small>
@@ -84,6 +78,7 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
     const err_subname = document.getElementById("err_subname");
     const err_subcode = document.getElementById("err_subcode");
@@ -91,42 +86,54 @@
     const err_sem = document.getElementById("err_sem");
     const err_dep = document.getElementById("err_dep");
 
-    function Validatesubname(){
-    err_subname.innerHTML=/^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(myform.subject_name.value.trim())
-    ? "" : "Enter a Valid Subject Name(eg: Operating System or OS)";
-    }
+    window.Validatesubname = function () {
+        err_subname.innerHTML =
+            /^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(myform.subject_name.value.trim())
+                ? ""
+                : "Enter a valid Subject Name (eg: Operating System or OS)";
+    };
 
-    function Validatesubcode(){
-    err_subcode.innerHTML=/^[A-Z0-9]+$/.test(myform.subject_code.value.trim())
-    ? "" :"Enter a Valid Subject Code(eg : CST304)";
-    }
+    window.Validatesubcode = function () {
+        err_subcode.innerHTML =
+            /^[A-Z0-9]+$/.test(myform.subject_code.value.trim())
+                ? ""
+                : "Enter a valid Subject Code (eg: CST403)";
+    };
 
-    function Validateteacher(){
-    err_teacher.innerHTML=/^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.subject_teacher.value.trim())
-    ? "" : "Enter a Valid Teacher Name(eg: Anu J.T)";
-    }
+    window.Validateteacher = function () {
+        err_teacher.innerHTML =
+            /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/
+                .test(myform.subject_teacher.value.trim())
+                ? ""
+                : "Enter a valid Teacher Name (eg: Anu J.T or Anu Kimal)";
+    };
 
-    function Validatesem(){
-    err_sem.innerHTML=myform.subject_sem.value===""
-    ? "Please select a Semester":"";
-    }
+    window.Validatesem = function () {
+        err_sem.innerHTML =
+            myform.subject_sem.value === ""
+                ? "Please select a Semester"
+                : "";
+    };
 
-    function Validatedep(){
-    err_dep.innerHTML=myform.subject_dep.value === ""
-    ? "Please select a Department" : "";
-    }
+    window.Validatedep = function () {
+        err_dep.innerHTML =
+            myform.subject_dep.value === ""
+                ? "Please select a Department"
+                : "";
+    };
 
-    function Validation(){
-    Validatesubname();
-    Validatesubcode();
-    Validateteacher();
-    Validatesem();
-    Validatedep();
+    window.Validation = function () {
+        Validatesubname();
+        Validatesubcode();
+        Validateteacher();
+        Validatesem();
+        Validatedep();
+        return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
+    };
 
-    return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
-    }
-
+});
 </script>
+
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
