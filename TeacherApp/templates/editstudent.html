@@ -130,6 +130,19 @@
 
 <!-- ONLY JS ADDED -->
 <script>
+
+    const err_name = document.getElementById("err_name");
+    const err_roll = document.getElementById("err_roll");
+    const err_reg = document.getElementById("err_reg");
+    const err_batch = document.getElementById("err_batch");
+    const err_sem = document.getElementById("err_sem");
+    const err_duration = document.getElementById("err_duration");
+    const err_phone = document.getElementById("err_phone");
+    const err_email = document.getElementById("err_email");
+    const err_pwd = document.getElementById("err_pwd");
+    const err_confirm = document.getElementById("err_confirm");
+
+
     function validateName() {
     err_name.innerHTML =
         /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.student_name.value.trim())
@@ -188,9 +201,9 @@ function validateEmail() {
 
 function validatePassword() {
     err_pwd.innerHTML =
-        /^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$/.test(myform.student_password.value)
+        /^(?=.{6,}$)[A-Z](?:[a-z0-9]*[_$#@][a-z0-9]*|[_$#@][a-z0-9]*)$/.test(myform.student_password.value)
             ? ""
-            : "Password must contain 1 uppercase letter, 1 digit, 1 special character (@/#), minimum 6 characters";
+            : "Password must contain 1 uppercase letter, 1 digit, 1 special character (@,#,$,_), minimum 6 characters";
 }
 
 function validateConfirm() {

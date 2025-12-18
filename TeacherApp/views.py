@@ -68,7 +68,7 @@ def savestudent(request):
         duration_regex = r'^\d{4}-\d{4}$'
         phone_regex = r'^[6-9]\d{9}$'
         gmail_regex = r'^[a-z0-9._]+@gmail\.com$'
-        pwd_regex = r'^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$'
+        pwd_regex = r'^(?=.{6,}$)[A-Z](?:[a-z0-9]*[_$#@][a-z0-9]*|[_$#@][a-z0-9]*)$'
 
         if not re.match(name_regex, student_name):
             messages.error(request, "Name must contain only alphabets, space and dot")
@@ -105,7 +105,7 @@ def savestudent(request):
         if not re.match(pwd_regex, student_password):
             messages.error(
                 request,
-                "Password must contain 1 uppercase, 1 digit, 1 special (@/#) and minimum 6 characters"
+                "Password must contain 1 uppercase, 1 digit, 1 special (@,#,$,_) and minimum 6 characters"
             )
             return redirect(Addstudentpage)
 
@@ -172,7 +172,7 @@ def updatestudent(request, s_id):
         duration_regex = r'^\d{4}-\d{4}$'
         phone_regex = r'^[6-9]\d{9}$'
         gmail_regex = r'^[a-z0-9._]+@gmail\.com$'
-        pwd_regex = r'^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$'
+        pwd_regex = r'^(?=.{6,}$)[A-Z](?:[a-z0-9]*[_$#@][a-z0-9]*|[_$#@][a-z0-9]*)$'
 
         if not re.match(name_regex, student_name):
             messages.error(request, "Enter a valid Student Name (eg: Anu M.K or Anu Joseph)")
@@ -209,7 +209,7 @@ def updatestudent(request, s_id):
         if not re.match(pwd_regex, student_password):
             messages.error(
                 request,
-                "Password must contain at least 1 uppercase letter, 1 digit, 1 special character (@/#), and minimum 6 characters"
+                "Password must contain at least 1 uppercase letter, 1 digit, 1 special character (@,#,$,_), and minimum 6 characters"
             )
             return redirect(EditstudentPage,s_id=s_id)
 

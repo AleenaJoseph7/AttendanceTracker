@@ -83,27 +83,14 @@
 
 </div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-{% if messages %}
-{% for i in messages %}
-{% if 'success' in i.tags %}
-<script> swal('{{i}}', '', 'success'); </script>
-
-{% elif 'warning' in i.tags %}
-<script> swal('{{i}}', '', 'warning'); </script>
-
-{% elif 'info' in i.tags %}
-<script> swal('{{i}}', '', 'info'); </script>
-
-{% elif 'error' in i.tags %}
-<script> swal('{{i}}', '', 'error'); </script>
-
-{% endif %}
-{% endfor %}
-{% endif %}
-
 <script>
+
+    const err_subname = document.getElementById("err_subname");
+    const err_subcode = document.getElementById("err_subcode");
+    const err_teacher = document.getElementById("err_teacher");
+    const err_sem = document.getElementById("err_sem");
+    const err_dep = document.getElementById("err_dep");
+
     function Validatesubname(){
     err_subname.innerHTML=/^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(myform.subject_name.value.trim())
     ? "" : "Enter a Valid Subject Name(eg: Operating System or OS)";
@@ -140,4 +127,26 @@
     }
 
 </script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% if messages %}
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script> swal('{{i}}', '', 'success'); </script>
+
+{% elif 'warning' in i.tags %}
+<script> swal('{{i}}', '', 'warning'); </script>
+
+{% elif 'info' in i.tags %}
+<script> swal('{{i}}', '', 'info'); </script>
+
+{% elif 'error' in i.tags %}
+<script> swal('{{i}}', '', 'error'); </script>
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
 {% endblock %}
