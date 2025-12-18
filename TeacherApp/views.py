@@ -267,7 +267,26 @@ def savesubject(request):
         subject_code_regex=r"^[A-Z0-9]+$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
-        if no re.ma
+        if not re.match(subject_name_regex,subject_name.strip()):
+            messages.error(request,"Enter a Valid Subject Name(eg :OS or Operating System")
+            return redirect(AddsubjectPage)
+
+        if not re.match(subject_code_regex,subject_code.strip()):
+            messages.error(request,"Enter a Valid Subject Code(eg: CST403")
+            return redirect(AddsubjectPage)
+
+        if not re.match(subject_teacher_regex,subject_teacher.strip()):
+            messages.error(request,"Enter a Valid Name(eg:Anu M.K or Anu Kimal")
+            return redirect(AddsubjectPage)
+
+        if not subject_sem:
+            messages.error(request,"Please select a Semester")
+            return redirect(AddsubjectPage)
+
+        if not subject_dep:
+            messages.error(request,"Please select a Department")
+            return redirect(AddsubjectPage)
+
 
         ob = Subjectdb(Subject_name=subject_name,
                        Subject_code=subject_code,
@@ -299,6 +318,30 @@ def Updatesubject(request, sub_id):
         subject_teacher = request.POST.get('subject_teacher')
         subject_sem = request.POST.get('subject_sem')
         subject_dep = request.POST.get('subject_dep')
+
+        subject_name_regex = r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
+        subject_code_regex = r"^[A-Z0-9]+$"
+        subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
+
+        if not re.match(subject_name_regex, subject_name.strip()):
+            messages.error(request, "Enter a Valid Subject Name(eg :OS or Operating System")
+            return redirect(AddsubjectPage)
+
+        if not re.match(subject_code_regex, subject_code.strip()):
+            messages.error(request, "Enter a Valid Subject Code(eg: CST403")
+            return redirect(AddsubjectPage)
+
+        if not re.match(subject_teacher_regex, subject_teacher.strip()):
+            messages.error(request, "Enter a Valid Name(eg:Anu M.K or Anu Kimal")
+            return redirect(AddsubjectPage)
+
+        if not subject_sem:
+            messages.error(request, "Please select a Semester")
+            return redirect(AddsubjectPage)
+
+        if not subject_dep:
+            messages.error(request, "Please select a Department")
+            return redirect(AddsubjectPage)
 
         Subjectdb.objects.filter(id=sub_id).update(Subject_name=subject_name,
                                                    Subject_code=subject_code,

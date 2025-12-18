@@ -8,20 +8,21 @@
         <h3 class="text-center mb-4" style="color:darkblue; font-weight:bold; font-size:30px; font-family:Arial;">Edit
             Subject</h3>
 
-        <form method="POST" action="{% url 'Updatesubject' sub_id=subject.id %}" name="myform" onsubmit="return Validation()">
+        <form method="POST" action="{% url 'Updatesubject' sub_id=subject.id %}" name="myform"
+              onsubmit="return Validation()">
             {% csrf_token %}
 
             <div class="mb-3">
                 <label class="form-label">Subject Name</label>
                 <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control"
-                       value="{{subject.Subject_name}}">
+                       value="{{subject.Subject_name}}" onkeyup="Validatesubname()">
                 <small class="text-danger" id="err_subname"></small>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Subject Code</label>
                 <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control"
-                       value="{{subject.Subject_code}}">
+                       value="{{subject.Subject_code}}" onkeyup="Validatesubcode()">
                 <small class="text-danger" id="err_subcode"></small>
 
             </div>
@@ -29,38 +30,46 @@
             <div class="mb-3">
                 <label class="form-label">Teacher</label>
                 <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control"
-                       value="{{subject.Subject_teacher}}">
+                       value="{{subject.Subject_teacher}}" onkeyup="Validateteacher()">
                 <small class="text-danger" id="err_teacher"></small>
 
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Semester</label>
-                <select name="subject_sem" class="form-control">
-                    <option>{{subject.Subject_sem}}</option>
-                    <option>S1</option>
-                    <option>S2</option>
-                    <option>S3</option>
-                    <option>S4</option>
-                    <option>S5</option>
-                    <option>S6</option>
+                <select name="subject_sem" class="form-control" onchange="Validatesem()">
+                    <option value="">-- Select Semester --</option>
+                    <option value="S1" {% if subject.Subject_sem==
+                    "S1" %}selected{% endif %}>S1</option>
+                    <option value="S2" {% if subject.Subject_sem==
+                    "S2" %}selected{% endif %}>S2</option>
+                    <option value="S3" {% if subject.Subject_sem==
+                    "S3" %}selected{% endif %}>S3</option>
+                    <option value="S4" {% if subject.Subject_sem==
+                    "S4" %}selected{% endif %}>S4</option>
+                    <option value="S5" {% if subject.Subject_sem==
+                    "S5" %}selected{% endif %}>S5</option>
+                    <option value="S6" {% if subject.Subject_sem==
+                    "S6" %}selected{% endif %}>S6</option>
+
                 </select>
                 <small class="text-danger" id="err_sem"></small>
-
             </div>
+
 
             <div class="mb-3">
                 <label class="form-label">Department</label>
-                <select name="subject_dep" class="form-control">
-                    <option>{{subject.Subject_dep}}</option>
-                    <option>CSE</option>
-                    <option>EC</option>
-                    <option>EEE</option>
-                    <option>CE</option>
+                <select name="subject_dep" class="form-control" onchange="Validatedep()">
+                    <option value="">-- Select Department --</option>
+                    <option value="CSE" {% if subject.Subject_dep == "CSE" %}selected{% endif %}>CSE</option>
+                    <option value="EC" {% if subject.Subject_dep == "EC" %}selected{% endif %}>EC</option>
+                    <option value="EEE" {% if subject.Subject_dep == "EEE" %}selected{% endif %}>EEE</option>
+                    <option value="CE" {% if subject.Subject_dep == "CE" %}selected{% endif %}>CE</option>
+
                 </select>
                 <small class="text-danger" id="err_dep"></small>
-
             </div>
+
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary mt-3" style="width:95%; border-radius:10px;">
@@ -77,26 +86,26 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {% if messages %}
-    {% for i in messages %}
-        {% if 'success' in i.tags %}
-            <script> swal('{{i}}', '', 'success'); </script>
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script> swal('{{i}}', '', 'success'); </script>
 
-        {% elif 'warning' in i.tags %}
-            <script> swal('{{i}}', '', 'warning'); </script>
+{% elif 'warning' in i.tags %}
+<script> swal('{{i}}', '', 'warning'); </script>
 
-        {% elif 'info' in i.tags %}
-            <script> swal('{{i}}', '', 'info'); </script>
+{% elif 'info' in i.tags %}
+<script> swal('{{i}}', '', 'info'); </script>
 
-        {% elif 'error' in i.tags %}
-            <script> swal('{{i}}', '', 'error'); </script>
+{% elif 'error' in i.tags %}
+<script> swal('{{i}}', '', 'error'); </script>
 
-        {% endif %}
-    {% endfor %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
 <script>
-    function validatesubname(){
-    err_subname.innerHTML=/^[A-Za-z\s]+$/.test(myform.subject_name.value.trim())
+    function Validatesubname(){
+    err_subname.innerHTML=/^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(myform.subject_name.value.trim())
     ? "" : "Enter a Valid Subject Name(eg: Operating System or OS)";
     }
 
@@ -111,17 +120,17 @@
     }
 
     function Validatesem(){
-    err_sem.innerHTML=myform.subject_sem.value==="-- Select Semester --"
+    err_sem.innerHTML=myform.subject_sem.value===""
     ? "Please select a Semester":"";
     }
 
     function Validatedep(){
-    err_dep.innerHTML=myform.subject_dep.value === "-- Select Department --"
+    err_dep.innerHTML=myform.subject_dep.value === ""
     ? "Please select a Department" : "";
     }
 
     function Validation(){
-    validatesubname();
+    Validatesubname();
     Validatesubcode();
     Validateteacher();
     Validatesem();
