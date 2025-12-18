@@ -67,7 +67,7 @@ def savestudent(request):
         student_confirm = request.POST.get('student_confirm')
         student_prof = request.FILES.get('student_prof')
 
-        name_regex = r'^[A-Za-z.\s]+$'
+        name_regex = r'^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$ '
         roll_regex = r'^(?:[1-9][0-9]?|100)$'
         reg_regex = r'^[A-Z0-9]+$'
         duration_regex = r'^\d{4}-\d{4}$'
@@ -164,7 +164,7 @@ def updatestudent(request, s_id):
         student_confirm = request.POST.get('student_confirm')
 
 
-        name_regex = r'^[A-Za-z.\s]+$'
+        name_regex = r'^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$ '
         roll_regex = r'^(?:[1-9][0-9]?|100)$'
         reg_regex = r'^[A-Z0-9]+$'
         duration_regex = r'^\d{4}-\d{4}$'
@@ -262,6 +262,12 @@ def savesubject(request):
         subject_teacher = request.POST.get('subject_teacher')
         subject_sem = request.POST.get('subject_sem')
         subject_dep = request.POST.get('subject_dep')
+
+        subject_name_regex=r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
+        subject_code_regex=r"^[A-Z0-9]+$"
+        subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
+
+        if no re.ma
 
         ob = Subjectdb(Subject_name=subject_name,
                        Subject_code=subject_code,

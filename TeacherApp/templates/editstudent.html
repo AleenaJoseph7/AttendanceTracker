@@ -131,7 +131,7 @@
 <!-- ONLY JS ADDED -->
 <script>
     function validateName(){
-    err_name.innerHTML=/^[A-Za-z.\s]+$/.test(myform.student_name.value.trim())
+    err_name.innerHTML=/^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.student_name.value.trim())
     ?"":"Only alphabets, space and dot allowed";
     }
 

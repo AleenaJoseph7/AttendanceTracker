@@ -138,7 +138,7 @@
 
 <script>
     function validateName() {
-        err_name.innerHTML = /^[A-Za-z.\s]+$/.test(myform.student_name.value.trim())
+        err_name.innerHTML =/^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.student_name.value.trim())
             ? "" : "Only alphabets, space and dot allowed";
     }
 
@@ -175,7 +175,7 @@
     }
 
     function validateEmail() {
-        err_email.innerHTML = /^[a-zA-Z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
+        err_email.innerHTML = /^[a-z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
             ? "" : "Please Enter a Valid Email";
     }
 

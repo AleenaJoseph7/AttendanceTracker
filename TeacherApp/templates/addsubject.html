@@ -8,32 +8,35 @@
         <h3 class="text-center mb-4" style="color:darkblue; font-weight:bold; font-size:30px; font-family:Arial;">Add
             Subject</h3>
 
-        <form method="POST" action="{% url 'savesubject' %}" name="myform">
+        <form method="POST" action="{% url 'savesubject' %}" name="myform" onsubmit="return Validation()">
             {% csrf_token %}
 
             <div class="mb-3">
                 <label class="form-label">Subject Name</label>
-                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control" onkeyup="Validatesubname">
+                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control"
+                       onkeyup="Validatesubname()">
                 <small class="text-danger" id="err_subname"></small>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Subject Code</label>
-                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control" onkeyup="Validatesubcode">
+                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control"
+                       onkeyup="Validatesubcode()">
                 <small class="text-danger" id="err_subcode"></small>
 
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Teacher</label>
-                <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control" onkeyup="Validateteacher">
+                <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control"
+                       onkeyup="Validateteacher()">
                 <small class="text-danger" id="err_teacher"></small>
 
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Semester</label>
-                <select name="subject_sem" class="form-control" onchange="Validatesem">
+                <select name="subject_sem" class="form-control" onchange="Validatesem()">
                     <option>-- Select Semester --</option>
                     <option>S1</option>
                     <option>S2</option>
@@ -47,7 +50,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Department</label>
-                <select name="subject_dep" class="form-control" onchange="Validatedep">
+                <select name="subject_dep" class="form-control" onchange="Validatedep()">
                     <option>-- Select Department --</option>
                     <option>CSE</option>
                     <option>EC</option>
@@ -72,21 +75,21 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {% if messages %}
-    {% for i in messages %}
-        {% if 'success' in i.tags %}
-            <script> swal('{{i}}', '', 'success'); </script>
+{% for i in messages %}
+{% if 'success' in i.tags %}
+<script> swal('{{i}}', '', 'success'); </script>
 
-        {% elif 'warning' in i.tags %}
-            <script> swal('{{i}}', '', 'warning'); </script>
+{% elif 'warning' in i.tags %}
+<script> swal('{{i}}', '', 'warning'); </script>
 
-        {% elif 'info' in i.tags %}
-            <script> swal('{{i}}', '', 'info'); </script>
+{% elif 'info' in i.tags %}
+<script> swal('{{i}}', '', 'info'); </script>
 
-        {% elif 'error' in i.tags %}
-            <script> swal('{{i}}', '', 'error'); </script>
+{% elif 'error' in i.tags %}
+<script> swal('{{i}}', '', 'error'); </script>
 
-        {% endif %}
-    {% endfor %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
 <script>
@@ -101,7 +104,7 @@
     }
 
     function Validateteacher(){
-    err_teacher.innerHTML=/^[A-Za-z.\s]+$/.test(myform.subject_teacher.value.trim())
+    err_teacher.innerHTML=/^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.subject_teacher.value.trim())
     ? "" : "Enter a Valid Teacher Name(eg: Anu J.T)";
     }
 
@@ -113,6 +116,16 @@
     function Validatedep(){
     err_dep.innerHTML=myform.subject_dep.value === "-- Select Department --"
     ? "Please select a Department" : "";
+    }
+
+    function Validation(){
+    validatesubname();
+    Validatesubcode();
+    Validateteacher();
+    Validatesem();
+    Validatedep();
+
+    return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
     }
 
 </script>
