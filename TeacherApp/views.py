@@ -261,15 +261,15 @@ def savesubject(request):
         subject_code_regex=r"^[A-Z0-9]+$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
-        if not re.match(subject_name_regex,subject_name.strip()):
+        if not re.match(subject_name_regex,subject_name):
             messages.error(request,"Enter a Valid Subject Name(eg :OS or Operating System")
             return redirect(AddsubjectPage)
 
-        if not re.match(subject_code_regex,subject_code.strip()):
+        if not re.match(subject_code_regex,subject_code):
             messages.error(request,"Enter a Valid Subject Code(eg: CST403")
             return redirect(AddsubjectPage)
 
-        if not re.match(subject_teacher_regex,subject_teacher.strip()):
+        if not re.match(subject_teacher_regex,subject_teacher):
             messages.error(request,"Enter a Valid Name(eg:Anu M.K or Anu Kimal")
             return redirect(AddsubjectPage)
 
@@ -317,15 +317,15 @@ def Updatesubject(request, sub_id):
         subject_code_regex = r"^[A-Z0-9]+$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
-        if not re.match(subject_name_regex, subject_name.strip()):
+        if not re.match(subject_name_regex, subject_name):
             messages.error(request, "Enter a Valid Subject Name(eg :OS or Operating System")
             return redirect(EditsubjectPage,sub_id=sub_id)
 
-        if not re.match(subject_code_regex, subject_code.strip()):
+        if not re.match(subject_code_regex, subject_code):
             messages.error(request, "Enter a Valid Subject Code(eg: CST403")
             return redirect(EditsubjectPage,sub_id=sub_id)
 
-        if not re.match(subject_teacher_regex, subject_teacher.strip()):
+        if not re.match(subject_teacher_regex, subject_teacher):
             messages.error(request, "Enter a Valid Name(eg:Anu M.K or Anu Kimal")
             return redirect(EditsubjectPage,sub_id=sub_id)
 
@@ -367,13 +367,36 @@ def Saveinternal(request):
         internalmark = request.POST.get('internalmark')
         totalmark = request.POST.get('totalmark')
 
+
+
+        internalmark_regex=r"^(?:[0-9]|[1-4][0-9]|50)$"
+        totalmark_regex=r"^50$"
+
+        if not student_id:
+            messages.error(request,"Please select a Student")
+            return redirect(Addinternalpage)
+
+        if not subject_id:
+            messages.error(request, "Please select a Subject")
+            return redirect(Addinternalpage)
+
+        if not re.match(internalmark_regex,internalmark):
+            messages.error(request, "Please enter a valid InternalMark(Range: 0-50)")
+            return redirect(Addinternalpage)
+
+        if not re.match(totalmark_regex,totalmark):
+            messages.error(request, "Please enter a valid TotalMark(ie: 50)")
+            return redirect(Addinternalpage)
+
         student = Studentdb.objects.get(id=student_id)
         subject = Subjectdb.objects.get(id=subject_id)
+
 
         ob = Internalmarkdb(Student=student,
                             Subject=subject,
                             Internalmark=internalmark,
                             Totalmark=totalmark)
+
         ob.save()
         messages.success(request, "Internal added Successfully")
         return redirect(Addinternalpage)

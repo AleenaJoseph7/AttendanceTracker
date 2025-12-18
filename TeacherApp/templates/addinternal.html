@@ -10,39 +10,43 @@
                 <h3 class="text-center mb-4"
                     style="font-size:30px; font-family:Arial; font-weight:bold; color:darkblue;">Add Internal Marks</h3>
 
-                <form method="POST" action="{% url 'Saveinternal' %}">
+                <form method="POST" action="{% url 'Saveinternal' %}" name="myform" onsubmit="return Validations()">
                     {% csrf_token %}
 
                     <div class="mb-3">
                         <label class="form-label">Select Student</label>
-                        <select name="student" class="form-control" required>
-                            <option>-- Select Student --</option>
+                        <select name="student" class="form-control" required onchange="Validatestudent()">
+                            <option value="">-- Select Student --</option>
                             {% for i in student %}
                             <option value="{{ i.id }}">{{i.Student_name}}({{i.Student_rollno}})</option>
                             {% endfor %}
                         </select>
+                        <small class="text-danger" id="err_student"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Select Subject</label>
-                        <select name="subject" class="form-control" required>
-                            <option>-- Select Subject --</option>
+                        <select name="subject" class="form-control" required onchange="Validatesub()">
+                            <option value="">-- Select Subject --</option>
                             {% for i in subject %}
                             <option value="{{ i.id }}">{{i.Subject_name}}({{i.Subject_code}})</option>
                             {% endfor %}
                         </select>
+                        <small class="text-danger" id="err_sub"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Internal Mark Obtained</label>
                         <input type="text" name="internalmark" min="0" placeholder="Enter marks obtained"
-                               class="form-control" required>
+                               class="form-control" required onkeyup="Validateinternal()">
+                        <small class="text-danger" id="err_internal"></small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Total Mark</label>
                         <input type="text" name="totalmark" min="1" placeholder="Enter total marks" class="form-control"
-                               required>
+                               required onkeyup="Validatetotal()">
+                        <small class="text-danger" id="err_total"></small>
                     </div>
 
                     <div class="text-center">
@@ -57,6 +61,46 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+    const err_student=document.getElementById("err_student");
+    const err_sub=document.getElementById("err_sub");
+    const err_internal=document.getElementById("err_internal");
+    const err_total=document.getElementById("err_total");
+
+    window.Validatestudent=function(){
+    err_student.innerHTML=myform.student.value.trim()===""
+    ? "Please select a Student" : "";
+    }
+
+    window.Validatesub=function(){
+    err_sub.innerHTML=myform.subject.value.trim()===""
+    ? "Please select a Subject" : "";
+    }
+
+    window.Validateinternal=function(){
+    err_internal.innerHTML=/^(?:[0-9]|[1-4][0-9]|50)$/.test(myform.internalmark.value.trim())
+    ? "" : "Please enter a valid InternalMark(Range: 0-50)";
+    }
+
+    window.Validatetotal=function(){
+    err_total.innerHTML=/^50$/.test(myform.totalmark.value.trim())
+    ? "" : "Please enter a valid TotalMark(ie: 50)";
+    }
+
+    window.Validations=function(){
+    Validatestudent();
+    Validatesub();
+    Validateinternal();
+    Validatetotal();
+        return document.querySelectorAll(".text-danger:not(:empty)").length===0
+
+    }
+    });
+
+
+</script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
