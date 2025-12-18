@@ -130,52 +130,76 @@
 
 <!-- ONLY JS ADDED -->
 <script>
-    function validateName(){
-    err_name.innerHTML=/^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.student_name.value.trim())
-    ?"":"Only alphabets, space and dot allowed";
-    }
+    function validateName() {
+    err_name.innerHTML =
+        /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/.test(myform.student_name.value.trim())
+            ? ""
+            : "Enter a valid Student Name (eg: Anu M.K or Anu Joseph)";
+}
 
-    function validateRoll(){
-    err_roll.innerHTML=/^(?:[1-9][0-9]?|100)$/.test(myform.student_rollno.value.trim())
-    ?"":"Enter valid roll number";
-    }
+function validateRoll() {
+    err_roll.innerHTML =
+        /^(?:[1-9][0-9]?|100)$/.test(myform.student_rollno.value.trim())
+            ? ""
+            : "Enter a valid Roll Number (1–100)";
+}
 
-    function validateReg(){
-    err_reg.innerHTML=/^[A-Z0-9]+$/.test(myform.student_regid.value.trim())
-    ?"":"CAPITAL letters and digits only";
-     }
+function validateReg() {
+    err_reg.innerHTML =
+        /^[A-Z0-9]+$/.test(myform.student_regid.value.trim())
+            ? ""
+            : "Register Number must contain capital letters and digits only";
+}
 
-    function validateBatch(){ err_batch.innerHTML=myform.student_batch.value===""
-    ?"Please select a batch":"";
-    }
+function validateBatch() {
+    err_batch.innerHTML =
+        myform.student_batch.value === ""
+            ? "Please select a Batch"
+            : "";
+}
 
-    function validateSem(){
-    err_sem.innerHTML=myform.student_sem.value===""
-    ?"Please select a semester":"";
-    }
+function validateSem() {
+    err_sem.innerHTML =
+        myform.student_sem.value === ""
+            ? "Please select a Semester"
+            : "";
+}
 
-    function validateDuration(){
-    err_duration.innerHTML=/^\d{4}-\d{4}$/.test(myform.student_duration.value.trim())
-    ?"":"YYYY-YYYY format required";
-    }
-    function validatePhone(){
-    err_phone.innerHTML=/^[6-9]\d{9}$/.test(myform.student_phone.value.trim())
-    ?"":"Invalid mobile number";
-    }
+function validateDuration() {
+    err_duration.innerHTML =
+        /^\d{4}-\d{4}$/.test(myform.student_duration.value.trim())
+            ? ""
+            : "Enter duration in the format YYYY-YYYY";
+}
 
-    function validateEmail(){
-    err_email.innerHTML=/^[a-zA-Z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
-    ?"":"Only Gmail allowed";
-    }
+function validatePhone() {
+    err_phone.innerHTML =
+        /^[6-9]\d{9}$/.test(myform.student_phone.value.trim())
+            ? ""
+            : "Enter a valid 10-digit Mobile Number";
+}
 
-    function validatePassword(){
-     err_pwd.innerHTML=/^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$/.test(myform.student_password.value)
-     ?"":"Weak password";
-     }
-    function validateConfirm(){
-     err_confirm.innerHTML=myform.student_password.value===myform.student_confirm.value
-     ?"":"Passwords do not match";
-     }
+function validateEmail() {
+    err_email.innerHTML =
+        /^[a-z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
+            ? ""
+            : "Enter a valid Email ID (eg: example@gmail.com)";
+}
+
+function validatePassword() {
+    err_pwd.innerHTML =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@#]).{6,}$/.test(myform.student_password.value)
+            ? ""
+            : "Password must contain 1 uppercase letter, 1 digit, 1 special character (@/#), minimum 6 characters";
+}
+
+function validateConfirm() {
+    err_confirm.innerHTML =
+        myform.student_password.value === myform.student_confirm.value
+            ? ""
+            : "Password and Confirm Password do not match";
+}
+
 
     function validation(){
         validateName();
