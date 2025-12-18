@@ -8,27 +8,32 @@
         <h3 class="text-center mb-4" style="color:darkblue; font-weight:bold; font-size:30px; font-family:Arial;">Add
             Subject</h3>
 
-        <form method="POST" action="{% url 'savesubject' %}">
+        <form method="POST" action="{% url 'savesubject' %}" name="myform">
             {% csrf_token %}
 
             <div class="mb-3">
                 <label class="form-label">Subject Name</label>
-                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control">
+                <input type="text" name="subject_name" placeholder="Enter Subject Name" class="form-control" onkeyup="Validatesubname">
+                <small class="text-danger" id="err_subname"></small>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Subject Code</label>
-                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control">
+                <input type="text" name="subject_code" placeholder="Ex: CS401" class="form-control" onkeyup="Validatesubcode">
+                <small class="text-danger" id="err_subcode"></small>
+
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Teacher</label>
-                <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control">
+                <input type="text" name="subject_teacher" placeholder="Teacher" class="form-control" onkeyup="Validateteacher">
+                <small class="text-danger" id="err_teacher"></small>
+
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Semester</label>
-                <select name="subject_sem" class="form-control">
+                <select name="subject_sem" class="form-control" onchange="Validatesem">
                     <option>-- Select Semester --</option>
                     <option>S1</option>
                     <option>S2</option>
@@ -37,17 +42,19 @@
                     <option>S5</option>
                     <option>S6</option>
                 </select>
+                <small class="text-danger" id="err_sem"></small>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Department</label>
-                <select name="subject_dep" class="form-control">
+                <select name="subject_dep" class="form-control" onchange="Validatedep">
                     <option>-- Select Department --</option>
                     <option>CSE</option>
                     <option>EC</option>
                     <option>EEE</option>
                     <option>CE</option>
                 </select>
+                <small class="text-danger" id="err_dep"></small>
             </div>
 
 
@@ -82,4 +89,31 @@
     {% endfor %}
 {% endif %}
 
+<script>
+    function validatesubname(){
+    err_subname.innerHTML=/^[A-Za-z\s]+$/.test(myform.subject_name.value.trim())
+    ? "" : "Enter a Valid Subject Name(eg: Operating System or OS)";
+    }
+
+    function Validatesubcode(){
+    err_subcode.innerHTML=/^[A-Z0-9]+$/.test(myform.subject_code.value.trim())
+    ? "" :"Enter a Valid Subject Code(eg : CST304)";
+    }
+
+    function Validateteacher(){
+    err_teacher.innerHTML=/^[A-Za-z.\s]+$/.test(myform.subject_teacher.value.trim())
+    ? "" : "Enter a Valid Teacher Name(eg: Anu J.T)";
+    }
+
+    function Validatesem(){
+    err_sem.innerHTML=myform.subject_sem.value==="-- Select Semester --"
+    ? "Please select a Semester":"";
+    }
+
+    function Validatedep(){
+    err_dep.innerHTML=myform.subject_dep.value === "-- Select Department --"
+    ? "Please select a Department" : "";
+    }
+
+</script>
 {% endblock %}
