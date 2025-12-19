@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendBtn = document.getElementById("sendBtn");
     const clearBtn = document.getElementById("clearChatBtn");
 
-    // SAFETY CHECK
     if (!chatBody || !messageBox || !sendBtn) {
         console.error("Chat elements missing in DOM");
         return;
@@ -25,62 +24,51 @@ document.addEventListener("DOMContentLoaded", function () {
     // LOAD MESSAGES
     // ================================
     async function loadMessages() {
-        try {
-            let url = "";
+    try {
+        let url = "";
 
-            // Teacher side → needs studentID in URL
-            if (studentID) {
-                url = `${BASE_URL}/chat/${studentID}/`;
-            }
-            // Student side → session-based
-            else {
-                url = `${BASE_URL}/chat/`;
-            }
-
-            const res = await fetch(url);
-            const data = await res.json();
-
-            chatBody.innerHTML = "";
-
-            data.messages.forEach(m => {
-                const div = document.createElement("div");
-
-                const isMe = m.sender.toLowerCase() === senderSide;
-                div.className = "message " + (isMe ? "me" : "other");
-
-
-
-                // READ TICKS (only for sender)
-                    let ticks = "";
-                    if (isMe && m.read_status === "sent") {
-                    ticks = "✓";
-                    }
-
-                    if (isMe && m.read_status === "read") {
-                        ticks = "✓✓";
-                        div.classList.add("read");
-                        }
-
-
-
-
-                div.innerHTML = `
-                    <span>${m.message}</span>
-                    <div class="meta">
-                        <small>${m.time || ""}</small>
-                        <small class="ticks">${ticks}</small>
-                    </div>
-                `;
-
-                chatBody.appendChild(div);
-            });
-
-            scrollDown();
-
-        } catch (err) {
-            console.error("Failed to load messages", err);
+        if (senderSide === "teacher") {
+            url = `${BASE_URL}/chat/${studentID}/`;
+        } else {
+            url = `${BASE_URL}/chat/get/`;
         }
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        chatBody.innerHTML = "";
+
+        data.messages.forEach(m => {
+            const div = document.createElement("div");
+            const isMe = m.sender === senderSide;
+
+            div.className = "message " + (isMe ? "me" : "other");
+
+            let ticks = "";
+            if (isMe && m.read_status === "sent") ticks = "✓";
+            if (isMe && m.read_status === "read") {
+                ticks = "✓✓";
+                div.classList.add("read");
+            }
+
+            div.innerHTML = `
+                <span>${m.message}</span>
+                <div class="meta">
+                    <small>${m.time}</small>
+                    <small class="ticks">${ticks}</small>
+                </div>
+            `;
+
+            chatBody.appendChild(div);
+        });
+
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+    } catch (err) {
+        console.error("Failed to load messages", err);
     }
+}
+
 
     // ================================
     // SEND MESSAGE
@@ -92,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             let url = "";
 
-            // Teacher side
-            if (studentID) {
+            // ✅ Teacher sending to student
+            if (senderSide === "teacher") {
                 url = `${BASE_URL}/chat/send/${studentID}/`;
             }
-            // Student side
+            // ✅ Student sending to teacher
             else {
                 url = `${BASE_URL}/chat/send/`;
             }
@@ -124,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             let url = "";
 
-            if (studentID) {
+            if (senderSide === "teacher") {
                 url = `${BASE_URL}/chat/clear/${studentID}/`;
             } else {
                 url = `${BASE_URL}/chat/clear/`;

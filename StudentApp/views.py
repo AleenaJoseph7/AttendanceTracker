@@ -134,13 +134,13 @@ def StudentAttendanceDisplayPage(request):
 
 def StudentChatPage(request):
     student_id = request.session.get("StudentId")
-    return render(request, "student_chat.html")
+    return render(request, "student_chat.html",{'student_id':student_id})
 
 
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 
-    # Mark ALL teacher messages as READ when student opens chat
+    # Mark teacher messages as READ when student opens chat
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher"
