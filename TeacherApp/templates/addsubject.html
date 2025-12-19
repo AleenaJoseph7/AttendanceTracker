@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.Validatesubcode = function () {
         err_subcode.innerHTML =
-            /^[A-Z0-9]+$/.test(myform.subject_code.value.trim())
+            /^[A-Z]{3}[0-9]{3}$/.test(myform.subject_code.value.trim())
                 ? ""
                 : "Enter a valid Subject Code (eg: CST403)";
     };

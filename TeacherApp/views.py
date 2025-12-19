@@ -262,7 +262,7 @@ def savesubject(request):
         subject_dep = request.POST.get('subject_dep')
 
         subject_name_regex=r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
-        subject_code_regex=r"^[A-Z0-9]+$"
+        subject_code_regex=r"^[A-Z]{3}[0-9]{3}$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
         if not re.match(subject_name_regex,subject_name):
@@ -318,7 +318,7 @@ def Updatesubject(request, sub_id):
         subject_dep = request.POST.get('subject_dep')
 
         subject_name_regex = r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
-        subject_code_regex = r"^[A-Z0-9]+$"
+        subject_code_regex = r"^[A-Z]{3}[0-9]{3}$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
         if not re.match(subject_name_regex, subject_name):
