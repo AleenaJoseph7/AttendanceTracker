@@ -177,9 +177,12 @@
     color: #34B7F1;
 }
 
-.message.me.read .meta .ticks {
-    color: #34B7F1 !important;
+
+.message.read .ticks {
+    color: #1b5cff;
+    font-weight: bold;
 }
+
 
 /* ================= INPUT ================= */
 

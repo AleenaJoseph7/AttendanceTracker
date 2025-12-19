@@ -134,20 +134,13 @@ def StudentAttendanceDisplayPage(request):
 
 def StudentChatPage(request):
     student_id = request.session.get("StudentId")
-
-    ChatMessage.objects.filter(
-        student_id=student_id,
-        sender="teacher",
-        read_status="delivered"
-    ).update(read_status="read")
-
     return render(request, "student_chat.html")
 
 
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 
-    # MARK TEACHER MESSAGES AS READ
+    # Mark ALL teacher messages as READ when student opens chat
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher"
@@ -159,10 +152,11 @@ def get_student_messages(request):
         "sender": m.sender,
         "message": m.message,
         "read_status": m.read_status,
-        "time": localtime(m.timestamp).strftime("%I:%M %p")
+        "time": m.timestamp.strftime("%I:%M %p")
     } for m in messages]
 
     return JsonResponse({"messages": data})
+
 
 @csrf_exempt
 def send_student_message(request):

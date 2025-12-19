@@ -52,15 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // READ TICKS (only for sender)
                     let ticks = "";
-
-                   if (isMe && m.read_status === "sent") {
-                     ticks = "✓";
+                    if (isMe && m.read_status === "sent") {
+                    ticks = "✓";
                     }
 
-                if (isMe && m.read_status === "read") {
-                ticks = "✓✓";
-                div.classList.add("read");
-                   }
+                    if (isMe && m.read_status === "read") {
+                        ticks = "✓✓";
+                        div.classList.add("read");
+                        }
+
 
 
 
