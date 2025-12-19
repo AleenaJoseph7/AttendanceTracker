@@ -158,11 +158,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 : "Enter a valid Roll Number (1–100)";
     };
 
-    window.validateReg = function () {
+     window.validateReg = function () {
         err_reg.innerHTML =
-            /^[A-Z0-9]+$/.test(myform.student_regid.value.trim())
+            /^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$/.test(myform.student_regid.value.trim())
                 ? ""
-                : "Register Number must contain capital letters and digits only";
+                : "Enter a valid Register Id (eg :PKG23EC001)";
     };
 
     window.validateBatch = function () {

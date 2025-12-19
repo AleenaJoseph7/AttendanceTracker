@@ -64,7 +64,7 @@ def savestudent(request):
 
         name_regex = r'^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$'
         roll_regex = r'^(?:[1-9][0-9]?|100)$'
-        reg_regex = r'^[A-Z0-9]+$'
+        reg_regex = r'^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$'
         duration_regex = r'^\d{4}-\d{4}$'
         phone_regex = r'^[6-9]\d{9}$'
         gmail_regex = r'^[a-z0-9._]+@gmail\.com$'
@@ -79,7 +79,7 @@ def savestudent(request):
             return redirect(Addstudentpage)
 
         if not re.match(reg_regex, student_regid):
-            messages.error(request, "Register ID must be CAPITAL letters and numbers only")
+            messages.error(request, "Enter a valid Register Id (eg :PKG23EC001)")
             return redirect(Addstudentpage)
 
         if not student_batch:
@@ -168,7 +168,7 @@ def updatestudent(request, s_id):
 
         name_regex = r'^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$'
         roll_regex = r'^(?:[1-9][0-9]?|100)$'
-        reg_regex = r'^[A-Z0-9]+$'
+        reg_regex = r'^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$'
         duration_regex = r'^\d{4}-\d{4}$'
         phone_regex = r'^[6-9]\d{9}$'
         gmail_regex = r'^[a-z0-9._]+@gmail\.com$'
@@ -183,7 +183,7 @@ def updatestudent(request, s_id):
             return redirect(EditstudentPage,s_id=s_id)
 
         if not re.match(reg_regex, student_regid):
-            messages.error(request, "Register Number must contain capital letters and digits only")
+            messages.error(request, "Enter a valid Register Id (eg :PKG23EC001)")
             return redirect(EditstudentPage,s_id=s_id)
 
         if not student_batch:
