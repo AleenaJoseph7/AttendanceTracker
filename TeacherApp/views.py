@@ -168,8 +168,6 @@ def updatestudent(request, s_id):
         except MultiValueDictKeyError:
             files = Studentdb.objects.get(id=s_id).Student_prof
 
-
-
         name_regex = r'^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$'
         roll_regex = r'^(?:[1-9][0-9]?|100)$'
         reg_regex = r'^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$'
@@ -180,48 +178,46 @@ def updatestudent(request, s_id):
 
         if not re.match(name_regex, student_name):
             messages.error(request, "Enter a valid Student Name (eg: Anu M.K or Anu Joseph)")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(roll_regex, student_rollno):
             messages.error(request, "Enter a valid Roll Number between 1 and 100")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(reg_regex, student_regid):
             messages.error(request, "Enter a valid Register Id (eg :PKG23EC001)")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not student_batch:
             messages.error(request, "Please select a Batch")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not student_sem:
             messages.error(request, "Please select a Semester")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(duration_regex, student_duration):
             messages.error(request, "Enter Duration in the format YYYY-YYYY")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(phone_regex, student_phone):
             messages.error(request, "Enter a valid 10-digit Mobile Number")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(gmail_regex, student_email):
             messages.error(request, "Enter a valid Gmail address (example@gmail.com)")
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if not re.match(pwd_regex, student_password):
             messages.error(
                 request,
                 "Password must contain at least 1 uppercase letter, 1 digit, 1 special character (@,#,$,_), and minimum 6 characters"
             )
-            return redirect(EditstudentPage,s_id=s_id)
+            return redirect(EditstudentPage, s_id=s_id)
 
         if student_password != student_confirm:
             messages.error(request, "Password and Confirm Password do not match")
             return redirect(Addstudentpage)
-
-
 
         Studentdb.objects.filter(id=s_id).update(
             Student_name=student_name,
@@ -261,30 +257,29 @@ def savesubject(request):
         subject_sem = request.POST.get('subject_sem')
         subject_dep = request.POST.get('subject_dep')
 
-        subject_name_regex=r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
-        subject_code_regex=r"^[A-Z]{3}[0-9]{3}$"
+        subject_name_regex = r"^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$"
+        subject_code_regex = r"^[A-Z]{3}[0-9]{3}$"
         subject_teacher_regex = r"^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$"
 
-        if not re.match(subject_name_regex,subject_name):
-            messages.error(request,"Enter a Valid Subject Name(eg :OS or Operating System")
+        if not re.match(subject_name_regex, subject_name):
+            messages.error(request, "Enter a Valid Subject Name(eg :OS or Operating System")
             return redirect(AddsubjectPage)
 
-        if not re.match(subject_code_regex,subject_code):
-            messages.error(request,"Enter a Valid Subject Code(eg: CST403")
+        if not re.match(subject_code_regex, subject_code):
+            messages.error(request, "Enter a Valid Subject Code(eg: CST403")
             return redirect(AddsubjectPage)
 
-        if not re.match(subject_teacher_regex,subject_teacher):
-            messages.error(request,"Enter a Valid Name(eg:Anu M.K or Anu Kimal")
+        if not re.match(subject_teacher_regex, subject_teacher):
+            messages.error(request, "Enter a Valid Name(eg:Anu M.K or Anu Kimal")
             return redirect(AddsubjectPage)
 
         if not subject_sem:
-            messages.error(request,"Please select a Semester")
+            messages.error(request, "Please select a Semester")
             return redirect(AddsubjectPage)
 
         if not subject_dep:
-            messages.error(request,"Please select a Department")
+            messages.error(request, "Please select a Department")
             return redirect(AddsubjectPage)
-
 
         ob = Subjectdb(Subject_name=subject_name,
                        Subject_code=subject_code,
@@ -323,23 +318,23 @@ def Updatesubject(request, sub_id):
 
         if not re.match(subject_name_regex, subject_name):
             messages.error(request, "Enter a Valid Subject Name(eg :OS or Operating System")
-            return redirect(EditsubjectPage,sub_id=sub_id)
+            return redirect(EditsubjectPage, sub_id=sub_id)
 
         if not re.match(subject_code_regex, subject_code):
             messages.error(request, "Enter a Valid Subject Code(eg: CST403")
-            return redirect(EditsubjectPage,sub_id=sub_id)
+            return redirect(EditsubjectPage, sub_id=sub_id)
 
         if not re.match(subject_teacher_regex, subject_teacher):
             messages.error(request, "Enter a Valid Name(eg:Anu M.K or Anu Kimal")
-            return redirect(EditsubjectPage,sub_id=sub_id)
+            return redirect(EditsubjectPage, sub_id=sub_id)
 
         if not subject_sem:
             messages.error(request, "Please select a Semester")
-            return redirect(EditsubjectPage,sub_id=sub_id)
+            return redirect(EditsubjectPage, sub_id=sub_id)
 
         if not subject_dep:
             messages.error(request, "Please select a Department")
-            return redirect(EditsubjectPage,sub_id=sub_id)
+            return redirect(EditsubjectPage, sub_id=sub_id)
 
         Subjectdb.objects.filter(id=sub_id).update(Subject_name=subject_name,
                                                    Subject_code=subject_code,
@@ -371,28 +366,27 @@ def Saveinternal(request):
         internalmark = request.POST.get('internalmark')
         totalmark = request.POST.get('totalmark')
 
-        internalmark_regex=r"^(?:[0-9]|[1-4][0-9]|50)$"
-        totalmark_regex=r"^50$"
+        internalmark_regex = r"^(?:[0-9]|[1-4][0-9]|50)$"
+        totalmark_regex = r"^50$"
 
         if not student_id:
-            messages.error(request,"Please select a Student")
+            messages.error(request, "Please select a Student")
             return redirect(Addinternalpage)
 
         if not subject_id:
             messages.error(request, "Please select a Subject")
             return redirect(Addinternalpage)
 
-        if not re.match(internalmark_regex,internalmark):
+        if not re.match(internalmark_regex, internalmark):
             messages.error(request, "Please enter a valid InternalMark(Range: 0-50)")
             return redirect(Addinternalpage)
 
-        if not re.match(totalmark_regex,totalmark):
+        if not re.match(totalmark_regex, totalmark):
             messages.error(request, "Please enter a valid TotalMark(ie: 50)")
             return redirect(Addinternalpage)
 
         student = Studentdb.objects.get(id=student_id)
         subject = Subjectdb.objects.get(id=subject_id)
-
 
         ob = Internalmarkdb(Student=student,
                             Subject=subject,
@@ -424,7 +418,6 @@ def Displayinternal(request):
             "selected_subject": selected_subject,
         }
     )
-
 
 
 def Editinternalpage(request, i_id):
@@ -461,7 +454,6 @@ def Updateinternal(request, i_id):
         if not re.match(totalmark_regex, totalmark):
             messages.error(request, "Please enter a valid TotalMark(ie: 50)")
             return redirect(Addinternalpage)
-
 
         student = Studentdb.objects.get(id=student_id)
         subject = Subjectdb.objects.get(id=subject_id)
