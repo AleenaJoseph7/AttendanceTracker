@@ -439,6 +439,26 @@ def Updateinternal(request, i_id):
         internalmark = request.POST.get('internalmark')
         totalmark = request.POST.get('totalmark')
 
+        internalmark_regex = r"^(?:[0-9]|[1-4][0-9]|50)$"
+        totalmark_regex = r"^50$"
+
+        if not student_id:
+            messages.error(request, "Please select a Student")
+            return redirect(Addinternalpage)
+
+        if not subject_id:
+            messages.error(request, "Please select a Subject")
+            return redirect(Addinternalpage)
+
+        if not re.match(internalmark_regex, internalmark):
+            messages.error(request, "Please enter a valid InternalMark(Range: 0-50)")
+            return redirect(Addinternalpage)
+
+        if not re.match(totalmark_regex, totalmark):
+            messages.error(request, "Please enter a valid TotalMark(ie: 50)")
+            return redirect(Addinternalpage)
+
+
         student = Studentdb.objects.get(id=student_id)
         subject = Subjectdb.objects.get(id=subject_id)
 
