@@ -117,7 +117,8 @@
                     <!-- Profile -->
                     <div class="mb-3">
                         <label class="form-label">Profile Image</label>
-                        <input type="file" name="student_prof" class="form-control">
+                        <input type="file" name="student_prof" class="form-control" onchange="validateProfile()">
+                        <small class="text-danger" id="err_prof"></small>
                     </div>
 
                     <div class="text-center">
@@ -149,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const err_email = document.getElementById("err_email");
     const err_pwd = document.getElementById("err_pwd");
     const err_confirm = document.getElementById("err_confirm");
+    const err_prof = document.getElementById("err_prof");
 
     window.validateName = function () {
         err_name.innerHTML =
@@ -222,6 +224,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 : "Password and Confirm Password do not match";
     };
 
+    window.validateProfile = function () {
+    err_prof.innerHTML =
+        myform.student_prof.files.length === 0
+            ? "Please select a Profile Image"
+            : "";
+};
+
     window.validation = function () {
         validateName();
         validateRoll();
@@ -233,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         validateEmail();
         validatePassword();
         validateConfirm();
+        validateProfile();
 
         return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
     };

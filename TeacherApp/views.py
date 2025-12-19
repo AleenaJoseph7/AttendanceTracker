@@ -113,6 +113,10 @@ def savestudent(request):
             messages.error(request, "Password and Confirm Password do not match")
             return redirect(Addstudentpage)
 
+        if not student_prof:
+            messages.error(request, "Please upload a profile image")
+            return redirect(Addstudentpage)
+
         obj = Studentdb(
             Student_name=student_name,
             Student_rollno=student_rollno,
