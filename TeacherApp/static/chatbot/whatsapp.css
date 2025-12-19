@@ -1,4 +1,4 @@
-/* ================= LAYOUT ================= */
+/* ================= MAIN LAYOUT ================= */
 
 .messenger-wrapper {
     display: flex;
@@ -8,11 +8,11 @@
     overflow: hidden;
 }
 
-/* ================= CHAT LIST ================= */
+/* ================= CHAT LIST (TEACHER) ================= */
 
 .chat-list {
     width: 320px;
-    background: #fff;
+    background: #ffffff;
     border-right: 1px solid #ddd;
     overflow-y: auto;
 }
@@ -41,6 +41,8 @@
     border-left: 4px solid #25D366;
 }
 
+/* ================= AVATAR ================= */
+
 .avatar {
     width: 45px;
     height: 45px;
@@ -48,9 +50,10 @@
     object-fit: cover;
 }
 
+/* ================= CHAT LIST TEXT ================= */
+
 .list-info {
     flex: 1;
-    overflow: hidden;
 }
 
 .student-name {
@@ -67,24 +70,18 @@
 
 .unread-badge {
     position: absolute;
-    top: 14px;
-    right: 16px;
-
-    width: 20px;
-    height: 20px;
-
+    top: 10px;
+    right: 10px;
+    width: 27px;
+    height: 27px;
     background: #25D366;
     color: #fff;
-
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-
-    box-shadow: 0 0 0 2px #fff;
 }
 
 /* ================= CHAT WINDOW ================= */
@@ -135,13 +132,14 @@
     overflow-y: auto;
 }
 
-/* ================= MESSAGES ================= */
+/* ================= MESSAGE BUBBLES ================= */
 
 .message {
     max-width: 70%;
     padding: 10px 14px;
     border-radius: 14px;
     margin-bottom: 10px;
+    word-break: break-word;
 }
 
 .message.me {
@@ -150,9 +148,10 @@
 }
 
 .message.other {
-    background: #fff;
+    background: #ffffff;
 }
 
+/* ================= MESSAGE META ================= */
 
 .message .meta {
     display: flex;
@@ -166,23 +165,16 @@
     color: #777;
 }
 
+/* ================= READ TICKS ================= */
 
 .message.me .ticks {
-    color: #999; /* grey */
     font-size: 12px;
+    color: #999;
 }
-
 
 .message.me.read .ticks {
     color: #34B7F1;
 }
-
-
-.message.read .ticks {
-    color: #1b5cff;
-    font-weight: bold;
-}
-
 
 /* ================= INPUT ================= */
 
@@ -190,7 +182,7 @@
     display: flex;
     gap: 10px;
     padding: 12px;
-    background: #fff;
+    background: #ffffff;
     border-top: 1px solid #ddd;
 }
 
@@ -199,6 +191,7 @@
     padding: 10px 14px;
     border-radius: 20px;
     border: 1px solid #ccc;
+    outline: none;
 }
 
 .chat-input button {
@@ -209,5 +202,3 @@
     color: #fff;
     cursor: pointer;
 }
-
-
