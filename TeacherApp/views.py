@@ -424,6 +424,7 @@ def Displayinternal(request):
     )
 
 
+
 def Editinternalpage(request, i_id):
     date = datetime.datetime.now()
     student = Studentdb.objects.all()
