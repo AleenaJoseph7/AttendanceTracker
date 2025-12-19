@@ -153,6 +153,34 @@
     background: #fff;
 }
 
+
+.message .meta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.message .meta small {
+    font-size: 11px;
+    color: #777;
+}
+
+
+.message.me .ticks {
+    color: #999; /* grey */
+    font-size: 12px;
+}
+
+
+.message.me.read .ticks {
+    color: #34B7F1;
+}
+
+.message.me.read .meta .ticks {
+    color: #34B7F1 !important;
+}
+
 /* ================= INPUT ================= */
 
 .chat-input {
@@ -178,3 +206,5 @@
     color: #fff;
     cursor: pointer;
 }
+
+

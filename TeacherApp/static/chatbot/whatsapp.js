@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             // Student side → session-based
             else {
-                url = `${BASE_URL}/chat/get/`;
+                url = `${BASE_URL}/chat/get_student_messages/`;
             }
 
             const res = await fetch(url);
@@ -45,19 +45,24 @@ document.addEventListener("DOMContentLoaded", function () {
             data.messages.forEach(m => {
                 const div = document.createElement("div");
 
-                const isMe = m.sender === senderSide;
+                const isMe = m.sender.toLowerCase() === senderSide;
                 div.className = "message " + (isMe ? "me" : "other");
 
+
+
                 // READ TICKS (only for sender)
-                let ticks = "";
-                if (isMe) {
-                    if (m.read_status === "sent") ticks = "✓";
-                    else if (m.read_status === "delivered") ticks = "✓✓";
-                    else if (m.read_status === "read") {
-                        ticks = "✓✓";
-                        div.classList.add("read");
+                    let ticks = "";
+
+                   if (isMe && m.read_status === "sent") {
+                     ticks = "✓";
                     }
-                }
+
+                if (isMe && m.read_status === "read") {
+                ticks = "✓✓";
+                div.classList.add("read");
+                   }
+
+
 
                 div.innerHTML = `
                     <span>${m.message}</span>
