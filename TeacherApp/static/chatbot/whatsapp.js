@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             // Student side → session-based
             else {
-                url = `${BASE_URL}/chat/get_student_messages/`;
+                url = `${BASE_URL}/chat/`;
             }
 
             const res = await fetch(url);

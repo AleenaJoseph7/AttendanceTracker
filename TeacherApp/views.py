@@ -694,16 +694,10 @@ def MessengerShortcut(request):
 
 def get_messages(request, student_id):
 
-    # student → teacher
+    # Student → Teacher
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="student"
-    ).exclude(read_status="read").update(read_status="read")
-
-    # teacher → student (for blue tick to appear)
-    ChatMessage.objects.filter(
-        student_id=student_id,
-        sender="teacher"
     ).exclude(read_status="read").update(read_status="read")
 
     messages = ChatMessage.objects.filter(student_id=student_id)
@@ -716,8 +710,6 @@ def get_messages(request, student_id):
     } for m in messages]
 
     return JsonResponse({"messages": data})
-
-
 
 @csrf_exempt
 def send_message(request, student_id):

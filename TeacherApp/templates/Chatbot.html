@@ -44,7 +44,7 @@
             </div>
 
             {% if unread_map|get_item:s.id and s.id != current_student.id %}
-                <span class="unread-badge">
+                <span class="unread-badge" style="margin:10px;">
                     {{ unread_map|get_item:s.id }}
                 </span>
             {% endif %}
