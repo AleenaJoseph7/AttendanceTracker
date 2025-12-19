@@ -367,8 +367,6 @@ def Saveinternal(request):
         internalmark = request.POST.get('internalmark')
         totalmark = request.POST.get('totalmark')
 
-
-
         internalmark_regex=r"^(?:[0-9]|[1-4][0-9]|50)$"
         totalmark_regex=r"^50$"
 
