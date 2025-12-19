@@ -14,6 +14,7 @@ from TeacherApp.models import ChatMessage
 
 from django.utils.timezone import localtime
 
+
 # Create your views here.
 def StudentHomePage(request):
     student = Studentdb.objects.get(id=request.session['StudentId'])
@@ -134,7 +135,7 @@ def StudentAttendanceDisplayPage(request):
 
 def StudentChatPage(request):
     student_id = request.session.get("StudentId")
-    return render(request, "student_chat.html",{'student_id':student_id})
+    return render(request, "student_chat.html", {'student_id': student_id})
 
 
 def get_student_messages(request):

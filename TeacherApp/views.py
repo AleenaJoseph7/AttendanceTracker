@@ -693,7 +693,6 @@ def MessengerShortcut(request):
 
 
 def get_messages(request, student_id):
-
     # Student → Teacher
     ChatMessage.objects.filter(
         student_id=student_id,
@@ -710,6 +709,7 @@ def get_messages(request, student_id):
     } for m in messages]
 
     return JsonResponse({"messages": data})
+
 
 @csrf_exempt
 def send_message(request, student_id):
