@@ -727,17 +727,8 @@ def clear_chat(request, student_id):
     ChatMessage.objects.filter(student_id=student_id).update(hide_teacher_msg=True)
     return JsonResponse({"status": "cleared"})
 
-# Chatbot empty code start
-def ChatMessageListPage(request):
-    messages = ChatMessage.objects.all()
-    return render(request, "chat_message_list.html", {
-        "messages": messages
-    })
-def delete_all_chat_messages(request):
-    if request.method == "POST":
-        ChatMessage.objects.all().delete()
-    return redirect("chat_message_list")
- # chatbot empty code end
+
+
 
 def AdminLoginPage(request):
     return render(request, "adminlogin.html")

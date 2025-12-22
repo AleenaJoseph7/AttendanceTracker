@@ -44,10 +44,6 @@ urlpatterns = [
     path('chat/send/<int:student_id>/', views.send_message),
     path('chat/clear/<int:student_id>/', views.clear_chat, name="clear_chat"),
 
-    # chatdb empty
-    path("chat/messages/", views.ChatMessageListPage, name="chat_message_list"),
-    path("chat/messages/delete-all/", views.delete_all_chat_messages, name="delete_all_chat_messages"),
-
     path('', views.AdminLoginPage, name="AdminLoginPage"),
     path('AdminLogin/', views.AdminLogin, name="AdminLogin"),
     path('AdminLogout/', views.AdminLogout, name="AdminLogout"),
