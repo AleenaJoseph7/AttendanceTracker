@@ -141,13 +141,15 @@ def StudentChatPage(request):
 def get_student_messages(request):
     student_id = request.session.get("StudentId")
 
+    messages = ChatMessage.objects.filter(student_id=student_id,hide_student_msg=False)
+
     # Mark teacher messages as READ when student opens chat
     ChatMessage.objects.filter(
         student_id=student_id,
         sender="teacher"
     ).exclude(read_status="read").update(read_status="read")
 
-    messages = ChatMessage.objects.filter(student_id=student_id)
+
 
     data = [{
         "sender": m.sender,
@@ -176,7 +178,7 @@ def send_student_message(request):
 @csrf_exempt
 def clear_student_chat(request):
     student_id = request.session.get("StudentId")
-    ChatMessage.objects.filter(student_id=student_id).delete()
+    ChatMessage.objects.filter(student_id=student_id).update(hide_student_msg=True)
     return JsonResponse({"status": "cleared"})
 
 

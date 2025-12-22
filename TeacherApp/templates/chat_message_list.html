@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3 class="mb-3">Chatbot Messages (Admin)</h3>
+
+    <!-- DELETE ALL BUTTON -->
+    <form method="post" action="{% url 'delete_all_chat_messages' %}"
+          onsubmit="return confirm('⚠️ This will permanently DELETE ALL chat messages. Continue?');">
+        {% csrf_token %}
+        <button class="btn btn-danger mb-4">
+            🗑️ Delete All Chat Messages (DB Reset)
+        </button>
+    </form>
+
+    <!-- MESSAGE TABLE -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Student</th>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for m in messages %}
+        <tr>
+            <td>{{ m.student.Student_name }}</td>
+            <td>{{ m.sender }}</td>
+            <td style="max-width:400px; white-space:normal;">
+                {{ m.message }}
+            </td>
+            <td>{{ m.timestamp|date:"d M Y, h:i A" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">
+                No chat messages found
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

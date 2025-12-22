@@ -69,6 +69,8 @@ class ChatMessage(models.Model):
             ("read", "Read"),
         ]
     )
+    hide_teacher_msg=models.BooleanField(default=False)
+    hide_student_msg=models.BooleanField(default=False)
 
     class Meta:
         ordering = ['timestamp']

@@ -14,9 +14,7 @@ from reportlab.lib import colors
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
-
 from django.contrib import messages
 from django.utils.timezone import localtime
 
@@ -699,7 +697,7 @@ def get_messages(request, student_id):
         sender="student"
     ).exclude(read_status="read").update(read_status="read")
 
-    messages = ChatMessage.objects.filter(student_id=student_id)
+    messages = ChatMessage.objects.filter(student_id=student_id, hide_teacher_msg=False)
 
     data = [{
         "sender": m.sender,
@@ -726,9 +724,20 @@ def send_message(request, student_id):
 
 @csrf_exempt
 def clear_chat(request, student_id):
-    ChatMessage.objects.filter(student_id=student_id).delete()
+    ChatMessage.objects.filter(student_id=student_id).update(hide_teacher_msg=True)
     return JsonResponse({"status": "cleared"})
 
+# Chatbot empty code start
+def ChatMessageListPage(request):
+    messages = ChatMessage.objects.all()
+    return render(request, "chat_message_list.html", {
+        "messages": messages
+    })
+def delete_all_chat_messages(request):
+    if request.method == "POST":
+        ChatMessage.objects.all().delete()
+    return redirect("chat_message_list")
+ # chatbot empty code end
 
 def AdminLoginPage(request):
     return render(request, "adminlogin.html")
