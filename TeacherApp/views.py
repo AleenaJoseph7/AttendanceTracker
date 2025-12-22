@@ -689,7 +689,6 @@ def MessengerShortcut(request):
         return redirect("Chatbotpage", student_id=first.id)
     return redirect("DisplaystudentPage")
 
-
 def get_messages(request, student_id):
     # Student → Teacher
     ChatMessage.objects.filter(
@@ -708,7 +707,6 @@ def get_messages(request, student_id):
 
     return JsonResponse({"messages": data})
 
-
 @csrf_exempt
 def send_message(request, student_id):
     data = json.loads(request.body)
@@ -720,7 +718,6 @@ def send_message(request, student_id):
     )
 
     return JsonResponse({"status": "success"})
-
 
 @csrf_exempt
 def clear_chat(request, student_id):
