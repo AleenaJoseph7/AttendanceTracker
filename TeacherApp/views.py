@@ -687,7 +687,7 @@ def MessengerShortcut(request):
     first = Studentdb.objects.order_by("id").first()
     if first:
         return redirect("Chatbotpage", student_id=first.id)
-    return redirect("DisplaystudentPage")
+    return redirect(Indexpage)
 
 def get_messages(request, student_id):
     # Student → Teacher
