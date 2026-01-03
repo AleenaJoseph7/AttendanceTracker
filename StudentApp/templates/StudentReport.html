@@ -35,7 +35,13 @@
             <tr class="text-center">
                 <td style="text-align:left; font-weight:500;">{{ i.subject }}</td>
                 <td>{{ i.subjectcode }}</td>
-                <td>{{ i.internalmark }}</td>
+                <td>
+                    {% if i.internalmark < 35 %}
+                        <span style="color:red;">{{ i.internalmark }}</span>
+                    {% else %}
+                        <span>{{ i.internalmark }}</span>
+                    {% endif %}
+                </td>
                 <td>{{ i.totalmark }}</td>
 
                 <!-- COLORED BADGE LOGIC -->
