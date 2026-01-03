@@ -91,7 +91,14 @@ def DownloadInternalPdf(request):
             return colors.red
         return colors.green
 
+    def internal_mark_color(cell_value):
+        try:
+            return colors.red if int(cell_value) < 35 else colors.HexColor("#2C3E50")
+        except:
+            return colors.HexColor("#2C3E50")
+
     column_color_map = {
+        2: internal_mark_color,
         4: attendance_color
     }
 
