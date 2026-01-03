@@ -615,26 +615,22 @@ def internal_pdf(request, subject_id):
     for r in records:
         data_rows.append([r.Student.Student_name, r.Internalmark, r.Totalmark])
 
+    def internal_mark_color(cell_value):
+        try:
+            return colors.red if int(cell_value) < 35 else colors.HexColor("#2C3E50")
+        except:
+            return colors.HexColor("#2C3E50")
+
+    column_color_map = {
+        1: internal_mark_color
+    }
+
     pdf_title = f"{subject.Subject_name}({subject.Subject_code}) Internal Report"
-    pdf_buffer = generate_pdf_table(pdf_title, data_rows)
+    pdf_buffer = generate_pdf_table(pdf_title, data_rows,column_color_map=column_color_map)
 
     return FileResponse(pdf_buffer, as_attachment=True, filename="internal_marks.pdf")
 
 
-def student_attendance_pdf(request, student_id):
-    data = Attendancedb.objects.filter(Student_id=student_id).order_by("Date")
-    student_name = data[0].Student.Student_name if data else "Student"
-
-    data_rows = [["Student Name", "Date", "Status"]]
-    for record in data:
-        data_rows.append([record.Student.Student_name, str(record.Date), record.Status])
-
-    column_color_map = {
-        2: lambda v: colors.green if v == "Present" else colors.red
-    }
-
-    pdf_buffer = generate_pdf_table(f"Attendance Report - {student_name}", data_rows, column_color_map)
-    return FileResponse(pdf_buffer, as_attachment=True, filename="student_attendance.pdf")
 
 
 def subject_attendance_percentage_pdf(request, subject_id):
