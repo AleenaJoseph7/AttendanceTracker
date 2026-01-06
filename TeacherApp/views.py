@@ -14,6 +14,7 @@ from reportlab.lib import colors
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 from django.contrib import messages
 from django.utils.timezone import localtime
@@ -21,7 +22,7 @@ from django.utils.timezone import localtime
 import re
 
 
-# Create your views here.
+
 def Indexpage(request):
     date = datetime.datetime.now()
     student_count = Studentdb.objects.count()

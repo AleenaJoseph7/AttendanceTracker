@@ -13,13 +13,11 @@
         <div class="subject-row"
              data-percent="{{ att.percentage }}">
 
-            <!-- SUBJECT NAME -->
             <div class="subject-info">
                 <h5 class="subject-title">{{ att.subject_name }}</h5>
                 <small class="sub-code">({{ att.subject_code }})</small>
             </div>
 
-            <!-- MINI PROGRESS CIRCLE -->
             <div class="mini-circle" data-progress="{{ att.percentage }}">
                 <span class="{% if att.percentage < 75 %}red-text{% endif %}">
                     {{ att.percentage }}%
@@ -35,7 +33,7 @@
 
 <style>
 
-    /* ----- Main Box ----- */
+
     .subject-box {
         width: 100%;
         max-width: 700px;
@@ -46,7 +44,7 @@
         box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     }
 
-    /* ----- Each Subject Row ----- */
+
     .subject-row {
         display: flex;
         justify-content: space-between;
@@ -60,14 +58,14 @@
         transition: 0.25s ease;
     }
 
-    /* Hover effect */
+
     .subject-row:hover {
         background: #eef4ff;
         transform: translateY(-3px);
         box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     }
 
-    /* Subject Title */
+
     .subject-title {
         font-size: 18px;
         font-weight: 700;
@@ -79,7 +77,7 @@
         color: #6c757d;
     }
 
-    /* ----- Mini Donut Circle ----- */
+
     .mini-circle {
         --size: 70px;
         --thickness: 10px;
@@ -99,7 +97,7 @@
         transition: 0.4s ease;
     }
 
-    /* Donut Inner */
+
     .mini-circle::before {
         content: "";
         position: absolute;
@@ -111,7 +109,7 @@
         border-radius: 50%;
     }
 
-    /* Text inside donut */
+
     .mini-circle span {
         position: absolute;
         font-size: 15px;

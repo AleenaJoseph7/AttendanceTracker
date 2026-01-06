@@ -4,11 +4,11 @@
 
 <div class="container mt-5">
 
-    <!-- SUBJECT FILTER + PDF BUTTON -->
+
     <form method="get" class="mb-4"
           style="display:flex; justify-content:space-between; align-items:center; gap:30px; padding:10px;">
 
-        <!-- Subject Dropdown on left -->
+
         <div style="flex:1;">
             <select name="subject" class="form-select" onchange="this.form.submit()">
                 <option value="">-- Select Subject --</option>
@@ -22,7 +22,7 @@
             </select>
         </div>
 
-        <!-- PDF Button on right -->
+
         <div>
             {% if selected_subject %}
             <a href="{% url 'subject_attendance_pdf' selected_subject %}" class="btn btn-primary">
@@ -34,7 +34,6 @@
     </form>
 
 
-    <!-- TABLE -->
     <div class="table-responsive shadow-sm p-3 bg-white rounded">
         <table class="table table-bordered table-hover align-middle">
 

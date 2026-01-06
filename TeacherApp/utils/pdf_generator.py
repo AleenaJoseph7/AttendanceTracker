@@ -10,7 +10,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
     buffer = BytesIO()
     styles = getSampleStyleSheet()
 
-    # ================= TITLE =================
+    # Title
     title_text = f"<para alignment='center'><b>{title}</b></para>"
 
     line_style = ParagraphStyle(
@@ -21,7 +21,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
         textColor=colors.HexColor("#2C3E50"),
     )
 
-    # ================= CELL STYLES =================
+    #cell styles
     header_style = ParagraphStyle(
         name='HeaderStyle',
         fontSize=12,
@@ -47,7 +47,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
         leading=14,
     )
 
-    # ================= FOOTER =================
+    # footer
     def add_page_number(canvas, doc):
         canvas.saveState()
         canvas.setFont('Helvetica', 8)
@@ -56,7 +56,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
         canvas.drawRightString(A4[0] - 30, 15, f"Page {doc.page}")
         canvas.restoreState()
 
-    # ================= DOCUMENT =================
+    # document
     doc = SimpleDocTemplate(
         buffer,
         pagesize=A4,
@@ -66,7 +66,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
         bottomMargin=40
     )
 
-    # ================= WRAP TABLE DATA =================
+    # wrap data
     wrapped_data = []
     for i, row in enumerate(data_rows):
         wrapped_row = []
@@ -88,7 +88,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
 
         wrapped_data.append(wrapped_row)
 
-    # ================= WIDER WIDTH =================
+    # width
     available_width = A4[0] - 60
     col_widths = [
         available_width * 0.28,
@@ -100,13 +100,13 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
 
     table = Table(wrapped_data, colWidths=col_widths, hAlign="CENTER")
 
-    # ================= HEADER COLOR =================
+    # header color
     header_color = colors.HexColor("#7EA6C4")
 
-    # Soft medium-dark grey border
+    # border
     border_color = colors.HexColor("#4D4D4D")
 
-    # ================= TABLE STYLE =================
+    # Table Style
     style = TableStyle([
 
         # HEADER
@@ -137,7 +137,7 @@ def generate_pdf_table(title, data_rows, column_color_map=None):
 
     table.setStyle(style)
 
-    # ================= ELEMENTS =================
+    # Elements
     elements = [
         Spacer(1, 5),
         Paragraph("<u></u>", line_style),

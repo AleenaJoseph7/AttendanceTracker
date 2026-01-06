@@ -1,9 +1,6 @@
 from django.db import models
-
 from datetime import date
 
-
-# Create your models here.
 class Studentdb(models.Model):
     Student_name = models.CharField(max_length=30, null=True, blank=True)
     Student_rollno = models.IntegerField(null=True, blank=True)

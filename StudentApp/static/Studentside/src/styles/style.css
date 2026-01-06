@@ -1,17 +1,7 @@
 @charset "utf-8";
 
-/*==============================================================
-
-	Name:style.css
-	Version:1.0.0
-
-==============================================================*/
-
-/*==============================================================
-	Common Styles Initials
-==============================================================*/
 html {
-	-webkit-text-size-adjust: none; /* Prevent font scaling in landscape */
+	-webkit-text-size-adjust: none;
 	width: 100%;
 	height: 100%;
 	-webkit-font-smoothing: antialiased;
@@ -94,9 +84,7 @@ p {
 	max-width: 1120px;
 	width: 100%;
 }
-/*==============================================================
-	Global Styles Start
-==============================================================*/
+
 .pre-loader{
 	background: #ffffff;
 	background-position: center center;
@@ -531,7 +519,7 @@ textarea.form-control{
 	height: 50px;
 	font-size: 16px;
 }
-/* ---------------- form validation class -------------*/
+
 .has-success{
 	color: #28a745;
 }
@@ -583,7 +571,7 @@ textarea.form-control{
 	box-shadow: 0px 0px 0px 1px #dc3545;
 }
 
-/* ---------------- form validation class -------------*/
+
 
 .btn{
 	font-family: 'Inter', sans-serif;
@@ -630,7 +618,7 @@ textarea.form-control{
 	padding: 10px;
 }
 
-/*-------------------------------- datepicker style ----------------*/
+
 .datepicker{
 	z-index: 1060;
 }
@@ -642,7 +630,7 @@ textarea.form-control{
 .datepicker--time-current-hours, .datepicker--time-current-minutes{color: #1b00ff;}
 .datepicker-inline .datepicker{margin: 0 auto;}
 
-/*---------------- clock picker style -------------------*/
+
 .form-control.time-picker:disabled, .form-control.time-picker[readonly]{background: #ffffff;}
 .form-control.time-picker-default:disabled, .form-control.time-picker-default[readonly]{background: #ffffff;}
 
@@ -992,13 +980,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 	content: "\f106";
 	background: transparent;
 }
-/*==============================================================
-	Global Styles End
-==============================================================*/
 
-/*==============================================================
-	Header Start
-==============================================================*/
 .header{
 	position: fixed;
 	height: 70px;
@@ -1275,12 +1257,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 	color: #1b00ff;
 	text-decoration: underline;
 }
-/*==============================================================
-	Footer End
-==============================================================*/
-/*==============================================================
-	Side Bar Start
-==============================================================*/
+
 .menu-icon,
 .search-toggle-icon{
 	width: 47px;
@@ -1634,13 +1611,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 	color: #1502bd;
 }
 
-/*==============================================================
-	Side Bar End
-==============================================================*/
 
-/*==============================================================
-	Login Start
-==============================================================*/
 .login-page{}
 .login-header{
 	position: relative;
@@ -1751,12 +1722,7 @@ body.IE .register-page-wrap .container{
 .forgot-password{
 	text-align: right;
 }
-/*==============================================================
-	Login End
-==============================================================*/
-/*==============================================================
-	Register Page Start
-==============================================================*/
+
 .register-page-wrap{
 	position: relative;
 	height: calc(100% - 70px);
@@ -1862,16 +1828,7 @@ body.IE .register-page-wrap .container{
 	margin-bottom: 15px;
 	font-size: 14px;
 }
-/*.register-page-wrap .wizard-content .wizard > .content > .body.current{
-	-webkit-transform: translate(0px, 0px);
-	-moz-transform: translate(0px, 0px);
-	-o-transform: translate(0px, 0px);
-	-ms-transform: translate(0px, 0px);
-	transform: translate(0px, 0px);
-}*/
-/*==============================================================
-	Register Page End
-==============================================================*/
+
 .main-container{
 	padding: 80px 20px 0px 300px;
 }
@@ -2452,12 +2409,7 @@ body.IE .register-page-wrap .container{
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-/*==============================================================
-	Timeline End
-==============================================================*/
-/*==============================================================
-	sitemap Start
-==============================================================*/
+
 .list-unstyled > li > ul{
 	margin-left: 35px;
 }
@@ -2533,12 +2485,6 @@ body.IE .register-page-wrap .container{
 .sitemap ul li.child:before, .sitemap ul li.child:after{
 	display: none;
 }
-/*==============================================================
-	sitemap Start
-==============================================================*/
-/*==============================================================
-	Calendar Start
-==============================================================*/
 .calendar-wrap{}
 .calendar-wrap .fc-event.ui-draggable-handle{
 	padding: 5px;
@@ -2558,12 +2504,7 @@ body.IE .register-page-wrap .container{
 .fc-header-toolbar h2{
 	font-size: 24px;
 }
-/*==============================================================
-	Calendar End
-==============================================================*/
-/*==============================================================
-	Blog Start
-==============================================================*/
+
 .blog-wrap{
 	padding-bottom: 50px;
 }
@@ -2698,12 +2639,7 @@ body.IE .register-page-wrap .container{
 	color: #405158;
 	font-weight: 500;
 }
-/*==============================================================
-	Blog Start
-==============================================================*/
-/*==============================================================
-	Product Page Start
-==============================================================*/
+
 .product-list{}
 .product-list ul li{
 	margin-bottom: 30px;
@@ -2722,11 +2658,7 @@ body.IE .register-page-wrap .container{
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-/*.product-list ul li:hover .product-box{
-	-webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.20);
-	-moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.20);
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.20);
-}*/
+
 .producct-img{
 	overflow: hidden;
 }
@@ -2835,12 +2767,7 @@ body.IE .register-page-wrap .container{
 	line-height: 1.5;
 	/*color: #78909c;*/
 }
-/*==============================================================
-	Product Page End
-==============================================================*/
-/*==============================================================
-	Faq Page Start
-==============================================================*/
+
 .faq-wrap{}
 .faq-wrap .card{
 	margin-bottom: 20px;
@@ -2891,17 +2818,13 @@ body.IE .register-page-wrap .container{
 .faq-wrap .card-body{
 	padding-top: 0;
 }
-/*==============================================================
-	Faq Page End
-==============================================================*/
+
 
 .gallery-wrap{}
 .gallery-wrap > ul > li{
 	margin-bottom: 30px;
 }
-/*==============================================================
-	pricing-table Start
-==============================================================*/
+
 .pricing-table-wrap{}
 .pricing-table-wrap .card{
 	border: 0;
@@ -3042,12 +2965,7 @@ body.IE .register-page-wrap .container{
 	display: block;
 	text-align: center;
 }
-/*==============================================================
-	pricing-table End
-==============================================================*/
-/*==============================================================
-	Profile Page Start
-==============================================================*/
+
 .profile-photo{
 	width: 160px;
 	height: 160px;
@@ -3318,9 +3236,7 @@ body.IE .register-page-wrap .container{
 	font-size: 12px;
 	font-weight: 700;
 }
-/*==============================================================
-	Profile Page End
-==============================================================*/
+
 
 .contact-directory-list > ul > li{
 	margin-bottom: 30px;
@@ -3428,9 +3344,7 @@ body.IE .register-page-wrap .container{
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-/*==============================================================
-	Invoice Page Start
-==============================================================*/
+
 .invoice-wrap{
 	overflow: auto;
 }
@@ -3478,13 +3392,7 @@ body.IE .register-page-wrap .container{
 	border-bottom: 1px solid #eaeaea;
 	padding-bottom: 5px;
 }
-/*==============================================================
-	Invoice Page End
-==============================================================*/
 
-/*==============================================================
-	Chat Module Start
-==============================================================*/
 
 .chat-list{
 	border: 1px solid #ecf0f4;
@@ -3794,9 +3702,6 @@ body.IE .register-page-wrap .container{
 	padding: 20px;
 }
 
-/*==============================================================
-	Chat Module End
-==============================================================*/
 
 .wizard-content .wizard>.actions>ul>li>a{
 	background-color: #1b00ff;
@@ -3952,9 +3857,7 @@ body.IE .register-page-wrap .container{
 	background: #100099;
 }
 
-/*==============================================================
-	Documentation Start
-==============================================================*/
+
 .documentation-wrap{
 	position: relative;
 	height: 100%;
@@ -3978,6 +3881,3 @@ body.IE .register-page-wrap .container{
 	color: #ebecef;
 	font-weight: 500;
 }
-/*==============================================================
-	Documentation End
-==============================================================*/

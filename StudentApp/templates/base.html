@@ -6,14 +6,11 @@
     <title>STRACK – Student Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/core.css' %}">
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/icon-font.min.css' %}">
     <link rel="stylesheet" href="{% static 'Studentside/vendors/styles/style.css' %}">
@@ -222,20 +219,9 @@
 </head>
 
 <body>
-
-<!-- LOADER -->
-<div class="pre-loader">
-    <div>
-        <div class="loader-progress">
-            <div class="bar"></div>
-        </div>
-        <p>STRACK Loading...</p>
-    </div>
-</div>
-
 <div class="layout-wrapper">
 
-    <!-- SIDEBAR -->
+
     <aside class="sidebar">
         <div class="brand-logo" style="padding:20px 1px; margin-top:15px;">
             <a href="{% url 'StudentHomePage' %}"
@@ -280,7 +266,7 @@
 
     <div class="main-wrapper">
 
-        <!-- HEADER -->
+
         <div class="header">
             <div id="hamburger"><i class="fa-solid fa-bars"></i></div>
 
@@ -303,19 +289,18 @@
             </div>
         </div>
 
-        <!-- CONTENT -->
         <main class="content-area">
             {% block content %}
             <div class="pd-ltr-20">
 
-                <!-- WELCOME BANNER -->
+
                 <div class="card-box pd-30 mb-30"
                      style="border-radius:18px; background:linear-gradient(135deg,#1b5cff,#6ea8ff); color:white;">
                     <h2 class="text-center">Welcome back, {{student.Student_name}} 👋</h2>
                     <p class="text-center">Here’s a quick overview of your academic performance today.</p>
                 </div>
 
-                <!-- PROFILE SECTION -->
+
                 <div class="card-box pd-30 mb-30"
                      style="border-radius:18px; background:#ffffff; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
                     <div class="row align-items-center">
@@ -375,7 +360,7 @@
 
                 </div>
 
-                <!-- QUICK ACCESS -->
+
                 <h3 style="color:#1b5cff;">Quick Access</h3>
 
                 <div class="row mt-4 mb-5">
@@ -418,7 +403,7 @@
 
         </main>
 
-        <!-- FOOTER -->
+
         <div class="footer-wrap">
             © 2025 STRACK Student Portal
         </div>
@@ -431,7 +416,8 @@
 
 <!--SWEETALERT-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-{% if messages %} {% for i in messages %} {% if 'success' in i.tags %}
+{% if messages %} {% for i in messages %}
+{% if 'success' in i.tags %}
 <script> swal('{{i}}', '', 'success'); </script>
 {% elif 'warning' in i.tags %}
 <script> swal('{{i}}', '', 'warning'); </script>
@@ -467,7 +453,6 @@
     });
 </script>
 
-<!-- jQuery & Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

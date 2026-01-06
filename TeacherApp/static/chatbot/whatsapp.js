@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ================================
-    // ELEMENT REFERENCES
-    // ================================
     const chatBody = document.getElementById("chat-body");
     const messageBox = document.getElementById("messageBox");
     const sendBtn = document.getElementById("sendBtn");
@@ -13,16 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // ================================
-    // HELPERS
-    // ================================
+
     function scrollDown() {
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // ================================
-    // LOAD MESSAGES
-    // ================================
+
     async function loadMessages() {
     try {
         let url = "";
@@ -70,9 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 
-    // ================================
-    // SEND MESSAGE
-    // ================================
+
     async function sendMessage() {
         const msg = messageBox.value.trim();
         if (!msg) return;
@@ -80,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             let url = "";
 
-            // ✅ Teacher sending to student
+            // Teacher sending to student
             if (senderSide === "teacher") {
                 url = `${BASE_URL}/chat/send/${studentID}/`;
             }
-            // ✅ Student sending to teacher
+            // Student sending to teacher
             else {
                 url = `${BASE_URL}/chat/send/`;
             }
@@ -105,9 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ================================
-    // CLEAR CHAT
-    // ================================
+
     async function clearChat() {
         try {
             let url = "";
@@ -126,9 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ================================
-    // EVENTS
-    // ================================
     sendBtn.addEventListener("click", sendMessage);
 
     messageBox.addEventListener("keydown", function (e) {
@@ -141,9 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearBtn.addEventListener("click", clearChat);
     }
 
-    // ================================
-    // AUTO REFRESH
-    // ================================
+
     loadMessages();
     setInterval(loadMessages, 1500);
 });

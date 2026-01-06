@@ -1,4 +1,3 @@
-/* ================= MAIN LAYOUT ================= */
 
 .messenger-wrapper {
     display: flex;
@@ -8,7 +7,7 @@
     overflow: hidden;
 }
 
-/* ================= CHAT LIST (TEACHER) ================= */
+
 
 .chat-list {
     width: 320px;
@@ -41,7 +40,6 @@
     border-left: 4px solid #25D366;
 }
 
-/* ================= AVATAR ================= */
 
 .avatar {
     width: 45px;
@@ -50,7 +48,7 @@
     object-fit: cover;
 }
 
-/* ================= CHAT LIST TEXT ================= */
+
 
 .list-info {
     flex: 1;
@@ -66,7 +64,7 @@
     color: #777;
 }
 
-/* ================= UNREAD BADGE ================= */
+
 
 .unread-badge {
     position: absolute;
@@ -84,7 +82,7 @@
     justify-content: center;
 }
 
-/* ================= CHAT WINDOW ================= */
+
 
 .chat-window {
     flex: 1;
@@ -93,7 +91,6 @@
     background: #efeae2;
 }
 
-/* ================= HEADER ================= */
 
 .chat-header {
     display: flex;
@@ -124,7 +121,7 @@
     cursor: pointer;
 }
 
-/* ================= CHAT BODY ================= */
+
 
 .chat-body {
     flex: 1;
@@ -132,7 +129,7 @@
     overflow-y: auto;
 }
 
-/* ================= MESSAGE BUBBLES ================= */
+
 
 .message {
     max-width: 70%;
@@ -151,7 +148,7 @@
     background: #ffffff;
 }
 
-/* ================= MESSAGE META ================= */
+
 
 .message .meta {
     display: flex;
@@ -165,7 +162,7 @@
     color: #777;
 }
 
-/* ================= READ TICKS ================= */
+
 
 .message.me .ticks {
     font-size: 12px;
@@ -176,7 +173,7 @@
     color: #34B7F1;
 }
 
-/* ================= INPUT ================= */
+
 
 .chat-input {
     display: flex;
