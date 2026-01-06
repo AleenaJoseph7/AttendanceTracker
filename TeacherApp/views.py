@@ -518,10 +518,6 @@ def toggle_attendance(request, record_id):
     record.save()
     return JsonResponse({"status": record.Status})
 
-
-
-
-
 def Displayattendancepage(request):
     subject_id = request.GET.get("subject")
 
