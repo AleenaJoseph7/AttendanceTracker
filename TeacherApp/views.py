@@ -398,9 +398,9 @@ def Saveinternal(request):
 
 
 def Displayinternal(request):
-    import datetime
     date = datetime.datetime.now()
-    selected_subject = request.GET.get("subject")  # Subject filter
+    # Subject filter
+    selected_subject = request.GET.get("subject")
 
     data = Internalmarkdb.objects.all()
     if selected_subject:
