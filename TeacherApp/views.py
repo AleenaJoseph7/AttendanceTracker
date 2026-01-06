@@ -531,15 +531,6 @@ def Displayattendancepage(request):
                   {'date': date, 'data': data, 'subject_id': subject_id, 'subjects': subjects})
 
 
-def Editattendancepage(request, a_id):
-    subject = Subjectdb.objects.all()
-    student = Studentdb.objects.all()
-    date = datetime.datetime.now()
-    attendance = Attendancedb.objects.get(id=a_id)
-    return render(request, "editattendance.html",
-                  {'date': date, 'attendance': attendance, 'subject': subject, 'student': student})
-
-
 def deleteattendance(request, a_id):
     data = Attendancedb.objects.filter(id=a_id)
     data.delete()

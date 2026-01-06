@@ -28,7 +28,6 @@ urlpatterns = [
     path('AttendancePage/', views.AttendancePage, name="AttendancePage"),
     path("toggle-attendance/<int:record_id>/", views.toggle_attendance, name="toggle_attendance"),
     path('Displayattendancepage/', views.Displayattendancepage, name="Displayattendancepage"),
-    path('Editattendancepage/<int:a_id>/', views.Editattendancepage, name="Editattendancepage"),
     path('deleteattendance/<int:a_id>/', views.deleteattendance, name="deleteattendance"),
     path('AttendancePercentagePage/', views.AttendancePercentagePage, name="AttendancePercentagePage"),
 
