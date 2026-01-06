@@ -399,13 +399,13 @@ def Saveinternal(request):
 
 def Displayinternal(request):
     date = datetime.datetime.now()
-    # Subject filter
+    subjects = Subjectdb.objects.all()
+    # Subject selected : string format get
     selected_subject = request.GET.get("subject")
 
     data = Internalmarkdb.objects.all()
     if selected_subject:
         data = data.filter(Subject_id=selected_subject)
-    subjects = Subjectdb.objects.all()
 
     return render(
         request,
