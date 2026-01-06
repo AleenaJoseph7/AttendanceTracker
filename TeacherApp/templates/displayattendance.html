@@ -30,7 +30,7 @@
                 <th>Subject Code</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th colspan="2" style="text-align:center;">Actions</th>
+                <th style="text-align:center;">Action</th>
             </tr>
             </thead>
 
@@ -46,12 +46,6 @@
                     {% else %}
                     <span style="color:Red;  font-weight:bold;">Absent</span>
                     {% endif %}
-                </td>
-
-                <td>
-                    <a href="{% url 'Editattendancepage' a_id=i.id %}">
-                        <button class="btn btn-success btn-sm px-3">Edit</button>
-                    </a>
                 </td>
                 <td>
                     <a href="{% url 'deleteattendance' a_id=i.id %}"

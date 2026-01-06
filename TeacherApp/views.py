@@ -540,24 +540,6 @@ def Editattendancepage(request, a_id):
                   {'date': date, 'attendance': attendance, 'subject': subject, 'student': student})
 
 
-def updateattendance(request, a_id):
-    if request.method == 'POST':
-        attendance_student = request.POST.get('attendance_student')
-        attendance_subject = request.POST.get('attendance_subject')
-        attendance_date = request.POST.get('attendance_date')
-        attendance_status = request.POST.get('attendance_status')
-
-        attendance_studentobj = Studentdb.objects.get(id=attendance_student)
-        attendance_subjectobj = Subjectdb.objects.get(id=attendance_subject)
-
-        Attendancedb.objects.filter(id=a_id).update(Student=attendance_studentobj,
-                                                    Subject=attendance_subjectobj,
-                                                    Date=attendance_date,
-                                                    Status=attendance_status)
-        messages.success(request, "Attendance updated Succesfully")
-        return redirect(Displayattendancepage)
-
-
 def deleteattendance(request, a_id):
     data = Attendancedb.objects.filter(id=a_id)
     data.delete()
