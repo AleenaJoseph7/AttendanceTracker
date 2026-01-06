@@ -3,7 +3,7 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-import datetime
+import datetime,json,re
 from datetime import date
 from django.db.models import Count, Q
 
@@ -13,13 +13,13 @@ from reportlab.lib import colors
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+
 
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 from django.contrib import messages
 from django.utils.timezone import localtime
 
-import re
+
 
 
 
