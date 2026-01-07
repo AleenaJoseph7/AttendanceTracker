@@ -136,14 +136,14 @@
             let percent = parseFloat(circle.dataset.progress);
             let angle = percent * 3.6;
 
-            // Choose BLUE or RED only
+
             let color = percent >= 75 ? "#1b5cff" : "#e63946";
 
-            // Apply donut color
+
             circle.style.background =
                 `conic-gradient(${color} ${angle}deg, #e3e3e3 0deg)`;
 
-            // Text color also becomes red or stays blue
+
             circle.querySelector("span").style.color = color;
 
         });

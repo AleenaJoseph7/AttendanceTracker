@@ -46,7 +46,7 @@ def StudentReportPage(request):
                            'totalmark': i.Totalmark,
                            'percentages': percentages})
 
-    return render(request, 'StudentReport.html', {'student': student, 'internal': internal, 'attendance': attendance})
+    return render(request, 'StudentReport.html', {'student': student, 'attendance': attendance})
 
 
 def DownloadInternalPdf(request):
