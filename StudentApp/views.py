@@ -1,4 +1,4 @@
-from django.contrib.messages.context_processors import messages
+from django.contrib.messages import messages
 from django.shortcuts import render, redirect
 from TeacherApp.models import Studentdb, Internalmarkdb, ChatMessage, Attendancedb, Subjectdb
 from django.contrib import messages
