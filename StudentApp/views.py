@@ -1,4 +1,4 @@
-from django.contrib.messages import messages
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from TeacherApp.models import Studentdb, Internalmarkdb, ChatMessage, Attendancedb, Subjectdb
 from django.contrib import messages
@@ -27,7 +27,7 @@ def StudentHomePage(request):
 def StudentReportPage(request):
     # get student id
     student = Studentdb.objects.get(id=request.session['StudentId'])
-    internal = Internalmarkdb.objects.filter(Student=request.session['StudentId'])
+    internal = Internalmarkdb.objects.filter(Student=student)
 
     attendance = []
 
