@@ -695,7 +695,7 @@ def AdminLogin(request):
                 return redirect(Indexpage)
 
             else:
-                messages.warning(request, "Incorrect Username or Password!")
+                messages.warning(request, "Incorrect Password!")
                 return redirect(AdminLoginPage)
         else:
             messages.warning(request, "Username Doesn't exist!")
