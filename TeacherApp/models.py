@@ -37,6 +37,8 @@ class Attendancedb(models.Model):
                                                                         ("Absent", "Absent")])
 
     # ("Present", "Present") 1st data to be stored to db, 2nd visible to user
+    class Meta:
+        ordering=['Date']
 
     def __str__(self):
         return f"{self.Student.Student_name} - {self.Subject.Subject_code} - {self.Date}"
