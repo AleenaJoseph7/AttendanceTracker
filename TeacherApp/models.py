@@ -14,6 +14,9 @@ class Studentdb(models.Model):
     Student_password = models.CharField(max_length=10, null=True, blank=True)
     Student_confirm = models.CharField(max_length=10, null=True, blank=True)
 
+    class Meta:
+        ordering=['Student_rollno']
+
     def __str__(self):
         return self.Student_name
 
