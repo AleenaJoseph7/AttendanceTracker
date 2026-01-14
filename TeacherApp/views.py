@@ -3,7 +3,7 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-import datetime,json,re
+import datetime, json, re
 from datetime import date
 from django.db.models import Count, Q
 
@@ -14,13 +14,9 @@ from reportlab.lib import colors
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
 from django.contrib import messages
 from django.utils.timezone import localtime
-
-
-
 
 
 def Indexpage(request):
@@ -518,6 +514,7 @@ def toggle_attendance(request, record_id):
     record.save()
     return JsonResponse({"status": record.Status})
 
+
 def Displayattendancepage(request):
     subject_id = request.GET.get("subject")
 
@@ -579,11 +576,9 @@ def internal_pdf(request, subject_id):
     }
 
     pdf_title = f"{subject.Subject_name}({subject.Subject_code}) Internal Report"
-    pdf_buffer = generate_pdf_table(pdf_title, data_rows,column_color_map=column_color_map)
+    pdf_buffer = generate_pdf_table(pdf_title, data_rows, column_color_map=column_color_map)
 
     return FileResponse(pdf_buffer, as_attachment=True, filename="internal_marks.pdf")
-
-
 
 
 def subject_attendance_percentage_pdf(request, subject_id):
@@ -638,6 +633,7 @@ def MessengerShortcut(request):
         return redirect("Chatbotpage", student_id=first.id)
     return redirect(Indexpage)
 
+
 def get_messages(request, student_id):
     # Student → Teacher
     ChatMessage.objects.filter(
@@ -656,6 +652,7 @@ def get_messages(request, student_id):
 
     return JsonResponse({"messages": data})
 
+
 @csrf_exempt
 def send_message(request, student_id):
     data = json.loads(request.body)
@@ -668,12 +665,11 @@ def send_message(request, student_id):
 
     return JsonResponse({"status": "success"})
 
+
 @csrf_exempt
 def clear_chat(request, student_id):
     ChatMessage.objects.filter(student_id=student_id).update(hide_teacher_msg=True)
     return JsonResponse({"status": "cleared"})
-
-
 
 
 def AdminLoginPage(request):
