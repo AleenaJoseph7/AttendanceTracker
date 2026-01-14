@@ -524,7 +524,7 @@ def Displayattendancepage(request):
     if subject_id:
         data = Attendancedb.objects.filter(Subject_id=subject_id)
     else:
-        data = Attendancedb.objects.all()
+        data = Attendancedb.objects.none()
     date = datetime.datetime.now()
     subjects = Subjectdb.objects.all()
     return render(request, "displayattendance.html",
