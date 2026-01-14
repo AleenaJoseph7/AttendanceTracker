@@ -9,7 +9,7 @@
 
             <div style="flex:1; width:1000px;">
                 <select name="subject" class="form-select" onchange="this.form.submit()">
-                    <option value="">Select Your Subjects</option>
+                    <option value="">Select Your Subject</option>
                     {% for s in subjects %}
                     <option value="{{ s.id }}"
                             {% if request.GET.subject == s.id|stringformat:"s" %}selected{% endif %}>
