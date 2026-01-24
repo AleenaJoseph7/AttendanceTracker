@@ -399,9 +399,11 @@ def Displayinternal(request):
     # Subject selected : string format get
     selected_subject = request.GET.get("subject")
 
-    data = Internalmarkdb.objects.all()
+
     if selected_subject:
-        data = data.filter(Subject_id=selected_subject)
+        data = Internalmarkdb.objects.filter(Subject_id=selected_subject)
+    else:
+        data = Internalmarkdb.objects.none()
 
     return render(
         request,
