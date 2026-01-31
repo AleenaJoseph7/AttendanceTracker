@@ -39,18 +39,12 @@
                 <label class="form-label">Semester</label>
                 <select name="subject_sem" class="form-control" onchange="Validatesem()">
                     <option value="">-- Select Semester --</option>
-                    <option value="S1" {% if subject.Subject_sem==
-                    "S1" %}selected{% endif %}>S1</option>
-                    <option value="S2" {% if subject.Subject_sem==
-                    "S2" %}selected{% endif %}>S2</option>
-                    <option value="S3" {% if subject.Subject_sem==
-                    "S3" %}selected{% endif %}>S3</option>
-                    <option value="S4" {% if subject.Subject_sem==
-                    "S4" %}selected{% endif %}>S4</option>
-                    <option value="S5" {% if subject.Subject_sem==
-                    "S5" %}selected{% endif %}>S5</option>
-                    <option value="S6" {% if subject.Subject_sem==
-                    "S6" %}selected{% endif %}>S6</option>
+                    <option value="S1" {% if subject.Subject_sem== "S1" %}selected{% endif %}>S1</option>
+                    <option value="S2" {% if subject.Subject_sem== "S2" %}selected{% endif %}>S2</option>
+                    <option value="S3" {% if subject.Subject_sem== "S3" %}selected{% endif %}>S3</option>
+                    <option value="S4" {% if subject.Subject_sem== "S4" %}selected{% endif %}>S4</option>
+                    <option value="S5" {% if subject.Subject_sem== "S5" %}selected{% endif %}>S5</option>
+                    <option value="S6" {% if subject.Subject_sem== "S6" %}selected{% endif %}>S6</option>
 
                 </select>
                 <small class="text-danger" id="err_sem"></small>
@@ -61,14 +55,10 @@
                 <label class="form-label">Department</label>
                 <select name="subject_dep" class="form-control" onchange="Validatedep()">
                     <option value="">-- Select Department --</option>
-                    <option value="CSE" {% if subject.Subject_dep==
-                    "CSE" %}selected{% endif %}>CSE</option>
-                    <option value="EC" {% if subject.Subject_dep==
-                    "EC" %}selected{% endif %}>EC</option>
-                    <option value="EEE" {% if subject.Subject_dep==
-                    "EEE" %}selected{% endif %}>EEE</option>
-                    <option value="CE" {% if subject.Subject_dep==
-                    "CE" %}selected{% endif %}>CE</option>
+                    <option value="CSE" {% if subject.Subject_dep== "CSE" %}selected{% endif %}>CSE</option>
+                    <option value="EC" {% if subject.Subject_dep== "EC" %}selected{% endif %}>EC</option>
+                    <option value="EEE" {% if subject.Subject_dep== "EEE" %}selected{% endif %}>EEE</option>
+                    <option value="CE" {% if subject.Subject_dep== "CE" %}selected{% endif %}>CE</option>
 
                 </select>
                 <small class="text-danger" id="err_dep"></small>

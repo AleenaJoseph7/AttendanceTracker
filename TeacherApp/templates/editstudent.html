@@ -46,14 +46,10 @@
                         <select name="student_batch" class="form-control"
                                 onchange="validateBatch()">
                             <option value="">-- Select Batch --</option>
-                            <option value="CSE" {% if student.Student_batch==
-                            "CSE" %}selected{% endif %}>CSE</option>
-                            <option value="EC" {% if student.Student_batch==
-                            "EC" %}selected{% endif %}>EC</option>
-                            <option value="EEE" {% if student.Student_batch==
-                            "EEE" %}selected{% endif %}>EEE</option>
-                            <option value="CE" {% if student.Student_batch==
-                            "CE" %}selected{% endif %}>CE</option>
+                            <option value="CSE" {% if student.Student_batch== "CSE" %}selected{% endif %}>CSE</option>
+                            <option value="EC" {% if student.Student_batch== "EC" %}selected{% endif %}>EC</option>
+                            <option value="EEE" {% if student.Student_batch== "EEE" %}selected{% endif %}>EEE</option>
+                            <option value="CE" {% if student.Student_batch== "CE" %}selected{% endif %}>CE</option>
                         </select>
                         <small class="text-danger" id="err_batch"></small>
                     </div>
@@ -63,18 +59,12 @@
                         <select name="student_sem" class="form-control"
                                 onchange="validateSem()">
                             <option value="">-- Select Semester --</option>
-                            <option value="S1" {% if student.Student_sem==
-                            "S1" %}selected{% endif %}>S1</option>
-                            <option value="S2" {% if student.Student_sem==
-                            "S2" %}selected{% endif %}>S2</option>
-                            <option value="S3" {% if student.Student_sem==
-                            "S3" %}selected{% endif %}>S3</option>
-                            <option value="S4" {% if student.Student_sem==
-                            "S4" %}selected{% endif %}>S4</option>
-                            <option value="S5" {% if student.Student_sem==
-                            "S5" %}selected{% endif %}>S5</option>
-                            <option value="S6" {% if student.Student_sem==
-                            "S6" %}selected{% endif %}>S6</option>
+                            <option value="S1" {% if student.Student_sem== "S1" %}selected{% endif %}>S1</option>
+                            <option value="S2" {% if student.Student_sem== "S2" %}selected{% endif %}>S2</option>
+                            <option value="S3" {% if student.Student_sem== "S3" %}selected{% endif %}>S3</option>
+                            <option value="S4" {% if student.Student_sem== "S4" %}selected{% endif %}>S4</option>
+                            <option value="S5" {% if student.Student_sem== "S5" %}selected{% endif %}>S5</option>
+                            <option value="S6" {% if student.Student_sem== "S6" %}selected{% endif %}>S6</option>
                         </select>
                         <small class="text-danger" id="err_sem"></small>
                     </div>
