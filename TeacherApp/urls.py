@@ -4,6 +4,8 @@ from TeacherApp import views
 urlpatterns = [
     path('Indexpage/', views.Indexpage, name="Indexpage"),
 
+    path("uniquecheck/", views.uniquecheck, name="uniquecheck"),
+
     path('Addstudentpage/', views.Addstudentpage, name="Addstudentpage"),
     path('savestudent/', views.savestudent, name="savestudent"),
     path('DisplaystudentPage/', views.DisplaystudentPage, name="DisplaystudentPage"),
