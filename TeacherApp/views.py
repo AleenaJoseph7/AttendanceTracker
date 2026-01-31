@@ -11,6 +11,7 @@ from django.http import FileResponse, JsonResponse
 from .utils.pdf_generator import generate_pdf_table
 from reportlab.lib import colors
 
+
 from django.views.decorators.csrf import csrf_exempt
 
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
@@ -36,34 +37,9 @@ def Indexpage(request):
                                           'today_percentage': today_percentage, })
 
 
-def uniquecheck(request):
-    model = request.GET.get("model")
-    field = request.GET.get("field")
-    value = request.GET.get("value", "").strip()
-
-    exists = False
-
-    if model == "student":
-        if field == "regid":
-            exists = Studentdb.objects.filter(Student_regid=value).exists()
-        elif field == "email":
-            exists = Studentdb.objects.filter(Student_email=value).exists()
-        elif field == "phone":
-            exists = Studentdb.objects.filter(Student_phone=value).exists()
-
-    elif model == "subject":
-        if field == "name":
-            exists = Subjectdb.objects.filter(Subject_name=value).exists()
-        elif field == "code":
-            exists = Subjectdb.objects.filter(Subject_code=value).exists()
-
-    return JsonResponse({"exists": exists})
-
-
 def Addstudentpage(request):
     date = datetime.datetime.now()
     return render(request, 'addstudent.html', {'date': date})
-
 
 def savestudent(request):
     if request.method == 'POST':
@@ -136,7 +112,7 @@ def savestudent(request):
             return redirect(Addstudentpage)
 
         if Studentdb.objects.filter(Student_regid=student_regid).exists():
-            messages.error(request, "This Register Id already exists...!")
+            messages.error(request,"This Register Id already exists...!")
             return redirect(Addstudentpage)
 
         if Studentdb.objects.filter(Student_email=student_email).exists():
@@ -146,6 +122,7 @@ def savestudent(request):
         if Studentdb.objects.filter(Student_phone=student_phone).exists():
             messages.error(request, "This Mobile Number already exists...!")
             return redirect(Addstudentpage)
+
 
         obj = Studentdb(
             Student_name=student_name,
@@ -433,6 +410,7 @@ def Displayinternal(request):
     subjects = Subjectdb.objects.all()
     # Subject selected : string format get
     selected_subject = request.GET.get("subject")
+
 
     if selected_subject:
         data = Internalmarkdb.objects.filter(Subject_id=selected_subject)
