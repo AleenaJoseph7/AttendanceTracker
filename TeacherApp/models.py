@@ -4,12 +4,12 @@ from datetime import date
 class Studentdb(models.Model):
     Student_name = models.CharField(max_length=30, null=True, blank=True)
     Student_rollno = models.IntegerField(null=True, blank=True)
-    Student_regid = models.CharField(max_length=30, null=True, blank=True)
+    Student_regid = models.CharField(max_length=30, null=True, blank=True,unique=True)
     Student_batch = models.CharField(max_length=30, null=True, blank=True)
     Student_sem = models.CharField(max_length=30, null=True, blank=True)
     Student_duration = models.CharField(max_length=30, null=True, blank=True)
-    Student_email = models.EmailField(null=True, blank=True)
-    Student_phone = models.IntegerField(null=True, blank=True)
+    Student_email = models.EmailField(null=True, blank=True,unique=True)
+    Student_phone = models.IntegerField(null=True, blank=True,unique=True)
     Student_prof = models.ImageField(upload_to="Student Profile Image", null=True, blank=True)
     Student_password = models.CharField(max_length=10, null=True, blank=True)
     Student_confirm = models.CharField(max_length=10, null=True, blank=True)
@@ -22,8 +22,8 @@ class Studentdb(models.Model):
 
 
 class Subjectdb(models.Model):
-    Subject_name = models.CharField(max_length=30, null=True, blank=True)
-    Subject_code = models.CharField(max_length=30, null=True, blank=True)
+    Subject_name = models.CharField(max_length=30, null=True, blank=True, unique=True)
+    Subject_code = models.CharField(max_length=30, null=True, blank=True,unique=True)
     Subject_teacher = models.CharField(max_length=30, null=True, blank=True)
     Subject_sem = models.CharField(max_length=30, null=True, blank=True)
     Subject_dep = models.CharField(max_length=30, null=True, blank=True)
