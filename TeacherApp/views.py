@@ -226,6 +226,18 @@ def updatestudent(request, s_id):
             messages.error(request, "Password and Confirm Password do not match")
             return redirect(Addstudentpage)
 
+        if Studentdb.objects.filter(Student_regid=student_regid).exists():
+            messages.error(request, "This Register Id already exists...!")
+            return redirect(EditstudentPage,s_id=s_id)
+
+        if Studentdb.objects.filter(Student_email=student_email).exists():
+            messages.error(request, "This Email Id already exists...!")
+            return redirect(EditstudentPage,s_id=s_id)
+
+        if Studentdb.objects.filter(Student_phone=student_phone).exists():
+            messages.error(request, "This Mobile Number already exists...!")
+            return redirect(EditstudentPage,s_id=s_id)
+
         Studentdb.objects.filter(id=s_id).update(
             Student_name=student_name,
             Student_rollno=student_rollno,
@@ -288,6 +300,14 @@ def savesubject(request):
             messages.error(request, "Please select a Department")
             return redirect(AddsubjectPage)
 
+        if Subjectdb.objects.filter(Subject_name=subject_name).exists():
+            messages.error(request,"This Subject Name already exists...!")
+            return redirect(AddsubjectPage)
+
+        if Subjectdb.objects.filter(Subject_code=subject_code).exists():
+            messages.error(request,"This Subject Code already exists...!")
+            return redirect(AddsubjectPage)
+
         ob = Subjectdb(Subject_name=subject_name,
                        Subject_code=subject_code,
                        Subject_teacher=subject_teacher,
@@ -341,6 +361,14 @@ def Updatesubject(request, sub_id):
 
         if not subject_dep:
             messages.error(request, "Please select a Department")
+            return redirect(EditsubjectPage, sub_id=sub_id)
+
+        if Subjectdb.objects.filter(Subject_name=subject_name).exists():
+            messages.error(request,"This Subject Name already exists...!")
+            return redirect(EditsubjectPage, sub_id=sub_id)
+
+        if Subjectdb.objects.filter(Subject_code=subject_code).exists():
+            messages.error(request,"This Subject Code already exists...!")
             return redirect(EditsubjectPage, sub_id=sub_id)
 
         Subjectdb.objects.filter(id=sub_id).update(Subject_name=subject_name,
