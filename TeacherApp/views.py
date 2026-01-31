@@ -112,6 +112,9 @@ def savestudent(request):
             messages.error(request, "Please upload a profile image")
             return redirect(Addstudentpage)
 
+        if Studentdb.objects.filter(student_regid=student_regid).exists():
+            messages.warning(request,"This Register Id already exists...!")
+
         obj = Studentdb(
             Student_name=student_name,
             Student_rollno=student_rollno,
