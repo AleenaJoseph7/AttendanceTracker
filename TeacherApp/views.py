@@ -7,11 +7,11 @@ import datetime, json, re
 from datetime import date
 from django.db.models import Count, Q
 
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from .utils.pdf_generator import generate_pdf_table
 from reportlab.lib import colors
 
-from django.http import JsonResponse
+
 from django.views.decorators.csrf import csrf_exempt
 
 from TeacherApp.models import Studentdb, Subjectdb, Attendancedb, Internalmarkdb, ChatMessage
