@@ -37,10 +37,6 @@ def Indexpage(request):
                                           'today_percentage': today_percentage, })
 
 
-def Addstudentpage(request):
-    date = datetime.datetime.now()
-    return render(request, 'addstudent.html', {'date': date})
-
 def uniquecheck(request):
     model = request.GET.get("model")
     field = request.GET.get("field")
@@ -64,6 +60,9 @@ def uniquecheck(request):
 
     return JsonResponse({"exists": exists})
 
+def Addstudentpage(request):
+    date = datetime.datetime.now()
+    return render(request, 'addstudent.html', {'date': date})
 
 def savestudent(request):
     if request.method == 'POST':
