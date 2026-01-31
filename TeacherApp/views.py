@@ -41,6 +41,29 @@ def Addstudentpage(request):
     date = datetime.datetime.now()
     return render(request, 'addstudent.html', {'date': date})
 
+def uniquecheck(request):
+    model = request.GET.get("model")
+    field = request.GET.get("field")
+    value = request.GET.get("value", "").strip()
+
+    exists = False
+
+    if model == "student":
+        if field == "regid":
+            exists = Studentdb.objects.filter(Student_regid=value).exists()
+        elif field == "email":
+            exists = Studentdb.objects.filter(Student_email=value).exists()
+        elif field == "phone":
+            exists = Studentdb.objects.filter(Student_phone=value).exists()
+
+    elif model == "subject":
+        if field == "name":
+            exists = Subjectdb.objects.filter(Subject_name=value).exists()
+        elif field == "code":
+            exists = Subjectdb.objects.filter(Subject_code=value).exists()
+
+    return JsonResponse({"exists": exists})
+
 
 def savestudent(request):
     if request.method == 'POST':
@@ -112,8 +135,18 @@ def savestudent(request):
             messages.error(request, "Please upload a profile image")
             return redirect(Addstudentpage)
 
-        if Studentdb.objects.filter(student_regid=student_regid).exists():
-            messages.warning(request,"This Register Id already exists...!")
+        if Studentdb.objects.filter(Student_regid=student_regid).exists():
+            messages.error(request,"This Register Id already exists...!")
+            return redirect(Addstudentpage)
+
+        if Studentdb.objects.filter(Student_email=student_email).exists():
+            messages.error(request, "This Email Id already exists...!")
+            return redirect(Addstudentpage)
+
+        if Studentdb.objects.filter(Student_phone=student_phone).exists():
+            messages.error(request, "This Mobile Number already exists...!")
+            return redirect(Addstudentpage)
+
 
         obj = Studentdb(
             Student_name=student_name,
