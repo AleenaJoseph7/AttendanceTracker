@@ -46,10 +46,14 @@
                         <select name="student_batch" class="form-control"
                                 onchange="validateBatch()">
                             <option value="">-- Select Batch --</option>
-                            <option value="CSE" {% if student.Student_batch == "CSE" %}selected{% endif %}>CSE</option>
-                            <option value="EC" {% if student.Student_batch == "EC" %}selected{% endif %}>EC</option>
-                            <option value="EEE" {% if student.Student_batch == "EEE" %}selected{% endif %}>EEE</option>
-                            <option value="CE" {% if student.Student_batch == "CE" %}selected{% endif %}>CE</option>
+                            <option value="CSE" {% if student.Student_batch==
+                            "CSE" %}selected{% endif %}>CSE</option>
+                            <option value="EC" {% if student.Student_batch==
+                            "EC" %}selected{% endif %}>EC</option>
+                            <option value="EEE" {% if student.Student_batch==
+                            "EEE" %}selected{% endif %}>EEE</option>
+                            <option value="CE" {% if student.Student_batch==
+                            "CE" %}selected{% endif %}>CE</option>
                         </select>
                         <small class="text-danger" id="err_batch"></small>
                     </div>
@@ -59,12 +63,18 @@
                         <select name="student_sem" class="form-control"
                                 onchange="validateSem()">
                             <option value="">-- Select Semester --</option>
-                            <option value="S1" {% if student.Student_sem == "S1" %}selected{% endif %}>S1</option>
-                            <option value="S2" {% if student.Student_sem == "S2" %}selected{% endif %}>S2</option>
-                            <option value="S3" {% if student.Student_sem == "S3" %}selected{% endif %}>S3</option>
-                            <option value="S4" {% if student.Student_sem == "S4" %}selected{% endif %}>S4</option>
-                            <option value="S5" {% if student.Student_sem == "S5" %}selected{% endif %}>S5</option>
-                            <option value="S6" {% if student.Student_sem == "S6" %}selected{% endif %}>S6</option>
+                            <option value="S1" {% if student.Student_sem==
+                            "S1" %}selected{% endif %}>S1</option>
+                            <option value="S2" {% if student.Student_sem==
+                            "S2" %}selected{% endif %}>S2</option>
+                            <option value="S3" {% if student.Student_sem==
+                            "S3" %}selected{% endif %}>S3</option>
+                            <option value="S4" {% if student.Student_sem==
+                            "S4" %}selected{% endif %}>S4</option>
+                            <option value="S5" {% if student.Student_sem==
+                            "S5" %}selected{% endif %}>S5</option>
+                            <option value="S6" {% if student.Student_sem==
+                            "S6" %}selected{% endif %}>S6</option>
                         </select>
                         <small class="text-danger" id="err_sem"></small>
                     </div>
@@ -130,107 +140,120 @@
 
 <!-- ONLY JS ADDED -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
-    const err_name = document.getElementById("err_name");
-    const err_roll = document.getElementById("err_roll");
-    const err_reg = document.getElementById("err_reg");
-    const err_batch = document.getElementById("err_batch");
-    const err_sem = document.getElementById("err_sem");
-    const err_duration = document.getElementById("err_duration");
-    const err_phone = document.getElementById("err_phone");
-    const err_email = document.getElementById("err_email");
-    const err_pwd = document.getElementById("err_pwd");
-    const err_confirm = document.getElementById("err_confirm");
+        const err_name = document.getElementById("err_name");
+        const err_roll = document.getElementById("err_roll");
+        const err_reg = document.getElementById("err_reg");
+        const err_batch = document.getElementById("err_batch");
+        const err_sem = document.getElementById("err_sem");
+        const err_duration = document.getElementById("err_duration");
+        const err_phone = document.getElementById("err_phone");
+        const err_email = document.getElementById("err_email");
+        const err_pwd = document.getElementById("err_pwd");
+        const err_confirm = document.getElementById("err_confirm");
 
-    window.validateName = function () {
-        err_name.innerHTML =
-            /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/
-                .test(myform.student_name.value.trim())
-                ? ""
-                : "Enter a valid Student Name (eg: Anu M.K or Anu Joseph)";
-    };
+        window.validateName = function () {
+            err_name.innerHTML =
+                /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/
+                    .test(myform.student_name.value.trim())
+                    ? ""
+                    : "Enter a valid Student Name (eg: Anu M.K or Anu Joseph)";
+        };
 
-    window.validateRoll = function () {
-        err_roll.innerHTML =
-            /^(?:[1-9][0-9]?|100)$/.test(myform.student_rollno.value.trim())
-                ? ""
-                : "Enter a valid Roll Number (1–100)";
-    };
+        window.validateRoll = function () {
+            err_roll.innerHTML =
+                /^(?:[1-9][0-9]?|100)$/.test(myform.student_rollno.value.trim())
+                    ? ""
+                    : "Enter a valid Roll Number (1–100)";
+        };
 
-     window.validateReg = function () {
-        err_reg.innerHTML =
-            /^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$/.test(myform.student_regid.value.trim())
-                ? ""
-                : "Enter a valid Register Id (eg :PKG23EC001)";
-    };
+         window.validateReg = function () {
+            const val = myform.student_regid.value.trim();
 
-    window.validateBatch = function () {
-        err_batch.innerHTML =
-            myform.student_batch.value === ""
-                ? "Please select a Batch"
-                : "";
-    };
+            if (!/^[A-Z]{3}\d{2}[A-Z]{2}\d{3}$/.test(val)) {
+                err_reg.innerHTML = "Enter a valid Register Id (eg :AEC27EC001)";
+                return;
+            }
 
-    window.validateSem = function () {
-        err_sem.innerHTML =
-            myform.student_sem.value === ""
-                ? "Please select a Semester"
-                : "";
-    };
+            uniqueCheck("student", "regid", val, "err_reg", "This Register Id already exists...!");
+         };
 
-    window.validateDuration = function () {
-        err_duration.innerHTML =
-            /^\d{4}-\d{4}$/.test(myform.student_duration.value.trim())
-                ? ""
-                : "Enter duration in the format YYYY-YYYY";
-    };
+        window.validateBatch = function () {
+            err_batch.innerHTML =
+                myform.student_batch.value === ""
+                    ? "Please select a Batch"
+                    : "";
+        };
 
-    window.validatePhone = function () {
-        err_phone.innerHTML =
-            /^[6-9]\d{9}$/.test(myform.student_phone.value.trim())
-                ? ""
-                : "Enter a valid 10-digit Mobile Number";
-    };
+        window.validateSem = function () {
+            err_sem.innerHTML =
+                myform.student_sem.value === ""
+                    ? "Please select a Semester"
+                    : "";
+        };
 
-    window.validateEmail = function () {
-        err_email.innerHTML =
-            /^[a-z0-9._]+@gmail\.com$/.test(myform.student_email.value.trim())
-                ? ""
-                : "Enter a valid Gmail address (example@gmail.com)";
-    };
+        window.validateDuration = function () {
+            err_duration.innerHTML =
+                /^\d{4}-\d{4}$/.test(myform.student_duration.value.trim())
+                    ? ""
+                    : "Enter duration in the format YYYY-YYYY";
+        };
 
-    window.validatePassword = function () {
-        err_pwd.innerHTML =
-            /^(?=.{6,}$)[A-Z](?:[a-z0-9]*[_$#@][a-z0-9]*|[_$#@][a-z0-9]*)$/
-                .test(myform.student_password.value)
-                ? ""
-                : "Password must start with one uppercase letter, include exactly one special character (_,$,#,@), and be at least 6 characters long";
-    };
+         window.validatePhone = function () {
+            const val = myform.student_phone.value.trim();
 
-    window.validateConfirm = function () {
-        err_confirm.innerHTML =
-            myform.student_password.value === myform.student_confirm.value
-                ? ""
-                : "Password and Confirm Password do not match";
-    };
+            if (!/^[6-9]\d{9}$/.test(val)) {
+                err_phone.innerHTML = "Enter a valid 10-digit Mobile Number";
+                return;
+            }
 
-    window.validation = function () {
-        validateName();
-        validateRoll();
-        validateReg();
-        validateBatch();
-        validateSem();
-        validateDuration();
-        validatePhone();
-        validateEmail();
-        validatePassword();
-        validateConfirm();
+            uniqueCheck("student", "phone", val, "err_phone", "This Mobile Number already exists...!");
+        };
 
-        return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
-    };
 
-});
+       window.validateEmail = function () {
+            const val = myform.student_email.value.trim();
+
+            if (!/^[a-z0-9._]+@gmail\.com$/.test(val)) {
+                err_email.innerHTML = "Enter a valid Gmail address (example@gmail.com)";
+                return;
+            }
+
+            uniqueCheck("student", "email", val, "err_email", "This Email Id already exists...!");
+        };
+
+        window.validatePassword = function () {
+            err_pwd.innerHTML =
+                /^(?=.{6,}$)[A-Z](?:[a-z0-9]*[_$#@][a-z0-9]*|[_$#@][a-z0-9]*)$/
+                    .test(myform.student_password.value)
+                    ? ""
+                    : "Password must start with one uppercase letter, include exactly one special character (_,$,#,@), and be at least 6 characters long";
+        };
+
+        window.validateConfirm = function () {
+            err_confirm.innerHTML =
+                myform.student_password.value === myform.student_confirm.value
+                    ? ""
+                    : "Password and Confirm Password do not match";
+        };
+
+        window.validation = function () {
+            validateName();
+            validateRoll();
+            validateReg();
+            validateBatch();
+            validateSem();
+            validateDuration();
+            validatePhone();
+            validateEmail();
+            validatePassword();
+            validateConfirm();
+
+            return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
+        };
+
+    });
 </script>
 
 
@@ -259,3 +282,17 @@ document.addEventListener("DOMContentLoaded", function () {
 {% endif %}
 
 {% endblock %}
+
+<script>
+    async function uniqueCheck(model, field, value, errId, msg) {
+        value = value.trim();
+        if (!value) return;
+
+        const res = await fetch("{% url 'uniquecheck' %}?model=" + model +
+            "&field=" + field + "&value=" + encodeURIComponent(value));
+
+        const data = await res.json();
+        document.getElementById(errId).innerHTML = data.exists ? msg : "";
+    }
+</script>
+

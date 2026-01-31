@@ -50,17 +50,16 @@
 
 
             <div class="mb-3">
-    <label class="form-label">Department</label>
-    <select name="subject_dep" class="form-control" onchange="Validatedep()">
-        <option value="">-- Select Department --</option>
-        <option value="CSE">CSE</option>
-        <option value="EC">EC</option>
-        <option value="EEE">EEE</option>
-        <option value="CE">CE</option>
-    </select>
-    <small class="text-danger" id="err_dep"></small>
-</div>
-
+                <label class="form-label">Department</label>
+                <select name="subject_dep" class="form-control" onchange="Validatedep()">
+                    <option value="">-- Select Department --</option>
+                    <option value="CSE">CSE</option>
+                    <option value="EC">EC</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CE">CE</option>
+                </select>
+                <small class="text-danger" id="err_dep"></small>
+            </div>
 
 
             <div class="text-center">
@@ -76,62 +75,71 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
-    const err_subname = document.getElementById("err_subname");
-    const err_subcode = document.getElementById("err_subcode");
-    const err_teacher = document.getElementById("err_teacher");
-    const err_sem = document.getElementById("err_sem");
-    const err_dep = document.getElementById("err_dep");
+        const err_subname = document.getElementById("err_subname");
+        const err_subcode = document.getElementById("err_subcode");
+        const err_teacher = document.getElementById("err_teacher");
+        const err_sem = document.getElementById("err_sem");
+        const err_dep = document.getElementById("err_dep");
 
-    window.Validatesubname = function () {
-        err_subname.innerHTML =
-            /^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(myform.subject_name.value.trim())
-                ? ""
-                : "Enter a valid Subject Name (eg: Operating System or OS)";
+        window.Validatesubname = function () {
+        const val = myform.subject_name.value.trim();
+
+        if (!/^[A-Z][A-Za-z]*(?:\s[A-Za-z]+)*$/.test(val)) {
+            err_subname.innerHTML = "Enter a valid Subject Name (eg: Operating System or OS)";
+            return;
+        }
+
+        uniqueCheck("subject", "name", val, "err_subname", "This Subject Name already exists...!");
     };
 
-    window.Validatesubcode = function () {
-        err_subcode.innerHTML =
-            /^[A-Z]{3}[0-9]{3}$/.test(myform.subject_code.value.trim())
-                ? ""
-                : "Enter a valid Subject Code (eg: CST403)";
+
+        window.Validatesubcode = function () {
+        const val = myform.subject_code.value.trim();
+
+        if (!/^[A-Z]{3}[0-9]{3}$/.test(val)) {
+            err_subcode.innerHTML = "Enter a valid Subject Code (eg: CST403)";
+            return;
+        }
+
+        uniqueCheck("subject", "code", val, "err_subcode", "This Subject Code already exists...!");
     };
 
-    window.Validateteacher = function () {
-        err_teacher.innerHTML =
-            /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/
-                .test(myform.subject_teacher.value.trim())
-                ? ""
-                : "Enter a valid Teacher Name (eg: Anu J.T or Anu Kimal)";
-    };
 
-    window.Validatesem = function () {
-        err_sem.innerHTML =
-            myform.subject_sem.value === ""
-                ? "Please select a Semester"
-                : "";
-    };
+        window.Validateteacher = function () {
+            err_teacher.innerHTML =
+                /^[A-Z][A-Za-z]*(?:\s(?:[A-Z][A-Za-z]*|[A-Z](?:\.[A-Z])+))+$/
+                    .test(myform.subject_teacher.value.trim())
+                    ? ""
+                    : "Enter a valid Teacher Name (eg: Anu J.T or Anu Kimal)";
+        };
 
-    window.Validatedep = function () {
-        err_dep.innerHTML =
-            myform.subject_dep.value === ""
-                ? "Please select a Department"
-                : "";
-    };
+        window.Validatesem = function () {
+            err_sem.innerHTML =
+                myform.subject_sem.value === ""
+                    ? "Please select a Semester"
+                    : "";
+        };
 
-    window.Validation = function () {
-        Validatesubname();
-        Validatesubcode();
-        Validateteacher();
-        Validatesem();
-        Validatedep();
-        return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
-    };
+        window.Validatedep = function () {
+            err_dep.innerHTML =
+                myform.subject_dep.value === ""
+                    ? "Please select a Department"
+                    : "";
+        };
 
-});
+        window.Validation = function () {
+            Validatesubname();
+            Validatesubcode();
+            Validateteacher();
+            Validatesem();
+            Validatedep();
+            return document.querySelectorAll(".text-danger:not(:empty)").length === 0;
+        };
+
+    });
 </script>
-
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -155,3 +163,16 @@ document.addEventListener("DOMContentLoaded", function () {
 {% endif %}
 
 {% endblock %}
+
+<script>
+    async function uniqueCheck(model, field, value, errId, msg) {
+        value = value.trim();
+        if (!value) return;
+
+        const res = await fetch("{% url 'uniquecheck' %}?model=" + model +
+            "&field=" + field + "&value=" + encodeURIComponent(value));
+
+        const data = await res.json();
+        document.getElementById(errId).innerHTML = data.exists ? msg : "";
+    }
+</script>
