@@ -204,7 +204,7 @@ def StudentLogin(request):
             messages.success(request, "Login Successfully!")
             return redirect(StudentHomePage)
         else:
-            messages.warning(request, "Username or Password!")
+            messages.warning(request, "Incorrect Username or Password!")
             return redirect(StudentLoginPage)
 
 
